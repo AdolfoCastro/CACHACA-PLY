@@ -1,6 +1,2 @@
-define
-a
-v
-s
-f
-
+Prototype func Integer Algo1 ( Integer Algunos)
+Prototype func Integer Algo2 ( Integer Algunos)

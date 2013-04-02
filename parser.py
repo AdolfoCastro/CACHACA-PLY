@@ -10,37 +10,50 @@
 #----------------------------------------------
 import sys
 import scanner
+import clases
+import tvariables
 import ply.yacc as yacc
 import fileinput
 
 # Consigue el mapa de tokens
 tokens = scanner.tokens
 start = 'programa'
+
 def p_programa(t):
-	'programa : prototipos1 vars1 modulos1 main modulos1'
+	'''programa : programa1 programa2 programa3 main programa3
+	            | empty'''
 	pass
 
-def p_prototipos1(t):
-	'''prototipos1 : prototipos
-				| empty
-				'''
+def p_programa1(t):
+	'''programa1 : RES_PROTO prototipos empty_lines_almost_one programa1 NEW_LINE
+				 | empty
+				 '''
 	pass
 
-def p_vars1(t):
-	'''vars1 : vars
-			| empty
-			'''
+def p_programa2(t):
+	'''programa2 : programa2 vars
+				 | empty
+				 '''
 	pass
 
-def p_modulos1(t):
-	'''modulos1 : modulos
-				| empty
-				'''
+def p_programa3(t):
+	'''programa3 : programa3 modulos
+				 | empty
+				 '''
 	pass
 
 def p_prototipos(t):
-	'prototipos : FUNC dato ID LPAREN tipo ID RPAREN'
+	'''prototipos : RES_FUNC dato ID LPAREN prototipos_1 RPAREN'''
 	pass
+
+def p_prototipos_1(t):
+	''' prototipos_1 : tipo ID prototipos_2'''
+	pass
+
+def p_prototipos_2(t):
+	'''prototipos_2  : COMMA prototipos_1
+					 | empty
+					 '''
 
 def p_dato(t):
 	'''dato : RES_INT
@@ -58,20 +71,25 @@ def p_tipo(t):
 
 def p_estructura(t):
 	'''estructura : list
-				| array
-				'''
+				  | array
+				  '''
 	pass
 
 def p_vars(t):
-	'vars : RES_DEF vars1'
+	'vars : RES_DEF vars1 empty_lines_almost_one'
 	pass
 
 def p_vars1(t):
 	'''vars1 : estructura
 			| estructura vars1
-			| dato VAR vars2
-			| dato VAR vars2 vars1
+			| dato VAR vars2 vars1_1
 			'''
+	pass
+
+def p_vars1_1(t):
+	''' vars1_1 : vars1
+				| empty
+				'''
 	pass
 
 def p_vars2(t):
@@ -87,23 +105,26 @@ def p_vars3(t):
 	pass
 
 def p_list(t):
-	'list : RES_LIST dato VAR brconsbr'
+	'list : RES_LIST dato ID list1 empty_lines_almost_one'
 	pass
 
 def p_list1(t):
-	'''list1 : LCURLY conscommaa RCURLY
-			| empty
-			'''
+	'''list1 : LCURLY cons_loop RCURLY
+			 | empty
+			 '''
 	pass
 
-def p_list2(t):
-	'''list2 : cons
-			| cons COMMA list2
-			'''
+def p_cons_loop(t):
+	'''cons_loop : cons cons_loop_1
+				 '''
 	pass
+
+def p_cons_loop_1(t):
+	'''cons_loop_1 : COMMA cons_loop
+				   | empty'''	
 
 def p_array(t):
-	'array : RES_ARRAY dato VAR LBRACKET CTE_INT RBRACKET array1'
+	'array : RES_ARRAY dato VAR LBRACKET CTE_INT RBRACKET array1 empty_lines_almost_one'
 	pass
 
 def p_array1(t):
@@ -119,43 +140,42 @@ def p_array2(t):
 	pass
 
 def p_modulos(t):
-	'''modulos : prototipos COL bloque
-				| prototipos COL
-				'''
+	'''modulos : prototipos COL empty_lines_almost_one bloque'''
 	pass
 
 def p_bloque(t):
-	'''bloque : estatutos bloque
-			| estatutos
-			| empty
-			'''
-	pass
-
-def p_ciclo(t):
-	'''ciclo : while
-			| for
-			'''
+	'''bloque : bloque NEW_LINE
+	 		  | estatutos
+			  | empty
+			  '''
 	pass
 
 def p_estatutos(t):
 	'''estatutos : condicion
-				| ciclo
-				| lectura
-				| escritura
-				| asignacion
-				| llamadas
-				| vars
-				'''
+				 | ciclo
+				 | lectura
+				 | escritura
+				 | asignacion
+				 | llamada
+				 | vars
+				 '''
+	pass
+
+def p_ciclo(t):
+	'''ciclo : while
+			 | for
+			 '''
 	pass
 
 def p_condicion(t):
 	'''condicion : if
-				| switch
-				'''
+				 | ifelse
+				 | switch
+				 '''
 	pass
 
 def p_llamada(t):
-	'llamada : VAR LPAREN llamada1 RPAREN'
+	'llamada : VAR LPAREN llamada1 RPAREN empty_lines_almost_one'
 	pass
 
 def p_llamada1(t):
@@ -165,11 +185,11 @@ def p_llamada1(t):
 	pass
 
 def p_lectura(t):
-	'lectura : RES_READ LPAREN tipo RPAREN'
+	'lectura : RES_READ LPAREN tipo RPAREN empty_lines_almost_one'
 	pass
 
 def p_escritura(t):
-	'escritura : RES_PRINT LPAREN escritura1 RPAREN'
+	'escritura : RES_PRINT LPAREN escritura1 RPAREN empty_lines_almost_one'
 	pass
 
 def p_escritura1(t):
@@ -181,7 +201,7 @@ def p_escritura1(t):
 	pass 
 
 def p_asignacion(t):
-	'asignacion : VAR EQUALS asignacion1'
+	'asignacion : VAR EQUALS asignacion1 empty_lines_almost_one'
 	pass
 
 def p_asignacion1(t):
@@ -214,11 +234,11 @@ def p_asignarray1(t):
 	pass
 
 def p_while(t):
-	'while : RES_WHILE LPAREN expresion RPAREN COL bloque'
+	'while : RES_WHILE LPAREN expresion RPAREN COL empty_lines_almost_one bloque'
 	pass
 
 def p_for(t):
-	'for : RES_FOR LPAREN forexp RPAREN COL bloque'
+	'for : RES_FOR LPAREN forexp RPAREN COL empty_lines_almost_one bloque'
 	pass
 
 def p_forexp(t):
@@ -237,35 +257,40 @@ def p_comparacion(t):
 	pass
 
 def p_if(t):
-	'''if : RES_IF LPAREN expresion RPAREN COL bloque
-		| RES_IF LPAREN expresion RPAREN COL bloque RES_ELSE COL bloque
-		'''
+	'''if : RES_IF LPAREN expresion RPAREN COL empty_lines_almost_one bloque
+		  '''
+	pass
+
+def p_ifelse(t):
+	''' ifelse : RES_IF LPAREN expresion RPAREN COL empty_lines_almost_one bloque RES_ELSE COL empty_lines_almost_one bloque
+			   '''
 	pass
 
 def p_switch(t):
-	'switch : RES_SWITCH COL switch2'
+	'switch : RES_SWITCH COL empty_lines_almost_one switch2'
 	pass
 
 def p_switch2(t):
-	'''switch2 : RES_CASE expresion COL bloque switch2
-				| empty
-				'''
+	'''switch2 : RES_CASE expresion COL empty_lines_almost_one bloque
+	           | switch2 NEW_LINE
+			   | empty
+			   '''
 	pass
 
 def p_expresion(t):
 	'''expresion : exp
-				| exp MIN zexp
-				| exp MIN_EQ zexp
-				| exp MAY zexp
-				| exp MAY_EQ zexp
-				| exp DIF zexp
-				'''
+				 | exp MIN exp
+				 | exp MIN_EQ exp
+			 	 | exp MAY exp
+				 | exp MAY_EQ exp
+				 | exp DIF exp
+				  '''
 	pass
 
 def p_exp(t):
 	'''exp : termino exp1
-			| termino
-			'''
+		   | termino
+		   '''
 	pass
 
 def p_exp1(t):
@@ -276,8 +301,8 @@ def p_exp1(t):
 
 def p_termino(t):
 	'''termino : factor termino1
-			| factor
-			'''
+			   | factor
+			   '''
 	pass
 
 def p_termino1(t):
@@ -304,15 +329,16 @@ def p_cons(t):
 	pass
 
 def p_main(t):
-	'main : RES_START COL bloque RES_END'
+	'''main : RES_START COL NEW_LINE bloque RES_END empty_lines'''
+
 	pass
 
 def p_consarray(t):
-	'consarray : ID LBRACKET CTE_INT RBRACKET EQUALS cons'
+	'consarray : ID LBRACKET CTE_INT RBRACKET EQUALS cons empty_lines_almost_one'
 	pass
 
 def p_conslist(t):
-	'conslist : ID EQUALS LCURLY conslist1 RCURLY'
+	'conslist : ID EQUALS LCURLY conslist1 RCURLY empty_lines_almost_one'
 	pass
 
 def p_conslist1(t):
@@ -321,16 +347,32 @@ def p_conslist1(t):
 				'''
 	pass
 
+def p_empty_lines(t):
+	'''empty_lines : empty_lines NEW_LINE 
+				   | empty
+				   '''
+	pass
+
+def p_empty_lines_almost_one(t):
+	'''empty_lines_almost_one : NEW_LINE empty_lines'''
+	pass
+
 def p_empty(t):
 	'empty : '
 	pass
 
 def p_error(t):
-	print("Error de sintaxis")
+	print "Syntax error at token", t.value ,">>", t.type
+	# Just discard the token and tell the parser it's okay.
+	yacc.errok()
+
+
 
 import profile
 
-yacc.yacc()
+yacc.yacc(method = 'LALR')
+#yacc.parse(debug = 1)
+
 
 program = []
 for line in fileinput.input():
