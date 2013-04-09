@@ -100,7 +100,7 @@ def exp_9():
 		else:
 			print "Error semantico tipos incompatibles"
 
-
+# Acciones de Generacion de codigo para estatutos condicionales if 
 def est_if_1():
 	aux = p_tipos.pop()
 	if aux != "Boolean":
@@ -133,25 +133,57 @@ def est_if_else_3():
 	p_saltos.pop()
 	cuadruplo.res = cont
 
+# Acciones de Generacion de codigo para estatutos condicionales while
+def est_while_1():
+  p_saltos.push(cont)
+	cuadruplo.res = memoria.siguiente()
+
+def est_while_2():
+	p_tipos.pop(aux)
+	if aux != "Boolean":
+		print "Error Semantico"
+	else:
+		pila_o.pop()
+		cuadruplo = Cuadruplo("GOTOFALSO", res, "", "")
+		p_saltos.pop(cont-1)
+
+def est_while_3():
+	p_saltos().pop(falso)
+	p_saltos().pop(retorno)
+	cuadruplo = Cuadruplo("GOTO", retorno, "", "")
+	cuadruplo.res = cont
+
+# Acciones de Generacion de codigo para estatutos condicionales switch
 def est_case_1(exp):
 	if exp == "Integer" or exp == "Float" or exp == "Boolean" or exp == "Double":
 		p_saltos.push("(")
 
-def est_case_2(tipo_exp_ordinal, tipo_exp):
-	if tipo_exp == tipo_exp_ordinal:
-		cte = pila_o.pop()
-		
+def est_case_2():
+	#Verificar que la expresión ordinal...
+	cte = pila_o.pop()
+	exp = pila_o.pop()
+	cuadruplo1 = Cuadruplo("=", exp, cte, tk)
+	cuadruplo2 = Cuadruplo("GOTOVERDADERO", tk, "", "")
+	pila_o.pop(tk)
+	pila_o.push(exp)
+	p_saltos(cont-1)
 
 def est_case_3():
+	#Verificar que la expresión ordinal...
+	cte = pila_o.pop()
+	exp = pila_o.pop()
+	cuadruplo = Cuadruplo("=", exp, cte, tk)
 
 def est_case_4():
-
+	pass
 def est_case_5():
-
+	pass
 def est_case_6():
-
+	pass
 def est_case_7():
+	pass
 
+# Acciones de Generacion de codigo para estatutos condicionales for
 def est_for_1(dir):
 	pila_o.push(dir)
 
