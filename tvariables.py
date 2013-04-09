@@ -12,21 +12,21 @@ import sys
 
 class TablaVariableNodo:
 	def __init__(self, nombre, tipo, dire):
-		nombre_variable = nombre
-		tipo_dato = tipo
-		direccion = dire
+		self.nombre_variable = nombre
+		self.tipo_dato = tipo
+		self.direccion = dire
 
 class TablaProcedimientoNodo:
-	def __init__(self, nombre, tipo, dirb, var):
-		nombre_funcion = nombre
-		tipo_retorno = tipo
-		dir_base = dirb
-		var = var
+	def __init__(self, nombre, tipo, dirb):
+		self.nombre_funcion = nombre
+		self.tipo_retorno = tipo
+		self.dir_base = dirb
+		self.var = []
 
-tabla_var = [ ]
 tabla_pro = [ ]
 
 def insert_procedimiento(nombre, tipo, dirb):
+	global tabla_pro
 	pro = TablaProcedimientoNodo(nombre, tipo, dirb)
 	tabla_pro.append(pro)
 
@@ -36,16 +36,19 @@ def print_tables(currentProList):
 		var = currentPro.var
 
 		if currentPro:
-			print "List is empty"
-		else:
-			print currentPro.nombre_funcion + " - " + currentPro.tipo_retorno + " - " + currentPro.dir_base + " - " + currentPro.var.first
+			print currentPro.nombre_funcion, " - " ,currentPro.tipo_retorno, " - ", currentPro.dir_base
+			
 			for variable in currentPro.var : 
-				print currentPro.var.first.nombre_variable + " - " + currentPro.var.first.tipo_dato + " - " + currentPro.var.first.direccion
+				print currentPro.var.first.nombre_variable, " - ", currentPro.var.first.tipo_dato, " - ", currentPro.var.first.direccion
 			print "\n"
+		else:
+			print "List is empty"
+			
 
 def insert_variable(nombre, tipo, dire):
-	var = TablaVariableNodo(nombre, tipo, dire)
-	tabla_var.append(var)
+	variable = TablaVariableNodo(nombre, tipo, dire)
+	lugar = tabla_pro
+	lugar.var.append(variable)
 
 def existe_pro(tabla_pro, nombre):
 	for pro in tabla_pro:

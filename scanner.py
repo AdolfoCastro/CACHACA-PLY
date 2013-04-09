@@ -39,6 +39,7 @@ reserved = {
 	'print'		:'RES_PRINT',
 	'read'		:'RES_READ',
 	'End'		:'RES_END',
+	'end'		:'E_END'
 	}
 
 # Tokens
@@ -92,20 +93,21 @@ reserved_map = { }
 for r in reserved:
     reserved_map[r.lower()] = r
 
-t_ignore = ' \t' 
+t_ignore = ' \t \n'
 
 # Identificador de funciones
 def t_ID(t):
-    r'[A-Za-z_][\w_]*'
+    r'[a-zA-Z_][\w_]*'
     t.type = reserved.get(t.value,'ID')
     return t
 
 # Identificador de Variables
+"""
 def t_VAR(t):
-    r'[a-zA-Z_][\w_]*'
-    t.type = reserved.get(t.value,"VAR")
+    r'[a-z]|[A-Z_][\w_]*'
+    t.type = reserved.get(t.value,'VAR')
     return t
-
+"""
 # Constantes enteras
 def t_CTE_INT(t):
 	r'\d+'

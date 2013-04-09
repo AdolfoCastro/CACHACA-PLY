@@ -1,2 +1,32 @@
+$adfadsfadsfadsfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfa
+sdf
+asdf
+asdf
+asd
+fas
+df
+asdf
+asdf
+$
 Prototype func Integer Algo1 ( Integer Algunos)
-Prototype func Integer Algo2 ( Integer Algunos)
+Prototype func Float Algo2 ( Integer Algunos)
+Prototype func Integer Algo1 ( Integer Algunos)
+Prototype func Float Algo2 ( Integer Algunos)
+Prototype func Integer Algo1 ( Integer Algunos)
+Prototype func Float Algo2 ( Integer Algunos)
+Prototype func Integer Algo1 ( Integer Algunos)
+Prototype func Float Algo2 ( Integer Algunos)
+Prototype func Integer Algo1 ( Integer Algunos)
+Prototype func Float Algo2 ( Integer Algunos)
+Prototype func Integer Algo1 ( Integer Algunos)
+Prototype func Float Algo2 ( Integer Algunos)
+
+
+
+func Integer Algo1 ( Integer Algunos):
+a = b + c + d
+
+
+Start:
+
+End
