@@ -18,14 +18,48 @@ from tvariables import *
 # Consigue el mapa de tokens
 tokens = scanner.tokens
 start = 'programa'
+'''
+/*******************globales********************/
+int contEntGlo=0;
+int contFlotGlo=1000;
+int contStrGlo=2000;
+int contBoolGlo=3000;
+//int contSaltosGlo=4000;
+/*******************Locales********************/
+int contEntLoc=5000;
+int contFlotLoc=6000;
+int contStrLoc=7000;
+int contBoolLoc=8000;
+//int contSaltosLoc=9000;
+/*******************Temporales*****************/
+int contEntTmp=10000;
+int contFlotTmp=11000;
+int contStrTmp=12000;
+int contBoolTmp=13000;
+//int contSaltosTmp=14000;
+/*******************Constantes*****************/
+int contEntCons=15000;
+int contFlotCons=16000;
+int contStrCons=17000;
+int contBoolCons=18000;
+//int contSaltosCons=19000;
+'''
 
 nombre_pro_act = None
 tipo_pro = None
 tipo_pro_actual  = None
+nombre_var_actual = None
 
 def p_programa(t):
-	'''programa : programa1 programa2 programa3 main programa3
+	'''programa : programa1 generaglo programa2 programa3 main programa3
 	            | empty'''
+	pass
+
+def p_generaglo(t):
+	'generaglo : '
+	global nombre_pro_act
+	insert_procedimiento('Global',' ',0)
+	nombre_pro_act = "Global"
 	pass
 
 def p_programa1(t):
@@ -38,7 +72,6 @@ def p_seen_prototipo(t):
 	global nombre_pro_act
 	global tipo_pro_actual
 	insert_procedimiento(nombre_pro_act,tipo_pro_actual,1)
-	insert_variable(nombre_pro_act,tipo_pro_actual,2)
 	pass
 
 def p_programa1_1(t):
@@ -102,14 +135,18 @@ def p_estructura(t):
 	pass
 
 def p_vars(t):
-	'vars : RES_DEF vars1 '
+	'vars : RES_DEF COL vars1 '
+	insert_variable(nombre_var_actual,tipo_pro_actual,1, nombre_pro_act)
 	pass
 
 def p_vars1(t):
-	'''vars1 : estructura
-			| estructura vars1
+	'''vars1 : estructura vars1
 			| dato ID vars2 vars1_1
 			'''
+	global tipo_pro_actual
+	tipo_pro_actual = tipo_pro
+	global nombre_var_actual
+	nombre_var_actual = t[2]
 	pass
 
 def p_vars1_1(t):
@@ -166,7 +203,23 @@ def p_array2(t):
 	pass
 
 def p_modulos(t):
-	'''modulos : prototipos COL  bloque'''
+	'''modulos : prototipos se_uso COL  bloque'''
+	pass
+
+def p_se_uso(t):
+	'se_uso : '
+	global nombre_pro_act
+	global tabla_pro
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == nombre_pro_act and not pro.se_uso:
+			tabla_pro[n].se_uso = True
+			break
+		elif pro.nombre_funcion == nombre_pro_act and pro.se_uso:
+			print "Sorry - function %s already exists" %nombre_pro_act
+			sys.exit()
+		elif n+1 == len(tabla_pro):
+			print "Sorry - prototype %s doesn't exist" % nombre_pro_act
+			sys.exit()
 	pass
 
 def p_bloque(t):
