@@ -22,6 +22,7 @@ class TablaProcedimientoNodo:
 		self.tipo_retorno = tipo
 		self.dir_base = dirb
 		self.var = []
+		self.se_uso = False
 
 tabla_pro = [ ]
 
@@ -33,24 +34,24 @@ def insert_procedimiento(nombre, tipo, dirb):
 def print_tables(currentProList):
 	print "Tabla de procedimientos y variables"
 	for currentPro in currentProList:
-		var = currentPro.var
-
 		if currentPro:
-			print currentPro.nombre_funcion, " - " ,currentPro.tipo_retorno, " - ", currentPro.dir_base
-			
-			for variable in currentPro.var : 
-				print currentPro.var.first.nombre_variable, " - ", currentPro.var.first.tipo_dato, " - ", currentPro.var.first.direccion
+			print currentPro.nombre_funcion, " - ", currentPro.tipo_retorno, " - ", currentPro.dir_base
+			for variable in currentPro.var:
+				print variable.nombre_variable, " - ", variable.tipo_dato, " - ", variable.direccion
 			print "\n"
 		else:
 			print "List is empty"
 			
 
-def insert_variable(nombre, tipo, dire):
+def insert_variable(nombre, tipo, dire, proc):
+	global tabla_pro
 	variable = TablaVariableNodo(nombre, tipo, dire)
-	lugar = tabla_pro
-	lugar.var.append(variable)
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			tabla_pro[n].var.append(variable)
 
-def existe_pro(tabla_pro, nombre):
+def existe_pro(nombre):
+	global tabla_pro
 	for pro in tabla_pro:
 		if pro.nombre_funcion == nombre:
 			sys.exit()
