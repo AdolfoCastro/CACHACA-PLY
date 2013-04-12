@@ -10,7 +10,7 @@
 #----------------------------------------------
 import sys
 import scanner
-import clases
+from clases import *
 import ply.yacc as yacc
 import fileinput
 from tvariables import *
@@ -397,7 +397,7 @@ def p_factor(t):
 	pass
 
 def p_cons(t):
-	'''cons : ID
+	'''cons : ID exp_1
 			| CTE_INT
 			| CTE_FLOAT
 			| consarray
@@ -405,9 +405,23 @@ def p_cons(t):
 			'''
 	pass
 
-def p_main(t):
-	'''main : RES_START COL  bloque RES_END '''
+def p_exp_1(t):
+	'exp_1 : '
+	global tabla_pro
+	global nombre_pro_act
+	tabla_pro[subindice_tabla_pro_pro_actual(nombre_pro_act)].var
+	exp_1(t[1], tipo)
 
+def p_main(t):
+	'''main : RES_START comienza_main COL  bloque RES_END '''
+	pass 
+
+def p_comienza_main(t):
+	'comienza_main : '
+	insert_procedimiento("Main"," ",1)
+	tabla_pro[-1].se_uso = True
+	global nombre_pro_act
+	nombre_pro_act = 'Main'
 	pass
 
 def p_consarray(t):
