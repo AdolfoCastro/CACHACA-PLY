@@ -26,6 +26,17 @@ class TablaProcedimientoNodo:
 
 tabla_pro = [ ]
 
+def subindice_tabla_pro_pro_actual(nombre):
+	global tabla_pro
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == nombre_pro_act and pro.se_uso:
+			return n
+	return 0
+
+def subindice_tabla_var_actual(nombre, tabla_var):
+	#for n,var in enumerate(tabla_var):
+	pass	
+
 def insert_procedimiento(nombre, tipo, dirb):
 	global tabla_pro
 	pro = TablaProcedimientoNodo(nombre, tipo, dirb)
