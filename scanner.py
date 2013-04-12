@@ -129,7 +129,7 @@ def t_CTE_DOUBLE(t):
 # Constantes String
 def t_CTE_STRING(t):
 	r'\"[^\"]*\"'
-	t.value = string(t.value)
+	t.value = t.value
 	return t
 
 # Salto de linea
