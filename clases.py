@@ -11,7 +11,7 @@
 
 #Clase de Stack
 class Stack(object):
-  def __init__(self): 
+	def __init__(self): 
 		# Initialize the stack
 		self.stack = [ ] 
 	def push(self,object):

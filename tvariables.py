@@ -28,6 +28,7 @@ tabla_pro = [ ]
 
 def subindice_tabla_pro_pro_actual(nombre):
 	global tabla_pro
+	global nombre_pro_act
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == nombre_pro_act and pro.se_uso:
 			return n
@@ -39,6 +40,7 @@ def subindice_tabla_var_actual(nombre, tabla_var):
 
 def insert_procedimiento(nombre, tipo, dirb):
 	global tabla_pro
+	existe_pro (nombre)
 	pro = TablaProcedimientoNodo(nombre, tipo, dirb)
 	tabla_pro.append(pro)
 
@@ -65,6 +67,7 @@ def existe_pro(nombre):
 	global tabla_pro
 	for pro in tabla_pro:
 		if pro.nombre_funcion == nombre:
+			print "Sorry - the prototype %s already exist"%nombre
 			sys.exit()
 
 def existe_var(tabla_var, nombre):

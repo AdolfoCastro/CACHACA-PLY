@@ -405,12 +405,14 @@ def p_cons(t):
 			'''
 	pass
 
+#no se que hace esta funcion, me produce errores "Adolfo"
 def p_exp_1(t):
 	'exp_1 : '
-	global tabla_pro
-	global nombre_pro_act
-	tabla_pro[subindice_tabla_pro_pro_actual(nombre_pro_act)].var
-	exp_1(t[1], tipo)
+	#global tabla_pro
+	#global nombre_pro_act
+	#tabla_pro[subindice_tabla_pro_pro_actual(nombre_pro_act)].var
+	#exp_1(t[1], tipo)
+	
 
 def p_main(t):
 	'''main : RES_START comienza_main COL  bloque RES_END '''

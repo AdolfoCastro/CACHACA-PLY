@@ -10,21 +10,38 @@ asdf
 $
 Prototype func Integer Algo1 ( Integer Algunos)
 Prototype func Float Algo2 ( Integer Algunos)
-Prototype func Integer Algo1 ( Integer Algunos)
-Prototype func Float Algo2 ( Integer Algunos)
-Prototype func Integer Algo1 ( Integer Algunos)
-Prototype func Float Algo2 ( Integer Algunos)
-Prototype func Integer Algo1 ( Integer Algunos)
-Prototype func Float Algo2 ( Integer Algunos)
-Prototype func Integer Algo1 ( Integer Algunos)
-Prototype func Float Algo2 ( Integer Algunos)
-Prototype func Integer Algo1 ( Integer Algunos)
-Prototype func Float Algo2 ( Integer Algunos)
+Prototype func Integer Algo123 ( Integer Algunos)
+
+
+
+
+define: String dasf
+define: Integer aasd
+define: Integer adaf
+define: Integer fadsf
+define: Integer aafdsf
+define: Integer a
+define: Float asdfaeqer
+define: Integer gasdgasdac
+define: Integer adfasdg4w
 
 
 
 func Integer Algo1 ( Integer Algunos):
 a = b + c + d
+
+define: String dasf
+define: Integer aasd
+define: Integer adaf
+define: Integer fadsf
+
+func Integer Algo123 ( Integer Algunos):
+a = b + c + d
+
+define: String dasf
+define: Integer aasd
+define: Integer adaf
+define: Integer fadsf
 
 
 Start:
