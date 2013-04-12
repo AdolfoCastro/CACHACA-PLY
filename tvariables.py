@@ -58,6 +58,7 @@ def print_tables(currentProList):
 
 def insert_variable(nombre, tipo, dire, proc):
 	global tabla_pro
+	existe_var (nombre,proc)
 	variable = TablaVariableNodo(nombre, tipo, dire)
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == proc:
@@ -69,11 +70,17 @@ def existe_pro(nombre):
 		if pro.nombre_funcion == nombre:
 			print "Sorry - the prototype %s already exist"%nombre
 			sys.exit()
+	pass
 
-def existe_var(tabla_var, nombre):
-	for var in tabla_var:
-		if var.nombre_variable == nombre:
-			sys.exit()
+def existe_var(nombre,proc):
+	global tabla_pro
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for variable in pro.var:
+				if variable.nombre_variable == nombre:
+					print "Sorry - the variable %s already exist"%nombre
+					sys.exit()
+	pass
 
 def existe_var_asignar(tabla_var, nombre):
 	if not existe_var(tabla_var, nombre):
