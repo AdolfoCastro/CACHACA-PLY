@@ -16,7 +16,7 @@ import ply.lex as lex
 # Palabras reservadas
 reserved = {
 	'Prototype'	:'RES_PROTO',
-	'define'	:'RES_DEF',
+	'Define'	:'RES_DEF',
 	'Integer'	:'RES_INT',
 	'String'	:'RES_STRING',
 	'Float'		:'RES_FLOAT',
@@ -108,17 +108,18 @@ def t_VAR(t):
     t.type = reserved.get(t.value,'VAR')
     return t
 """
-# Constantes enteras
-def t_CTE_INT(t):
-	r'\d+'
-	t.value = int(t.value)
-	return 
 
 #Constantes de punto flotante
 def t_CTE_FLOAT(t):
 	r'[0-9]+.[0-9]+'
 	t.value = float(t.value)
 	return t
+
+# Constantes enteras
+def t_CTE_INT(t):
+	r'\d+'
+	t.value = int(t.value)
+	return 
 
 # Constantes 
 def t_CTE_DOUBLE(t):

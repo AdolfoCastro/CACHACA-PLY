@@ -15,7 +15,7 @@ class TablaVariableNodo:
 		self.nombre_variable = nombre
 		self.tipo_dato = tipo
 		self.direccion = dire
-
+		
 class TablaProcedimientoNodo:
 	def __init__(self, nombre, tipo, dirb):
 		self.nombre_funcion = nombre

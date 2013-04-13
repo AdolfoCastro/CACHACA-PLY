@@ -15,8 +15,8 @@ Prototype func Integer Algo123 ( Integer Algunos)
 
 
 
-define: String dasf
-define: String daasdfsf
+Define: String dasf
+Define: String daasdfsf
 
 
 
@@ -24,10 +24,35 @@ func Integer Algo1 ( Integer Algunos):
 a = b + c + d
 
 
+
 func Integer Algo123 ( Integer Algunos):
 a = b + c + d
 
 
-Start:
+Start :
+	a = 1.5
 
+	if (aint > bflt):
+		#estr = "Es mayor"
+	end
+
+	$If Else$
+	if (bflt == cdbl):
+		
+	else:
+		
+	end
+
+	$If Elif$
+	if (estr == "Hola como estas?"):
+
+	else: estr = "Es igual"
+		
+	end
+
+	$IF ELIF ELSE$
+	if (estr == "Hola como estas?"):
+		
+	else:
+	end
 End

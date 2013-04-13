@@ -115,6 +115,7 @@ def p_prototipos_2(t):
 def p_dato(t):
 	'''dato : RES_INT
 			| RES_FLOAT
+			| RES_DOUBLE
 			| RES_BOOLEAN
 			| RES_DOUBLE
 			| RES_STRING 
@@ -282,10 +283,10 @@ def p_asignacion(t):
 	pass
 
 def p_asignacion1(t):
-	'''asignacion1 : expresion
-					| asignlist
-					| asignarray
-					'''
+	'''asignacion1 : exp
+				   | asignlist
+				   | asignarray
+				   '''
 	pass
 
 def p_asignlist(t):
@@ -362,6 +363,7 @@ def p_expresion_1(t):
 			 	   | MAY exp
 				   | MAY_EQ exp
 				   | DIF exp
+				   | EQ_EQ exp
 				   | empty
 				   '''
 
@@ -401,6 +403,10 @@ def p_cons(t):
 	'''cons : ID exp_1
 			| CTE_INT
 			| CTE_FLOAT
+			| CTE_DOUBLE
+			| CTE_STRING
+			| RES_TRUE
+			| RES_FALSE
 			| consarray
 			| conslist
 			'''
@@ -416,7 +422,7 @@ def p_exp_1(t):
 	
 
 def p_main(t):
-	'''main : RES_START comienza_main COL  bloque RES_END '''
+	'''main : RES_START comienza_main COL bloque RES_END '''
 	pass 
 
 def p_comienza_main(t):

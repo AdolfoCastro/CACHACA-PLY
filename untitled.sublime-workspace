@@ -5,7 +5,7 @@
 		[
 			[
 				"nombre",
-				"nombre_variable"
+				"nombre"
 			],
 			[
 				"nom",
@@ -527,6 +527,18 @@
 		"selected_items":
 		[
 			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"project",
+				"Project: Close"
+			],
+			[
 				"php",
 				"Set Syntax: PHP"
 			],
@@ -535,11 +547,11 @@
 				"Set Syntax: SQL"
 			]
 		],
-		"width": 392.0
+		"width": 449.0
 	},
 	"console":
 	{
-		"height": 0.0
+		"height": 125.0
 	},
 	"distraction_free":
 	{
@@ -552,14 +564,15 @@
 	},
 	"file_history":
 	[
-		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/parser.py",
-		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/scanner.py",
 		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/cuadruplos.py",
-		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/entrada.txt",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/parser.py",
 		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/tvariables.py",
-		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/cubo_semantico.py",
-		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/clases.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/parsetab.py",
 		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/parser.out",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/clases.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/scanner.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/cubo_semantico.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/entrada.txt",
 		"/Users/adolfocastro/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/adolfocastro/Dropbox/Desarrollo en la nube/desarrollo en la nube funcionando/django-testapp-develop/dbindexer/compiler.py",
 		"/Users/adolfocastro/Desktop/CACHACA-PLY/parser.py",
@@ -678,8 +691,7 @@
 		"/Users/adolfocastrorojas/Desktop/Compilador/sintactico.y",
 		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/compilar.sh",
 		"/Users/adolfocastrorojas/Desktop/tvariables.c",
-		"/Users/adolfocastrorojas/Desktop/tabladevariables.c",
-		"/Users/adolfocastrorojas/Desktop/tabladeprocedimiento"
+		"/Users/adolfocastrorojas/Desktop/tabladevariables.c"
 	],
 	"find":
 	{
@@ -698,6 +710,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"for",
+			"nombre",
+			"operando2",
+			"Cuadruplo",
+			"def",
+			"DEF",
+			"def",
+			"DEF",
+			"def",
+			"',\n",
+			"def ",
+			"nombre",
+			"#----------------------------------------------",
 			"nombre_pro_act",
 			"vars",
 			"var",
@@ -812,20 +837,7 @@
 			"lexer",
 			"calc >",
 			"xml",
-			"semi",
-			"external_declaration",
-			"knotty",
-			"D01A71",
-			"rs",
-			"content",
-			"print",
-			"fuction",
-			"fucion",
-			"unollamada",
-			"llamada",
-			"existpro",
-			"existepro",
-			"cuadruploDeEntrada"
+			"semi"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -886,7 +898,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"input":
 	{
@@ -929,6 +941,50 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"par",
+				"parser.py"
+			],
+			[
+				"cuad",
+				"cuadruplos.py"
+			],
+			[
+				"tv",
+				"tvariables.py"
+			],
+			[
+				"tvariabes",
+				"tvariables.py"
+			],
+			[
+				"cuadrup",
+				"cuadruplos.py"
+			],
+			[
+				"tvaria",
+				"tvariables.py"
+			],
+			[
+				"clases",
+				"clases.py"
+			],
+			[
+				"parser",
+				"parser.py"
+			],
+			[
+				"tva",
+				"tvariables.py"
+			],
+			[
+				"scaner",
+				"scanner.py"
+			],
+			[
+				"cubo",
+				"cubo_semantico.py"
+			]
 		],
 		"width": 0.0
 	},
