@@ -1,6 +1,6 @@
 $Este es un comentario
 Los comentarios pueden tener varias lineas
-  y pueden estar indentados
+	y pueden estar indentados
 ademas puede contener diferentes caracte!@(U@#D(H#2r423r 
 $
 
@@ -23,45 +23,77 @@ func Integer Algo1(Integer a):
 	Define: Float bflt
 	Define: Double cdbl
 	Define: Boolean dbool
-	Define: String  estr
+	Define: String estr
 
 $Este es el metodo main$
 Start:
-	$La palabra reservada set sirve para 
-	definir el valor de una variable$
-	set aint = 1
-	$
-	Aqui marca error
-	set bflt = 1.5
-	set cdbl = 3.7
-	$
-	set dbool = True
-	set estr = "Esto es un string"
+	Define: Array Integer arregloInt[10]
+
+	arregloInt[0]=0
+	arregloInt[1]=1
+	arregloInt[2]=2
+	arregloInt[3]=3
+	arregloInt[4]=4
+
+	Define: String varmain
+	print "Entra al programa"
+	
+	#Asignaciones
+	aint = 1
+	bflt = 1.5
+	cdbl = 3.7
+	dbool = true
+	estr = "Esto es un string"
+	
+	Algo1(aint)
 	
 	$Estatutos Condicionales$
 	$If sencillo$
 	if (aint > bflt):
-		set estr = "Es mayor"
-
+		estr = "Es mayor"
+	end
 	$If Else$
 	if (bflt == cdbl):
-		set estr = "Es igual" 
+		estr = "Es igual" 
 	else:
-		set estr = "Hola como estas?"
-
+		estr = "No es igual"
+	end
 	$If Elif$
-	if (estr == "Hola como estas?"):
-		set estr = "Bien"
-	elif estr == "Es igual":
-		set estr = "Pues que bien"
-
-	$IF ELIF ELSE$
-	if (estr == "Hola como estas?"):
-		set estr = "Bien"
-	elif (estr == "Es igual"):
-		set estr = "Pues que bien"
+	if (estr == "No es igual"):
+		estr = "Es diferente"
 	else:
-		set estr = "Pues que paso?"
+		if estr == "Es igual":
+			estr = "No es diferente"
+	end
 
-	while 
+	$IF ELSE IF ELSE$
+	if (estr == "Es igual"):
+		estr = "Son el mismo"
+	else:
+		if (estr == "Es diferente"):
+			estr = "Cambio"
+		else:
+			estr = "Pues que paso?"
+		end
+	end
+
+	switch:
+		case (aint<1):
+			print("Es menor a 1")
+		case (aint<=1):
+			print("Es menor o igual a 1")
+		case (aint==1):
+			print("Es igual a 1")
+		case (aint>=1):
+			print("Es mayor o igual a 1")
+		case (aint>1):
+			print("Es mayor a 1")
+
+	for(aint=0: aint!=0: aint=aint+1):
+		bflt = bflt + aint + 2
+		print aint
+
+	while(aint<0):
+		print(aint)
+		aint=aint-1
 End
