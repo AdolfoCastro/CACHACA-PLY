@@ -1,0 +1,67 @@
+$Este es un comentario
+Los comentarios pueden tener varias lineas
+  y pueden estar indentados
+ademas puede contener diferentes caracte!@(U@#D(H#2r423r 
+$
+
+$Este es un prototipo, sirven para dar de alta las funciones$
+Prototype func Integer Algo1(Integer Algunos)
+
+$Las variables que se definen fuera de 
+funciones y fuera del main son GLOBALES$
+Define: Integer aint
+Define: Float bflt 
+Define: Double cdbl
+Define: Boolean dbool
+Define: String  estr
+
+$Esta es la definicion de una funcion$
+func Integer Algo1(Integer a):
+	$Las variables dentro de una funcion 
+	pertenecen al scope de la funcion$
+	Define: Integer aint
+	Define: Float bflt
+	Define: Double cdbl
+	Define: Boolean dbool
+	Define: String  estr
+
+$Este es el metodo main$
+Start:
+	$La palabra reservada set sirve para 
+	definir el valor de una variable$
+	set aint = 1
+	$
+	Aqui marca error
+	set bflt = 1.5
+	set cdbl = 3.7
+	$
+	set dbool = True
+	set estr = "Esto es un string"
+	
+	$Estatutos Condicionales$
+	$If sencillo$
+	if (aint > bflt):
+		set estr = "Es mayor"
+
+	$If Else$
+	if (bflt == cdbl):
+		set estr = "Es igual" 
+	else:
+		set estr = "Hola como estas?"
+
+	$If Elif$
+	if (estr == "Hola como estas?"):
+		set estr = "Bien"
+	elif estr == "Es igual":
+		set estr = "Pues que bien"
+
+	$IF ELIF ELSE$
+	if (estr == "Hola como estas?"):
+		set estr = "Bien"
+	elif (estr == "Es igual"):
+		set estr = "Pues que bien"
+	else:
+		set estr = "Pues que paso?"
+
+	while 
+End
