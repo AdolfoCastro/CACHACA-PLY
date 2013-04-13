@@ -117,7 +117,6 @@ def p_dato(t):
 			| RES_FLOAT
 			| RES_DOUBLE
 			| RES_BOOLEAN
-			| RES_DOUBLE
 			| RES_STRING 
 			'''
 	global tipo_pro 
