@@ -1,6 +1,7 @@
 #globales
 contEntGlo	=	0
 contFlotGlo	=	1000
+coutDoubleGlo= 4000
 contStrGlo	=	2000
 contBoolGlo	=	3000
 #contSaltosGlo=4000
@@ -8,15 +9,16 @@ contBoolGlo	=	3000
 #locales
 contEntLoc=5000
 contFlotLoc=6000
-contStrLoc=7000
-contBoolLoc=8000
+contDoubleLoc=7000
+contStrLoc=8000
+contBoolLoc=9000
 #contSaltosLoc=9000
 
 #Temporales
-contEntTmp=10000
-contFlotTmp=11000
-contStrTmp=12000
-contBoolTmp=13000
+contEntTmp=11000
+contFlotTmp=12000
+contStrTmp=13000
+contBoolTmp=14000
 #contSaltosTmp=14000
 
 #Constates

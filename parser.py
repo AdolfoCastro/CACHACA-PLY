@@ -27,9 +27,11 @@ tipo_pro = None
 tipo_pro_actual  = None
 nombre_var_actual = None
 tipo_var = None
+memoria = None
+esta_global = False
 
 def p_programa(t):
-	'''programa : programa1 generaglo programa2 programa3 main programa3
+	'''programa : programa1 generaglo valida_entra_global programa2 valida_salir_gobal programa3 main programa3
 	            | empty'''
 	pass
 
@@ -59,10 +61,20 @@ def p_programa1_1(t):
 	pass
 
 def p_programa2(t):
-	'''programa2 : programa2 vars
+	'''programa2 :  programa2  vars 
 				 | empty
 				 '''
 	pass
+
+def p_valida_entra_global(t):
+	'valida_entra_global : '
+	global esta_global
+	esta_global = True
+
+def p_valida_salir_gobal(t):
+	'valida_salir_gobal : '
+	global esta_global
+	esta_global = False
 
 def p_programa3(t):
 	'''programa3 : programa3 modulos
@@ -115,7 +127,8 @@ def p_estructura(t):
 
 def p_vars(t):
 	'vars : RES_DEF COL vars1 '
-	insert_variable(nombre_var_actual,tipo_pro_actual,1, nombre_pro_act)
+	global memoria
+	insert_variable(nombre_var_actual,tipo_pro_actual,memoria, nombre_pro_act)
 	pass
 
 def p_vars1(t):
@@ -123,7 +136,46 @@ def p_vars1(t):
 			| dato ID vars2 vars1_1
 			'''
 	global tipo_pro_actual
+
+	global contEntLoc
+	global contFlotLoc
+	global contStrLoc
+	global contDoubleLoc
+
+	global contEntGlo
+	global contFlotGlo
+	global coutDoubleGlo
+	global contStrGlo
+
+	global memoria
+	global esta_global
 	tipo_pro_actual = tipo_pro
+	if esta_global:
+		if tipo_pro_actual == "Integer":
+			memoria = contEntGlo
+			contEntGlo += 1
+		if tipo_pro_actual == "Float":
+			memoria = contFlotGlo
+			contFlotGlo += 1
+		if tipo_pro_actual == "Double":
+			memoria = coutDoubleGlo
+			coutDoubleGlo += 1
+		if tipo_pro_actual == "String":
+			memoria = contStrGlo
+			contStrGlo += 1
+	else:
+		if tipo_pro_actual == "Integer":
+			memoria = contEntLoc
+			contEntLoc += 1
+		if tipo_pro_actual == "Float":
+			memoria = contFlotLoc
+			contFlotLoc += 1
+		if tipo_pro_actual == "Double":
+			memoria = contDoubleLoc
+			contDoubleLoc += 1
+		if tipo_pro_actual == "String":
+			memoria = contStrLoc
+			contStrLoc += 1
 	global nombre_var_actual
 	nombre_var_actual = t[2]
 	pass
@@ -433,10 +485,14 @@ def p_exp_3(t):
 
 def p_main(t):
 	'''main : RES_START comienza_main COL bloque RES_END '''
+	global esta_global
+	esta_global = False
 	pass 
 
 def p_comienza_main(t):
 	'comienza_main : '
+	global esta_global
+	esta_global = True
 	insert_procedimiento("Main"," ",1)
 	tabla_pro[-1].se_uso = True
 	global nombre_pro_act

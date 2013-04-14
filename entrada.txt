@@ -11,12 +11,14 @@ $
 Prototype func Integer Algo1 ( Integer Algunos)
 Prototype func Float Algo2 ( Integer Algunos)
 Prototype func Integer Algo123 ( Integer Algunos)
+Prototype func Integer Algo5(Integer Algunos)
 
 
 
 
 Define: String dasf
 Define: String daasdfsf
+Define: Integer dos
 
 
 
@@ -41,6 +43,9 @@ Start :
 	Define : Integer bflt
 	Define : Integer cdbl
 	Define : Integer estr
+	Define : Float asd
+	Define : Float asde
+	Define : Float asds
 	a = 1.5
 
 
@@ -68,3 +73,12 @@ Start :
 	else:
 	end
 End
+
+func Integer Algo5 ( Integer Algunos):
+Define: Float a
+Define: Integer b
+Define: Integer c
+Define: Integer d
+
+
+a = 2.3+ 3.2 +3.4
