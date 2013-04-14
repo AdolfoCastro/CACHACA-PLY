@@ -24,19 +24,7 @@ class TablaProcedimientoNodo:
 		self.var = []
 		self.se_uso = False
 
-tabla_pro = [ ]
-
-def subindice_tabla_pro_pro_actual(nombre):
-	global tabla_pro
-	global nombre_pro_act
-	for n,pro in enumerate(tabla_pro):
-		if pro.nombre_funcion == nombre_pro_act and pro.se_uso:
-			return n
-	return 0
-
-def subindice_tabla_var_actual(nombre, tabla_var):
-	#for n,var in enumerate(tabla_var):
-	pass	
+tabla_pro = [ ]	
 
 def insert_procedimiento(nombre, tipo, dirb):
 	global tabla_pro
@@ -80,6 +68,22 @@ def existe_var(nombre,proc):
 				if variable.nombre_variable == nombre:
 					print "Sorry - the variable %s already exist"%nombre
 					sys.exit()
+	pass
+
+def busca_tipo(nombre,proc):
+	global tabla_pro
+	esta = False
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for variable in pro.var:
+				if variable.nombre_variable == nombre:
+					tipo_var  = variable.tipo_dato
+					esta = True
+					return tipo_var
+			if not esta:
+				print "Sorry - the variable  %s was not declared"%nombre
+ 				sys.exit()
+
 	pass
 
 def existe_var_asignar(tabla_var, nombre):

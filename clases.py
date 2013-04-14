@@ -24,6 +24,9 @@ class Stack(object):
 		return self.stack[-1]
 	def length(self):
 		return len(self.stack)
+	def show(self):
+		for node in self.stack:
+			print node
 
 class Memoria(object):
 	def __init__(self):

@@ -20,17 +20,29 @@ Define: String daasdfsf
 
 
 
+
 func Integer Algo1 ( Integer Algunos):
-a = b + c + d
+Define: Float a
+Define: Integer b
+Define: Integer c
+Define: Integer d
+
+
+a = 2.3+ 3.2 +3.4
 
 
 
 func Integer Algo123 ( Integer Algunos):
-a = b + c + d
 
 
 Start :
+	Define : Integer a
+	Define : Integer aint
+	Define : Integer bflt
+	Define : Integer cdbl
+	Define : Integer estr
 	a = 1.5
+
 
 	if (aint > bflt):
 		#estr = "Es mayor"

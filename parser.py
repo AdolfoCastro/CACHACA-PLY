@@ -14,41 +14,19 @@ from clases import *
 import ply.yacc as yacc
 import fileinput
 from tvariables import *
+from memory import *
+from cuadruplos import *
+from tconstantes import *
 
 # Consigue el mapa de tokens
 tokens = scanner.tokens
 start = 'programa'
-'''
-/*******************globales********************/
-int contEntGlo=0;
-int contFlotGlo=1000;
-int contStrGlo=2000;
-int contBoolGlo=3000;
-//int contSaltosGlo=4000;
-/*******************Locales********************/
-int contEntLoc=5000;
-int contFlotLoc=6000;
-int contStrLoc=7000;
-int contBoolLoc=8000;
-//int contSaltosLoc=9000;
-/*******************Temporales*****************/
-int contEntTmp=10000;
-int contFlotTmp=11000;
-int contStrTmp=12000;
-int contBoolTmp=13000;
-//int contSaltosTmp=14000;
-/*******************Constantes*****************/
-int contEntCons=15000;
-int contFlotCons=16000;
-int contStrCons=17000;
-int contBoolCons=18000;
-//int contSaltosCons=19000;
-'''
 
 nombre_pro_act = None
 tipo_pro = None
 tipo_pro_actual  = None
 nombre_var_actual = None
+tipo_var = None
 
 def p_programa(t):
 	'''programa : programa1 generaglo programa2 programa3 main programa3
@@ -278,7 +256,17 @@ def p_escritura1(t):
 
 
 def p_asignacion(t):
-	'asignacion : ID EQUALS asignacion1 '
+	'asignacion : ID seen_id_asignacion'
+	global nombre_var_actual 
+	nombre_var_actual = t[1]
+	global tipo_var
+	tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
+	exp_1(nombre_var_actual,tipo_var)
+	pass
+
+def p_seen_id_asignacion(t):
+	'seen_id_asignacion : EQUALS asignacion1 '
+
 	pass
 
 def p_asignacion1(t):
@@ -376,6 +364,8 @@ def p_exp1(t):
 			| MINUS exp
 			| empty
 			'''
+	signo = t[1]
+	exp_2(signo)
 	pass
 
 def p_termino(t):
@@ -388,6 +378,8 @@ def p_termino1(t):
 				| DIVIDE termino
 				| empty
 				'''
+	signo = t[1]
+	exp_3(signo)
 	pass
 
 def p_factor(t):
@@ -400,8 +392,8 @@ def p_factor(t):
 
 def p_cons(t):
 	'''cons : ID exp_1
-			| CTE_INT
-			| CTE_FLOAT
+			| CTE_INT exp_2
+			| CTE_FLOAT exp_3
 			| CTE_DOUBLE
 			| CTE_STRING
 			| RES_TRUE
@@ -409,15 +401,34 @@ def p_cons(t):
 			| consarray
 			| conslist
 			'''
+	global nombre_var_actual 
+	nombre_var_actual = t[1]
 	pass
 
 #no se que hace esta funcion, me produce errores "Adolfo"
 def p_exp_1(t):
 	'exp_1 : '
-	#global tabla_pro
-	#global nombre_pro_act
-	#tabla_pro[subindice_tabla_pro_pro_actual(nombre_pro_act)].var
-	#exp_1(t[1], tipo)
+	global nombre_var_actual
+	global tipo_var
+	global contEntGlo
+	tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
+	exp_1(nombre_var_actual,tipo_var)
+
+def p_exp_2(t):
+	'exp_2 : '
+	global contEntGlo
+	global nombre_var_actual
+	global tipo_var
+	insert_constante(nombre_var_actual,tipo_var,contEntGlo)
+	contEntGlo+=1
+
+def p_exp_3(t):
+	'exp_3 : '
+	global nombre_var_actual
+	global tipo_var
+	global contFlotGlo
+	insert_constante(nombre_var_actual,tipo_var,contFlotGlo)
+	contFlotGlo+=1
 	
 
 def p_main(t):
@@ -470,3 +481,5 @@ for line in fileinput.input():
 yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
+print_cuadruplos()
+print_constantes(tabla_cons)

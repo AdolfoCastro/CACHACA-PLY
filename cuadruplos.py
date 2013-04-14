@@ -9,6 +9,7 @@
 #----------------------------------------------
 from clases import Stack
 from cubo_semantico import cubo_semantico
+import os, sys
 
 class Cuadruplo:
 
@@ -31,10 +32,12 @@ def exp_1(var, tipo):
 	p_tipos.push(tipo)
 
 def exp_2(oper):
-	p_oper.push(oper)
+	if oper:
+		p_oper.push(oper)
 
 def exp_3(oper):
-	p_oper.push(oper)
+	if oper:
+		p_oper.push(oper)
 
 def exp_4(memoria):
 	if p_oper.head() == "+" or p_oper.head() == "-":
@@ -135,7 +138,7 @@ def est_if_else_3():
 
 # Acciones de Generacion de codigo para estatutos condicionales while
 def est_while_1():
-  p_saltos.push(cont)
+	p_saltos.push(cont)
 	cuadruplo.res = memoria.siguiente()
 
 def est_while_2():
@@ -159,7 +162,7 @@ def est_case_1(exp):
 		p_saltos.push("(")
 
 def est_case_2():
-	#Verificar que la expresión ordinal...
+	#Verificar que la expresion ordinal
 	cte = pila_o.pop()
 	exp = pila_o.pop()
 	cuadruplo1 = Cuadruplo("=", exp, cte, tk)
@@ -169,7 +172,7 @@ def est_case_2():
 	p_saltos(cont-1)
 
 def est_case_3():
-	#Verificar que la expresión ordinal...
+	#Verificar que la expresion ordinal...
 	cte = pila_o.pop()
 	exp = pila_o.pop()
 	cuadruplo = Cuadruplo("=", exp, cte, tk)
@@ -209,3 +212,22 @@ def est_for_4():
 	cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
 	cuadruplo3.res = retorno + 1
 	tmpf.free()
+
+def print_cuadruplos():
+	global pila_o
+	global p_tipos
+	global p_oper
+	global p_saltos
+
+	print "\n"
+	print "--Opernando--"
+	pila_o.show()
+	print "\n"
+	print "--Tipos--"
+	p_tipos.show()
+	print "\n"
+	print "--Operador--" 
+	p_oper.show()
+	print "\n"
+	print "--Saltos--"
+	p_saltos.show()
