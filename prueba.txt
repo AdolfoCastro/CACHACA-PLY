@@ -27,20 +27,20 @@ func Integer Algo1(Integer a):
 
 $Este es el metodo main$
 Start:
-	Define: Array Integer arregloInt[10]
+	Define: Array Integer arreglo[10]
 
-	arregloInt[0]=0
-	arregloInt[1]=1
-	arregloInt[2]=2
-	arregloInt[3]=3
-	arregloInt[4]=4
+	arreglo[0]=0
+	arreglo[1]=1
+	arreglo[2]=2
+	arreglo[3]=3
+	arreglo[4]=4
 
 	Define: String varmain
-	print "Entra al programa"
+	print("Entra al programa")
 	
 	#Asignaciones
 	aint = 1
-	bflt = 1.5
+	bflt = 1.9
 	cdbl = 3.7
 	dbool = true
 	estr = "Esto es un string"
@@ -49,7 +49,7 @@ Start:
 	
 	$Estatutos Condicionales$
 	$If sencillo$
-	if (aint > bflt):
+	if (aint > bflt && dbool==true || dbool==false):
 		estr = "Es mayor"
 	end
 	$If Else$
@@ -62,7 +62,7 @@ Start:
 	if (estr == "No es igual"):
 		estr = "Es diferente"
 	else:
-		if estr == "Es igual":
+		if (estr == "Es igual"):
 			estr = "No es diferente"
 	end
 
@@ -78,22 +78,24 @@ Start:
 	end
 
 	switch:
-		case (aint<1):
+		case aint<1:
 			print("Es menor a 1")
-		case (aint<=1):
+		case aint<=1:
 			print("Es menor o igual a 1")
-		case (aint==1):
+		case aint==1:
 			print("Es igual a 1")
-		case (aint>=1):
+		case aint>=1:
 			print("Es mayor o igual a 1")
-		case (aint>1):
+		case aint>1:
 			print("Es mayor a 1")
 
-	for(aint=0: aint!=0: aint=aint+1):
+	for(aint=1: aint==0: aint=aint+1):
 		bflt = bflt + aint + 2
-		print aint
+		print(aint)
+	end
 
 	while(aint<0):
 		print(aint)
 		aint=aint-1
+	end
 End
