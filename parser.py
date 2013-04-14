@@ -43,8 +43,8 @@ def p_generaglo(t):
 	pass
 
 def p_programa1(t):
-	'''programa1 : RES_PROTO prototipos seen_prototipo programa1_1
-				 '''
+	'''programa1 : RES_PROTO prototipos seen_prototipo programa1
+				 | empty'''
 	pass
 
 def p_seen_prototipo(t):
@@ -52,12 +52,6 @@ def p_seen_prototipo(t):
 	global nombre_pro_act
 	global tipo_pro_actual
 	insert_procedimiento(nombre_pro_act,tipo_pro_actual,1)
-	pass
-
-def p_programa1_1(t):
-	'''programa1_1 : programa1
-				   | empty
-				   '''
 	pass
 
 def p_programa2(t):
