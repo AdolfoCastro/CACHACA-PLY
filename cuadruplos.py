@@ -24,6 +24,7 @@ pila_o = Stack()
 p_tipos = Stack()
 p_oper = Stack()
 p_saltos = Stack()
+tabla_cuadruplos = []
 
 # Acciones de Generacion de codigo para Expresiones usando 
 # cuadruplos incluyendo algunas acciones para verificacion semantica
@@ -39,13 +40,34 @@ def exp_3(oper):
 	if oper:
 		p_oper.push(oper)
 
-def exp_4(memoria):
+def exp_4():
+	global contEntTmp
+	global contFlotTmp
+	global contDoubleTmp
+	global contStrTmp
+	global contBoolTmp
 	if p_oper.head() == "+" or p_oper.head() == "-":
 		tipo_res = cubo_semantico[p_tipos.head()][p_tipos.neck()][p_oper.head()]
 		if tipo_res != "Error":
+			if tipo_res == "Integer":
+				memoria  = contEntTmp
+				contEntTmp+=1
+			elif tipo_res == "Float":
+				memoria = contFlotTmp
+				contFlotTmp+=1
+			elif tipo_res == "Double":
+				memoria = contDoubleTmp
+				contDoubleTmp+=1
+			elif tipo_res == "String":
+				memoria = contStrTmp
+				contStrTmp+=1
+
 			p_tipos.pop()
 			p_tipos.pop()
-			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria.siguiente())
+
+			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
+			tabla_cuadruplos.apend(cuadruplo)
+
 			#Libera la memoria
 			if cuadruplo.o1.contains("MEM"):
 				memoria.liberar(cuadruplo.o1)
@@ -213,7 +235,8 @@ def est_for_4():
 	cuadruplo3.res = retorno + 1
 	tmpf.free()
 
-def print_cuadruplos():
+def print_pilas():
+	print "Pilas"
 	global pila_o
 	global p_tipos
 	global p_oper
@@ -232,3 +255,13 @@ def print_cuadruplos():
 	print "\n"
 	print "--Saltos--"
 	p_saltos.show()
+
+def print_cuadruplos(currentCuadList):
+	print "Tabla Cuadruplos"
+	for currentCuad in currentCuadList:
+		if currentCuad:
+			print currentCuad.op, " - ", currentCuad.o1, " - ", currentCuad.o2,"-",currentCuad.res
+		else:
+			print "List is empty"
+	pass
+

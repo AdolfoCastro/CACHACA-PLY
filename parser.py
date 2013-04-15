@@ -63,7 +63,6 @@ def p_seen_prototipo(t):
 	'seen_prototipo : '
 	global nombre_pro_act
 	global tipo_pro_actual
-	print nombre_pro_act
 	insert_procedimiento(nombre_pro_act,tipo_pro_actual,1)
 	pass
 
@@ -424,9 +423,14 @@ def p_exp(t):
 		   '''
 	pass
 
+def p_cuadruplo_exp_4(t):
+	'cuadruplo_exp_4 : '
+
+
+
 def p_exp1(t):
-	'''exp1 : PLUS exp
-			| MINUS exp
+	'''exp1 : PLUS exp cuadruplo_exp_4
+			| MINUS exp cuadruplo_exp_4
 			| empty
 			'''
 	signo = t[1]
@@ -577,5 +581,6 @@ for line in fileinput.input():
 yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
-print_cuadruplos()
+print_pilas()
 print_constantes(tabla_cons)
+print_cuadruplos(tabla_cuadruplos)

@@ -17,13 +17,14 @@ contBoolLoc=9000
 #Temporales
 contEntTmp=11000
 contFlotTmp=12000
-contStrTmp=13000
-contBoolTmp=14000
+contDoubleTmp=13000 
+contStrTmp=14000
+contBoolTmp=15000
 #contSaltosTmp=14000
 
 #Constates
-contEntCons=15000
-contFlotCons=16000
-contStrCons=17000
-contBoolCons=18000
+contEntCons=16000
+contFlotCons=17000
+contStrCons=18000
+contBoolCons=19000
 #contSaltosCons=19000

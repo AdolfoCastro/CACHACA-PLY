@@ -7,7 +7,7 @@ Define: Integer Uno
 Define: Float Dos
 Define: String tres
 Define: Double Cuatro
-Uno = Uno + Dos *  3 +234 /3.4
+Uno = Uno + Dos + Uno + Dos + Uno + Dos
 
 Start :
 Define: Integer Uno
