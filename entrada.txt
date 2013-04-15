@@ -1,16 +1,13 @@
 Prototype func Integer funcion ( Integer Algo)
+Prototype func Integer funcion1 ( Integer Algo)
 
-Define: Integer Uno
-Define: Float Dos
-Define: String tres
-Define: Double Cuatro
 
 func Integer funcion ( Integer Algo):
 Define: Integer Uno
 Define: Float Dos
 Define: String tres
 Define: Double Cuatro
-Uno = Uno + Dos * Integer 3 +  Integer 33
+Uno = Uno + Dos *  3 +234 /3.4
 
 Start :
 Define: Integer Uno
@@ -20,4 +17,7 @@ Define: Double Cuatro
 
 	
 End
+
+func Integer funcion1 ( Integer Algo):
+
 

@@ -39,7 +39,8 @@ reserved = {
 	'print'		:'RES_PRINT',
 	'read'		:'RES_READ',
 	'End'		:'RES_END',
-	'end'		:'E_END'
+	'end'		:'E_END',
+	'endi'		:'ENDI'
 	}
 
 # Tokens
@@ -120,11 +121,11 @@ def t_CTE_INT(t):
 	r'[0-9]+'
 	print"pasa",t
 	t.value = int(t.value)
-	return 
+	return t
 
 # Constantes 
 def t_CTE_DOUBLE(t):
-	r'[0-9]+.[0-9]{0-,100}'
+	r'[0-9]+.[0-9]'
 	t.value = Double(t.value)
 	return t
 

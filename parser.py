@@ -36,10 +36,21 @@ def p_programa(t):
 	            | empty'''
 	pass
 
+def p_prueba(t):
+	'prueba : '
+	global nombre_pro_act
+	print nombre_pro_act
+	print nombre_pro_act
+	print nombre_pro_act
+	print nombre_pro_act
+	print nombre_pro_act
+	pass
+
 def p_generaglo(t):
 	'generaglo : '
 	global nombre_pro_act
 	insert_procedimiento('Global',' ',0)
+	tabla_pro[-1].se_uso = True
 	nombre_pro_act = "Global"
 	pass
 
@@ -231,7 +242,7 @@ def p_array2(t):
 	pass
 
 def p_modulos(t):
-	'''modulos : prototipos se_uso COL  bloque'''
+	'''modulos : prototipos se_uso COL  bloque '''
 	pass
 
 def p_se_uso(t):
@@ -496,10 +507,10 @@ def p_exp_cons_int(t):
 	global contEntLoc
 	if nombre_var_actual == 'Global':
 		insert_constante(nombre_var_actual,tipo_var,contEntGlo)
-		contEntGlo=+1
+		contEntGlo+=1
 	else:
 		insert_constante(nombre_var_actual,tipo_var,contEntLoc)
-		contEntLoc=+1
+		contEntLoc+=1
 
 
 def p_exp_cons_float(t):
@@ -510,10 +521,10 @@ def p_exp_cons_float(t):
 	global contFlotLoc
 	if nombre_var_actual == 'Global':
 		insert_constante(nombre_var_actual,tipo_var,contFlotGlo)
-		contEntGlo=+1
+		contEntGlo+=1
 	else:
 		insert_constante(nombre_var_actual,tipo_var,contFlotLoc)
-		contFlotLoc=+1
+		contFlotLoc+=1
 	pass
 def p_main(t):
 	'''main : RES_START comienza_main COL bloque RES_END '''
@@ -557,6 +568,7 @@ import profile
 
 yacc.yacc(method = 'LALR')
 #yacc.parse(debug = 1)
+
 
 
 program = []
