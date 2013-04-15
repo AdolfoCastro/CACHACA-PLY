@@ -86,6 +86,22 @@ def busca_tipo(nombre,proc):
 
 	pass
 
+def get_address(nombre,proc):
+	global tabla_pro
+	esta = False
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for variable in pro.var:
+				if variable.nombre_variable == nombre:
+					address_var  = variable.direccion
+					esta = True
+					return address_var
+			if not esta:
+				print "Sorry - the variable  %s was not declared"%nombre
+ 				sys.exit()
+
+	pass
+
 def existe_var_asignar(tabla_var, nombre):
 	if not existe_var(tabla_var, nombre):
 		print "La variable " + nombre + " a la que quieres asignar un valor no existe"

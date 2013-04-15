@@ -29,9 +29,10 @@ nombre_var_actual = None
 tipo_var = None
 memoria = None
 esta_global = False
+nombre_var_asignacion = None
 
 def p_programa(t):
-	'''programa : programa1 generaglo valida_entra_global programa2 valida_salir_gobal programa3 main programa3
+	'''programa : programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 main programa3
 	            | empty'''
 	pass
 
@@ -51,11 +52,12 @@ def p_seen_prototipo(t):
 	'seen_prototipo : '
 	global nombre_pro_act
 	global tipo_pro_actual
+	print nombre_pro_act
 	insert_procedimiento(nombre_pro_act,tipo_pro_actual,1)
 	pass
 
 def p_programa2(t):
-	'''programa2 :  programa2  vars 
+	'''programa2 : vars programa2 
 				 | empty
 				 '''
 	pass
@@ -69,6 +71,7 @@ def p_valida_salir_gobal(t):
 	'valida_salir_gobal : '
 	global esta_global
 	esta_global = False
+
 
 def p_programa3(t):
 	'''programa3 : programa3 modulos
@@ -302,18 +305,23 @@ def p_escritura1(t):
 
 
 def p_asignacion(t):
-	'asignacion : ID seen_id_asignacion'
-	global nombre_var_actual 
-	nombre_var_actual = t[1]
-	global tipo_var
-	tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
-	exp_1(nombre_var_actual,tipo_var)
+	'asignacion : seen_id_asignacion EQUALS asignacion1 insert_asignacion'
 	pass
 
 def p_seen_id_asignacion(t):
-	'seen_id_asignacion : EQUALS asignacion1 '
+	'seen_id_asignacion : ID '
+	global nombre_var_asignacion
+	nombre_var_asignacion = t[1]
 
+def p_insert_asignacion(t):
+	'insert_asignacion : '
+	global nombre_var_asignacion
+	global tipo_var
+	direccion_var_actual = get_address(nombre_var_asignacion,nombre_pro_act)
+	tipo_var = busca_tipo(nombre_var_asignacion,nombre_pro_act)
+	exp_1(direccion_var_actual,tipo_var)
 	pass
+
 
 def p_asignacion1(t):
 	'''asignacion1 : exp
@@ -429,17 +437,17 @@ def p_termino1(t):
 	pass
 
 def p_factor(t):
-	'''factor : LPAREN expresion RPAREN
-			| cons
-			| PLUS cons
-			| MINUS cons
-			'''
+	'''factor : LPAREN exp RPAREN
+			  | cons
+			  | PLUS cons
+			  | MINUS cons
+			  '''
 	pass
 
 def p_cons(t):
-	'''cons : ID exp_1
-			| CTE_INT exp_2
-			| CTE_FLOAT exp_3
+	'''cons : seen_id_cons exp_1
+			| seen_int_cons exp_cons_int
+			| seen_float_cons exp_cons_float
 			| CTE_DOUBLE
 			| CTE_STRING
 			| RES_TRUE
@@ -447,46 +455,72 @@ def p_cons(t):
 			| consarray
 			| conslist
 			'''
+
+	pass
+def p_seen_id_cons(t):
+	'''seen_id_cons : ID'''
 	global nombre_var_actual 
 	nombre_var_actual = t[1]
 	pass
 
-#no se que hace esta funcion, me produce errores "Adolfo"
+
+def p_seen_float_cons(t):
+	'''seen_float_cons : CTE_FLOAT'''
+	global nombre_var_actual 
+	global tipo_var
+	tipo_var = "Float"
+	nombre_var_actual = t[1]
+	pass
+
+def p_seen_int_cons(t):
+	'''seen_int_cons : CTE_INT'''
+	global nombre_var_actual 
+	global tipo_var
+	tipo_var = "Integer"
+	nombre_var_actual = t[1]
+	pass
+
 def p_exp_1(t):
 	'exp_1 : '
 	global nombre_var_actual
 	global tipo_var
-	global contEntGlo
+	direccion_var_actual = get_address(nombre_var_actual,nombre_pro_act)
 	tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
-	exp_1(nombre_var_actual,tipo_var)
+	exp_1(direccion_var_actual,tipo_var)
 
-def p_exp_2(t):
-	'exp_2 : '
-	global contEntGlo
+def p_exp_cons_int(t):
+	'exp_cons_int : '
 	global nombre_var_actual
 	global tipo_var
-	insert_constante(nombre_var_actual,tipo_var,contEntGlo)
-	contEntGlo+=1
+	global contEntGlo
+	global contEntLoc
+	if nombre_var_actual == 'Global':
+		insert_constante(nombre_var_actual,tipo_var,contEntGlo)
+		contEntGlo=+1
+	else:
+		insert_constante(nombre_var_actual,tipo_var,contEntLoc)
+		contEntLoc=+1
 
-def p_exp_3(t):
-	'exp_3 : '
+
+def p_exp_cons_float(t):
+	'exp_cons_float : '
 	global nombre_var_actual
 	global tipo_var
 	global contFlotGlo
-	insert_constante(nombre_var_actual,tipo_var,contFlotGlo)
-	contFlotGlo+=1
-	
-
+	global contFlotLoc
+	if nombre_var_actual == 'Global':
+		insert_constante(nombre_var_actual,tipo_var,contFlotGlo)
+		contEntGlo=+1
+	else:
+		insert_constante(nombre_var_actual,tipo_var,contFlotLoc)
+		contFlotLoc=+1
+	pass
 def p_main(t):
 	'''main : RES_START comienza_main COL bloque RES_END '''
-	global esta_global
-	esta_global = False
 	pass 
 
 def p_comienza_main(t):
 	'comienza_main : '
-	global esta_global
-	esta_global = True
 	insert_procedimiento("Main"," ",1)
 	tabla_pro[-1].se_uso = True
 	global nombre_pro_act

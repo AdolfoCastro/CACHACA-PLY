@@ -222,6 +222,7 @@ def print_cuadruplos():
 	print "\n"
 	print "--Opernando--"
 	pila_o.show()
+	#print 'cabeza pila o', pila_o.head()
 	print "\n"
 	print "--Tipos--"
 	p_tipos.show()
