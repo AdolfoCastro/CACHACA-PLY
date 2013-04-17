@@ -30,6 +30,7 @@ tipo_var = None
 memoria = None
 esta_global = False
 nombre_var_asignacion = None
+oper = None
 
 def p_programa(t):
 	'''programa : programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 main programa3
@@ -39,10 +40,6 @@ def p_programa(t):
 def p_prueba(t):
 	'prueba : '
 	global nombre_pro_act
-	print nombre_pro_act
-	print nombre_pro_act
-	print nombre_pro_act
-	print nombre_pro_act
 	print nombre_pro_act
 	pass
 
@@ -315,8 +312,18 @@ def p_escritura1(t):
 
 
 def p_asignacion(t):
-	'asignacion : seen_id_asignacion EQUALS asignacion1 insert_asignacion'
+	'asignacion : seen_id_asignacion EQUALS cuadruplo_exp_8_asignacion asignacion1 insert_asignacion cuadruplo_exp_9_asignacion'
 	pass
+
+def p_cuadruplo_exp_8_asignacion(t):
+	'cuadruplo_exp_8_asignacion : '
+	exp_8("=")
+	pass
+
+def p_cuadruplo_exp_9_asignacion(t):
+	'cuadruplo_exp_9_asignacion : '
+	exp_9()
+	pass 
 
 def p_seen_id_asignacion(t):
 	'seen_id_asignacion : ID '
@@ -405,59 +412,114 @@ def p_switch2(t):
 	pass
 
 def p_expresion(t):
-	'''expresion : exp expresion_1
+	'''expresion : exp expresion_1 cuadruplo_exp_9
 				  '''
 	pass
 def p_expresion_1(t):
-	'''expresion_1 : MIN exp
-				   | MIN_EQ exp
-			 	   | MAY exp
-				   | MAY_EQ exp
-				   | DIF exp
-				   | EQ_EQ exp
+	'''expresion_1 : see_rel cuadruplo_exp_8 exp
 				   | empty
 				   '''
+	pass
+
+def p_see_rel(t):
+	'''see_rel : MIN
+				| MIN_EQ
+				| MAY
+				| MAY_EQ
+				| DIF
+				| EQ_EQ
+				'''
+	global oper
+	oper = t[1]
+	pass
+
+def p_cuadruplos_exp_8(t):
+	'cuadruplo_exp_8 : '
+	global oper
+	exp_8(oper)
+	pass
+
+def p_cuadruplos_exp_9(t):
+	'cuadruplo_exp_9 : '
+	exp_9()
+	pass
 
 def p_exp(t):
-	'''exp : termino exp1
+	'''exp : termino cuadruplo_exp_4 exp1
 		   '''
+	pass
+
+def p_exp1(t):
+	'''exp1 : see_operador_e cuadruplos_exp_2 exp
+			| empty
+			'''
+	pass
+
+def p_see_operador_e(t):
+	'''see_operador_e : PLUS
+					  | MINUS
+				'''
+	global oper
+	oper = t[1]
+	pass
+
+def p_cuadruplos_exp_2(t):
+	'''cuadruplos_exp_2 : '''
+	global oper
+	exp_2(oper)
+	pass
+
+def p_termino(t):
+	'''termino : factor cuadruplo_exp_5 termino1
+			   '''
+	pass
+ 
+def p_termino1(t):
+	'''termino1 : see_operador_f cuadruplos_exp_3 termino
+				| empty
+				'''
+	pass
+
+def p_see_operador_f(t):
+	'''see_operador_f : TIMES
+					| DIVIDE
+				'''
+	global oper
+	oper = t[1]
+	pass
+
+def p_cuadruplos_exp_3(t):
+	'''cuadruplos_exp_3 : '''
+	global oper
+	exp_3(oper)
 	pass
 
 def p_cuadruplo_exp_4(t):
 	'cuadruplo_exp_4 : '
-
-
-
-def p_exp1(t):
-	'''exp1 : PLUS exp cuadruplo_exp_4
-			| MINUS exp cuadruplo_exp_4
-			| empty
-			'''
-	signo = t[1]
-	exp_2(signo)
+	exp_4()
 	pass
 
-def p_termino(t):
-	'''termino : factor termino1
-			   '''
-	pass
-
-def p_termino1(t):
-	'''termino1 : TIMES termino
-				| DIVIDE termino
-				| empty
-				'''
-	signo = t[1]
-	exp_3(signo)
+def p_cuadruplo_exp_5(t):
+	'cuadruplo_exp_5 : '
+	exp_5()
 	pass
 
 def p_factor(t):
-	'''factor : LPAREN exp RPAREN
+	'''factor : LPAREN cuadruplo_exp_6 exp RPAREN cuadruplo_exp_7
 			  | cons
 			  | PLUS cons
 			  | MINUS cons
 			  '''
 	pass
+
+def p_cuadruplo_exp_6(t):
+	'cuadruplo_exp_6 : '
+	exp_6()
+
+
+def p_cuadruplo_exp_7(t):
+	'cuadruplo_exp_7 : '
+	exp_7()
 
 def p_cons(t):
 	'''cons : seen_id_cons exp_1
@@ -584,3 +646,4 @@ print_tables(tabla_pro)
 print_pilas()
 print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
+print "Num Saltos: %d" %cont_saltos
