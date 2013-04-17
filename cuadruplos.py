@@ -10,6 +10,9 @@
 from clases import Stack
 from cubo_semantico import cubo_semantico
 import os, sys
+from memory import *
+
+cont_saltos = 0
 
 class Cuadruplo:
 
@@ -19,6 +22,14 @@ class Cuadruplo:
 		self.o2 = operando2
 		self.res = mem
 
+
+def insert_cuadruplo(cuad):
+	global tabla_cuadruplos
+	global cont_saltos
+	tabla_cuadruplos.append(cuad)
+	cont_saltos += 1
+	print cont_saltos
+
 # Pilas para las acciones de la validacion semantica
 pila_o = Stack()
 p_tipos = Stack()
@@ -26,17 +37,24 @@ p_oper = Stack()
 p_saltos = Stack()
 tabla_cuadruplos = []
 
+
+p_oper.push(None)
+
 # Acciones de Generacion de codigo para Expresiones usando 
 # cuadruplos incluyendo algunas acciones para verificacion semantica
 def exp_1(var, tipo):
+	global p_tipos
+	global pila_o
 	pila_o.push(var)
 	p_tipos.push(tipo)
 
 def exp_2(oper):
+	global p_oper
 	if oper:
 		p_oper.push(oper)
 
 def exp_3(oper):
+	global p_oper
 	if oper:
 		p_oper.push(oper)
 
@@ -46,6 +64,9 @@ def exp_4():
 	global contDoubleTmp
 	global contStrTmp
 	global contBoolTmp
+	global p_oper
+	global p_tipos
+	global pila_o
 	if p_oper.head() == "+" or p_oper.head() == "-":
 		tipo_res = cubo_semantico[p_tipos.head()][p_tipos.neck()][p_oper.head()]
 		if tipo_res != "Error":
@@ -66,13 +87,13 @@ def exp_4():
 			p_tipos.pop()
 
 			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
-			tabla_cuadruplos.apend(cuadruplo)
+			insert_cuadruplo(cuadruplo)
 
 			#Libera la memoria
-			if cuadruplo.o1.contains("MEM"):
-				memoria.liberar(cuadruplo.o1)
-			if  cuadruplo.o2.contains("MEM"):
-				memoria.liberar(cuadruplo.o2)
+			#if cuadruplo.o1 >= 11000 or cuadruplo.o1 <= 15999:
+			#	pila_o.pop()
+			#if  cuadruplo.o2 >= 11000 or cuadruplo.o2 <= 15999:
+			#	pila_o.pop()
 
 			pila_o.push(cuadruplo.res)
 			p_tipos.push(tipo_res)
@@ -80,17 +101,41 @@ def exp_4():
 			print "Error semantico tipos incompatibles"
 
 def exp_5():
+	global contEntTmp
+	global contFlotTmp
+	global contDoubleTmp
+	global contStrTmp
+	global contBoolTmp
+	global p_oper
+	global p_tipos
+	global pila_o
 	if p_oper.head() == "*" or p_oper.head() == "/":
 		tipo_res = cubo_semantico[p_tipos.head()][p_tipos.neck()][p_oper.head()]
 		if tipo_res != "Error":
+			if tipo_res == "Integer":
+				memoria  = contEntTmp
+				contEntTmp+=1
+			elif tipo_res == "Float":
+				memoria = contFlotTmp
+				contFlotTmp+=1
+			elif tipo_res == "Double":
+				memoria = contDoubleTmp
+				contDoubleTmp+=1
+			elif tipo_res == "String":
+				memoria = contStrTmp
+				contStrTmp+=1
+
 			p_tipos.pop()
 			p_tipos.pop()
-			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria.siguiente())
+
+			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
+			insert_cuadruplo(cuadruplo)
+
 			#Libera la memoria
-			if cuadruplo.o1.contains("MEM"):
-				memoria.liberar(cuadruplo.o1)
-			if  cuadruplo.o2.contains("MEM"):
-				memoria.liberar(cuadruplo.o2)
+			#if cuadruplo.o1 >= 11000 or cuadruplo.o1 <= 15999:
+			#	pila_o.pop()
+			#if  cuadruplo.o2 >= 11000 or cuadruplo.o2 <= 15999:
+			#	pila_o.pop()
 
 			pila_o.push(cuadruplo.res)
 			p_tipos.push(tipo_res)
@@ -98,32 +143,66 @@ def exp_5():
 			print "Error semantico tipos incompatibles"
 
 def exp_6():
+	global p_oper
 	p_oper.push("{")
 
 def exp_7():
-	if p_oper.head() == "{":
-		p_oper.pop()
+	global p_oper
+	#if p_oper.head() == "{":
+	p_oper.pop()
 
 def exp_8(oper):
 	p_oper.push(oper)
 
 def exp_9():
-	if p_oper.head() == "&&" or p_oper.head() == "||":
+	global contEntTmp
+	global contFlotTmp
+	global contDoubleTmp
+	global contStrTmp
+	global contBoolTmp
+	global p_oper
+	global p_tipos
+	global pila_o
+	if p_oper.head() == ">" or p_oper.head() == ">=" or	p_oper.head() == "<" or p_oper.head() == "<=" or p_oper.head() == "==" or p_oper.head() == "!=" or p_oper.head() == "=":
 		tipo_res = cubo_semantico[p_tipos.head()][p_tipos.neck()][p_oper.head()]
 		if tipo_res != "Error":
-			p_tipos.pop()
-			p_tipos.pop()
-			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria.siguiente())
-			#Libera la memoria
-			if cuadruplo.o1.contains("MEM"):
-				memoria.liberar(cuadruplo.o1)
-			if  cuadruplo.o2.contains("MEM"):
-				memoria.liberar(cuadruplo.o2)
+			if tipo_res == "Integer":
+				memoria  = contEntTmp
+				contEntTmp+=1
+			elif tipo_res == "Float":
+				memoria = contFlotTmp
+				contFlotTmp+=1
+			elif tipo_res == "Double":
+				memoria = contDoubleTmp
+				contDoubleTmp+=1
+			elif tipo_res == "String":
+				memoria = contStrTmp
+				contStrTmp+=1
+			elif tipo_res == "Boolean":
+				memoria = contBoolTmp
+				contBoolTmp+=1
 
-			pila_o.push(cuadruplo.res)
-			p_tipos.push(tipo_res)
+			p_tipos.pop()
+			p_tipos.pop()
+
+			if p_oper.head() == "=":
+				cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), None, pila_o.pop())
+			else:
+				cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
+				pila_o.push(cuadruplo.res)
+				p_tipos.push(tipo_res)
+
+			insert_cuadruplo(cuadruplo)
+
+			#Libera la memoria
+			#if cuadruplo.o1 >= 11000 or cuadruplo.o1 <= 15999:
+			#	pila_o.pop()
+			#if  cuadruplo.o2 >= 11000 or cuadruplo.o2 <= 15999:
+			#	pila_o.pop()
+
 		else:
-			print "Error semantico tipos incompatibles"
+			print "Sorry - incomaptible types"
+			sys.exit()
 
 # Acciones de Generacion de codigo para estatutos condicionales if 
 def est_if_1():
@@ -260,7 +339,7 @@ def print_cuadruplos(currentCuadList):
 	print "Tabla Cuadruplos"
 	for currentCuad in currentCuadList:
 		if currentCuad:
-			print currentCuad.op, " - ", currentCuad.o1, " - ", currentCuad.o2,"-",currentCuad.res
+			print currentCuad.op, " , ", currentCuad.o1, " , ", currentCuad.o2," , ",currentCuad.res
 		else:
 			print "List is empty"
 	pass
