@@ -28,7 +28,8 @@ def insert_cuadruplo(cuad):
 	global cont_saltos
 	tabla_cuadruplos.append(cuad)
 	cont_saltos += 1
-	
+	#print cont_saltos
+
 # Pilas para las acciones de la validacion semantica
 pila_o = Stack()
 p_tipos = Stack()
@@ -238,23 +239,62 @@ def est_if_else_3():
 
 # Acciones de Generacion de codigo para estatutos condicionales while
 def est_while_1():
-	p_saltos.push(cont)
-	cuadruplo.res = memoria.siguiente()
+	global cont_saltos
+	p_saltos.push(cont_saltos)
 
 def est_while_2():
-	p_tipos.pop(aux)
+	aux = p_tipos.pop()
 	if aux != "Boolean":
-		print "Error Semantico"
+		print "Sorry - While expressions must return Boolean values"
+		sys.exit()
 	else:
-		pila_o.pop()
-		cuadruplo = Cuadruplo("GOTOFALSO", res, "", "")
-		p_saltos.pop(cont-1)
+		res = pila_o.pop()
+		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
+		insert_cuadruplo(cuadruplo)
+		p_saltos.push(cont_saltos-1)
 
 def est_while_3():
-	p_saltos().pop(falso)
-	p_saltos().pop(retorno)
-	cuadruplo = Cuadruplo("GOTO", retorno, "", "")
-	cuadruplo.res = cont
+	falso = p_saltos.pop()
+	retorno = p_saltos.pop()
+	cuadruplo = Cuadruplo("GOTO", "", "", retorno)
+	insert_cuadruplo(cuadruplo)
+	tabla_cuadruplos[falso].res = cont_saltos
+
+# Acciones de Generacion de codigo para estatutos condicionales for
+def est_for_1(dir):
+	pila_o.push(dir)
+
+def est_for_2():
+	exp1 = pila_o.pop()
+	id_ = pila_o.head()
+	cuadruplo = Cuadruplo("=", exp1, "", id_)
+
+def est_for_3():
+	global cont_saltos
+	global contEntTmp
+	id_ = pila_o.head()
+	tmpf = contEntTmp
+	contEntTmp += 1
+	exp2 = pila_o.pop()
+	tmpx = contEntTmp
+	contEntTmp += 1
+	cuadruplo1 = Cuadruplo("=", exp2, "", tmpf)
+	insert_cuadruplo(cuadruplo1)
+	cuadruplo2 = Cuadruplo("<=", id_, tmpf, tmpx)
+	insert_cuadruplo(cuadruplo2)
+	cuadruplo3 = Cuadruplo("GOTOFALSO", tmpx, "", "")
+	insert_cuadruplo(cuadruplo3)
+	p_saltos.push(cont_saltos-2)
+
+def est_for_4():
+	id_ = pila_o.pop()
+	cuadruplo1 = Cuadruplo("+", id_, 1, id_)
+	id_ = pila_o.head()
+	retorno = p_saltos.pop()
+	cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
+	cuadruplo3.res = retorno + 1
+	#tmpf.free()
+
 
 # Acciones de Generacion de codigo para estatutos condicionales switch
 def est_case_1(exp):
@@ -266,7 +306,7 @@ def est_case_2():
 	cte = pila_o.pop()
 	exp = pila_o.pop()
 	cuadruplo1 = Cuadruplo("=", exp, cte, tk)
-	cuadruplo2 = Cuadruplo("GOTOVERDADERO", tk, "", "")
+	cuadruplo2 = Cuadruplo("GOTOTRUE", tk, "", "")
 	pila_o.pop(tk)
 	pila_o.push(exp)
 	p_saltos(cont-1)
@@ -285,33 +325,6 @@ def est_case_6():
 	pass
 def est_case_7():
 	pass
-
-# Acciones de Generacion de codigo para estatutos condicionales for
-def est_for_1(dir):
-	pila_o.push(dir)
-
-def est_for_2():
-	exp1 = pila_o.pop()
-	id_ = pila_o.head()
-	cuadruplo = Cuadruplo("=", exp1, "", id_)
-
-def est_for_3():
-	tmpf = Temporal()
-	exp2 = pila_o.pop()
-	tmpx = Temporal()
-	cuadruplo1 = Cuadruplo("=", exp2, "", tmpf)
-	cuadruplo2 = Cuadruplo("<=", id_, tmpf, tmpx)
-	cuadruplo3 = Cuadruplo("GOTOFALSO", tmpx, "")
-	tmpf.free()
-	p_saltos.push(cont-2)
-
-def est_for_4():
-	id_ = pila_o.pop()
-	cuadruplo1 = Cuadruplo("+", id_, 1, id_)
-	retorno = p_saltos.pop()
-	cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
-	cuadruplo3.res = retorno + 1
-	tmpf.free()
 
 def print_pilas():
 	print "Pilas"
