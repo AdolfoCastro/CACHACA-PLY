@@ -63,12 +63,12 @@ t_COMMA 	= r'\,'
 t_COL 		= r'\:'
 t_AND 		= r'&&'
 t_OR 		= r'\|\|'
-
-# Asignacion
-t_EQUALS 	= r'='
 t_MAY 		= r'>'
 t_MIN 		= r'<'
 t_DIF 		= r'!='
+
+# Asignacion
+t_EQUALS 	= r'='
 
 # Comentarios
 t_ignore_COMMENT = r'\$[^$]*\$|\#.*'
@@ -112,18 +112,19 @@ def t_VAR(t):
 
 #Constantes de punto flotante
 def t_CTE_FLOAT(t):
-	r'[0-9]+\.[0-9]+'
+	r'[0-9]+[\.][0-9]+'
 	t.value = float(t.value)
 	return t
 
 # Constantes enteras
 def t_CTE_INT(t):
 	r'[0-9]+'
+	t.value = int(t.value)
 	return t
 
 # Constantes 
 def t_CTE_DOUBLE(t):
-	r'[0-9]+.[0-9]'
+	r'[0-9]+[\.][0-9]+'
 	t.value = Double(t.value)
 	return t
 
