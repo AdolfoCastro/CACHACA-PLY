@@ -31,6 +31,7 @@ memoria = None
 esta_global = False
 nombre_var_asignacion = None
 oper = None
+nombre_var_for = None
 
 def p_programa(t):
 	'''programa : programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 main programa3
@@ -368,27 +369,68 @@ def p_asignarray1(t):
 	pass
 
 def p_while(t):
-	'while : RES_WHILE LPAREN expresion RPAREN COL  bloque'
+	'while : RES_WHILE cuadruplo_est_while_1 LPAREN expresion RPAREN cuadruplo_est_while_2 COL  bloque cuadruplo_est_while_3'
+	pass
+
+def p_cuadruplo_est_while_1(t):
+	'cuadruplo_est_while_1 : '
+	est_while_1()
+	pass
+
+def p_cuadruplo_est_while_2(t):
+	'cuadruplo_est_while_2 : '
+	est_while_2()
+	pass
+
+def p_cuadruplo_est_while_3(t):
+	'cuadruplo_est_while_3 : '
+	est_while_3()
 	pass
 
 def p_for(t):
-	'for : RES_FOR LPAREN forexp RPAREN COL  bloque'
+	'for : RES_FOR LPAREN forexp RPAREN COL bloque cuadruplo_est_for_4 '
 	pass
 
 def p_forexp(t):
-	'''forexp : ID EQUALS cons COL expresion COL ID EQUALS expresion
+	'''forexp : seen_id_for cuadruplo_est_for_1 EQUALS exp COL expresion cuadruplo_est_for_2 COL ID EQUALS exp cuadruplo_est_for_3
 			   '''
 	pass
-"""
-def p_comparacion(t):
-	'''comparacion : MAY
-					| MAY_EQ
-					| MIN
-					| MIN_EQ
-					| DIF
-					'''
+
+def p_seen_id_for(t):
+	'seen_id_for : ID'
+	global nombre_var_for
+	nombre_var_for = t[1]
 	pass
-"""
+
+def p_cuadruplo_est_for_1(t):
+	'cuadruplo_est_for_1 : '
+	est_for_1(nombre_var_for)
+	pass
+
+def p_cuadruplo_est_for_2(t):
+	'cuadruplo_est_for_2 : '
+	est_for_2()
+	pass
+
+def p_cuadruplo_est_for_3(t):
+	'cuadruplo_est_for_3 : '
+	est_for_3()
+	pass
+
+def p_cuadruplo_est_for_4(t):
+	'cuadruplo_est_for_4 : '
+	est_for_4()
+	pass
+
+#def p_comparacion(t):
+#	'''comparacion : MAY
+#					| MAY_EQ
+#					| MIN
+#					| MIN_EQ
+#					| DIF
+#					'''
+#	pass
+
 
 def p_if(t):
 	'''if : RES_IF LPAREN expresion RPAREN COL  bloque ifelse
@@ -515,11 +557,12 @@ def p_factor(t):
 def p_cuadruplo_exp_6(t):
 	'cuadruplo_exp_6 : '
 	exp_6()
-
+	pass
 
 def p_cuadruplo_exp_7(t):
 	'cuadruplo_exp_7 : '
 	exp_7()
+	pass
 
 def p_cons(t):
 	'''cons : seen_id_cons exp_1
@@ -527,13 +570,24 @@ def p_cons(t):
 			| seen_float_cons exp_cons_float
 			| CTE_DOUBLE
 			| CTE_STRING
-			| RES_TRUE
-			| RES_FALSE
+			| seen_bool
 			| consarray
 			| conslist
 			'''
-
 	pass
+
+def p_seen_bool(t):
+	'''seen_bool : RES_TRUE
+				| RES_FALSE'''
+	global nombre_var_actual
+	global tipo_var
+	global contBoolCons
+	insert_constante(nombre_var_actual, tipo_var, contBoolCons)
+	pila_o.push(contBoolCons)
+	p_tipos.push("Boolean")
+	contBoolCons+=1
+	pass
+
 def p_seen_id_cons(t):
 	'''seen_id_cons : ID'''
 	global nombre_var_actual 
@@ -570,21 +624,21 @@ def p_exp_cons_int(t):
 	global nombre_var_actual
 	global tipo_var
 	global contEntCons
-	insert_constante(nombre_var_actual,tipo_var,contEntCons)
+	insert_constante(nombre_var_actual, tipo_var, contEntCons)
 	pila_o.push(contEntCons)
-	p_tipos.push('Integer')
+	p_tipos.push("Integer")
 	contEntCons+=1
-
 
 def p_exp_cons_float(t):
 	'exp_cons_float : '
 	global nombre_var_actual
 	global tipo_var
 	global contFlotCons
-	insert_constante(nombre_var_actual,tipo_var,contFlotCons)
+	insert_constante(nombre_var_actual, tipo_var, contFlotCons)
 	pila_o.push(contFlotCons)
-	p_tipos.push('Float')
+	p_tipos.push("Float")
 	contFlotCons+=1
+
 def p_main(t):
 	'''main : RES_START comienza_main COL bloque RES_END '''
 	pass 
@@ -616,8 +670,8 @@ def p_empty(t):
 	pass
 
 def p_error(t):
-	print "error sintactico"
-	print "Syntax error at token", t.value ,">>", t.type
+	print "Sorry, what did you mean by %s?" %t.value
+	print "Sorry - Syntax error at token", t.value ,">>", t.type
 	# Just discard the token and tell the parser it's okay.
 	yacc.restart()
 
@@ -639,4 +693,4 @@ print_tables(tabla_pro)
 print_pilas()
 print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
-print "Num Saltos: %d" %cont_saltos
+#print "Num Saltos: %d" %cont_saltos
