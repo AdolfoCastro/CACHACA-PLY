@@ -1,23 +1,28 @@
 Prototype func Integer funcion ( Integer Algo)
-Prototype func Integer funcion1 ( Integer Algo)
+Prototype func Integer fibonacci_recursivo(Integer n)
 
+Define: Integer glob
 
 func Integer funcion ( Integer Algo):
-Define: Integer Uno
-Define: Float Dos
-Define: String tres
-Define: Double Cuatro
-Uno = Uno + Dos + Uno + Dos + Uno + Dos + 312 - 1.123
+	Define: Integer Uno
+	Define: Float Dos
+	Define: Boolean bool
 
-Start :
-Define: Integer Uno
-Define: Float Dos
-Define: String tres
-Define: Double Cuatro
-
+	bool = true
 	
+	while(bool==bool):
+		print(bool)
+		Uno = Uno + Dos
+	end
+	
+	while(Uno>Dos):
+			Uno = Dos + Uno
+	end
+ 
+	for(Uno = 0: Uno > Dos: Uno = Uno + Uno):
+		#Dos = Uno + Dos
+	end
+
+Start:
+
 End
-
-func Integer funcion1 ( Integer Algo):
-
-
