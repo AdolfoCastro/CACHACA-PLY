@@ -28,8 +28,7 @@ def insert_cuadruplo(cuad):
 	global cont_saltos
 	tabla_cuadruplos.append(cuad)
 	cont_saltos += 1
-	print cont_saltos
-
+	
 # Pilas para las acciones de la validacion semantica
 pila_o = Stack()
 p_tipos = Stack()

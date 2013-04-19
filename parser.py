@@ -569,29 +569,22 @@ def p_exp_cons_int(t):
 	'exp_cons_int : '
 	global nombre_var_actual
 	global tipo_var
-	global contEntGlo
-	global contEntLoc
-	if nombre_var_actual == 'Global':
-		insert_constante(nombre_var_actual,tipo_var,contEntGlo)
-		contEntGlo+=1
-	else:
-		insert_constante(nombre_var_actual,tipo_var,contEntLoc)
-		contEntLoc+=1
+	global contEntCons
+	insert_constante(nombre_var_actual,tipo_var,contEntCons)
+	pila_o.push(contEntCons)
+	p_tipos.push('Integer')
+	contEntCons+=1
 
 
 def p_exp_cons_float(t):
 	'exp_cons_float : '
 	global nombre_var_actual
 	global tipo_var
-	global contFlotGlo
-	global contFlotLoc
-	if nombre_var_actual == 'Global':
-		insert_constante(nombre_var_actual,tipo_var,contFlotGlo)
-		contEntGlo+=1
-	else:
-		insert_constante(nombre_var_actual,tipo_var,contFlotLoc)
-		contFlotLoc+=1
-	pass
+	global contFlotCons
+	insert_constante(nombre_var_actual,tipo_var,contFlotCons)
+	pila_o.push(contFlotCons)
+	p_tipos.push('Float')
+	contFlotCons+=1
 def p_main(t):
 	'''main : RES_START comienza_main COL bloque RES_END '''
 	pass 
