@@ -2,14 +2,17 @@ Prototype func Integer funcion ( Integer Algo)
 Prototype func Integer fibonacci_recursivo(Integer n)
 
 Define: Integer glob
+Define: Integer Uno
+	Define: Float Dos
+	Define: Boolean bool
 
 func Integer funcion ( Integer Algo):
 	Define: Integer Uno
 	Define: Float Dos
 	Define: Boolean bool
-
+$
 	bool = true
-	
+
 	while(bool==bool):
 		print(bool)
 		Uno = Uno + Dos
@@ -22,7 +25,15 @@ func Integer funcion ( Integer Algo):
 	for(Uno = 0: Uno > Dos: Uno = Uno + Uno):
 		#Dos = Uno + Dos
 	end
+$
+	switch (Uno):
+		case 2 :
+			Uno = Uno
+		case 3 : 
+			Uno = Uno
+	end
 
 Start:
+
 
 End

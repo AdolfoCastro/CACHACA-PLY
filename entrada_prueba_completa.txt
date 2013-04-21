@@ -1,21 +1,13 @@
-$Este es un comentario
-Los comentarios pueden tener varias lineas
-	y pueden estar indentados
-ademas puede contener diferentes caracte!@(U@#D(H#2r423r 
-$
-
-$Este es un prototipo, sirven para dar de alta las funciones$
 Prototype func Integer Algo1(Integer Algunos)
 
-$Las variables que se definen fuera de 
-funciones y fuera del main son GLOBALES$
 Define: Integer aint
 Define: Float bflt 
 Define: Double cdbl
 Define: Boolean dbool
 Define: String  estr
 
-$Esta es la definicion de una funcion$
+
+
 func Integer Algo1(Integer a):
 	$Las variables dentro de una funcion 
 	pertenecen al scope de la funcion$
@@ -25,11 +17,17 @@ func Integer Algo1(Integer a):
 	Define: Boolean dbool
 	Define: String  estr
 
-$Este es el metodo main$
+
 Start:
+	
+	Define: Float bflt 
+	Define: Double cdbl
+	Define: Boolean dbool
+	Define: String  estr
+	Define: Integer aint
 	$La palabra reservada sirve para 
 	definir el valor de una variable$
-	aint = 1
+	aint = 1123456
 	$
 	Aqui marca error
 	bflt = 1.5

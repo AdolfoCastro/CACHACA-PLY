@@ -494,7 +494,7 @@ def p_switch(t):
 
 def p_seen_exp_switch(t):
 	'seen_exp_switch : exp'
-	est_case_1(pila_o.pop())
+	est_case_1()
 
 def p_switch2(t):
 	'''switch2 : RES_CASE seen_exp_case COL seen_case_3  bloque  seen_case_4 switch2 
@@ -514,7 +514,7 @@ def p_seen_case_4(t):
 
 def p_seen_exp_case(t):
 	'seen_exp_case : exp '
-	est_case_2(pila_o.pop())
+	est_case_2()
 	pass
 
 def p_expresion(t):

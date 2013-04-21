@@ -328,23 +328,23 @@ def est_for_3():
 
 
 # Acciones de Generacion de codigo para estatutos condicionales switch
-def est_case_1(res):
+def est_case_1():
 	global resswitch
-	resswitch = res
-	print resswitch
+	resswitch = pila_o.pop()
+	p_tipos.pop()
 	pass
 
-def est_case_2(res):
+def est_case_2():
 	global rescase
 	global resswitch
 	global contBoolTmp
-	rescase  = res
+	rescase  = pila_o.pop()
+	p_tipos.pop()
 	cuadruplo = Cuadruplo('==',resswitch,rescase,contBoolTmp)
 	insert_cuadruplo(cuadruplo)
 	p_tipos.push('Boolean')
 	pila_o.push(contBoolTmp)
 	contBoolTmp+=1
-	print rescase
 	pass
 
 def est_case_3():
