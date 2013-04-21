@@ -403,22 +403,22 @@ def p_cuadruplo_est_while_3(t):
 	pass
 
 def p_for(t):
-	'for : RES_FOR LPAREN forexp RPAREN sale_update COL bloque cuadruplo_est_for_4 '
+	'for : RES_FOR LPAREN forexp RPAREN sale_update COL bloque cuadruplo_est_for_3 '
 	pass
 
 def p_sale_update(t):
 	'sale_update : '
-	exp_for(False)
+	exp_for_(False)
 	pass
 
 def p_forexp(t):
-	'''forexp : asignacion cuadruplo_est_for_1 COL expresion cuadruplo_est_for_2 COL entra_update ID EQUALS exp cuadruplo_est_for_3
+	'''forexp : asignacion cuadruplo_est_for_1 COL expresion cuadruplo_est_for_2 COL entra_update ID EQUALS exp
 			   '''
 	pass
 
 def p_entra_update(t):
 	'entra_update : '
-	exp_for(True)
+	exp_for_(True)
 	pass
 
 # def p_seen_id_for(t):
@@ -429,7 +429,7 @@ def p_entra_update(t):
 
 def p_cuadruplo_est_for_1(t):
 	'cuadruplo_est_for_1 : '
-	est_for_1(nombre_var_for)
+	est_for_1()
 	pass
 
 def p_cuadruplo_est_for_2(t):
@@ -489,13 +489,32 @@ def p_cuadruplo_est_if_else_3(t):
 	pass
 
 def p_switch(t):
-	'switch : RES_SWITCH COL  switch2'
+	'switch : RES_SWITCH LPAREN seen_exp_switch RPAREN COL  switch2'
 	pass
 
+def p_seen_exp_switch(t):
+	'seen_exp_switch : exp'
+	est_case_1(pila_o.pop())
+
 def p_switch2(t):
-	'''switch2 : RES_CASE expresion COL  bloque switch2 
+	'''switch2 : RES_CASE seen_exp_case COL seen_case_3  bloque  seen_case_4 switch2 
 			   | empty
 			   '''
+	pass
+
+def p_seen_case_3(t):
+	'seen_case_3 : '
+	est_case_3()
+	pass
+
+def p_seen_case_4(t):
+	'seen_case_4 : '
+	est_case_4()
+	pass
+
+def p_seen_exp_case(t):
+	'seen_exp_case : exp '
+	est_case_2(pila_o.pop())
 	pass
 
 def p_expresion(t):
