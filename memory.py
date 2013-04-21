@@ -1,5 +1,5 @@
 #globales
-contEntGlo	=	0
+contEntGlo  =	0
 contFlotGlo	=	1000
 coutDoubleGlo= 4000
 contStrGlo	=	2000
@@ -25,6 +25,7 @@ contBoolTmp=15000
 #Constates
 contEntCons=16000
 contFlotCons=17000
+contDoubleCons=13000 
 contStrCons=18000
 contBoolCons=19000
 #contSaltosCons=19000
