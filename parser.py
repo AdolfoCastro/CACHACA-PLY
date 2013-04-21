@@ -33,6 +33,7 @@ nombre_var_asignacion = None
 oper = None
 nombre_var_for = None
 
+
 def p_programa(t):
 	'''programa : programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 main programa3
 	            | empty'''
@@ -146,11 +147,13 @@ def p_vars1(t):
 	global contFlotLoc
 	global contStrLoc
 	global contDoubleLoc
+	global contBoolLoc
 
 	global contEntGlo
 	global contFlotGlo
 	global coutDoubleGlo
 	global contStrGlo
+	global contBoolGlo
 
 	global memoria
 	global esta_global
@@ -159,28 +162,35 @@ def p_vars1(t):
 		if tipo_pro_actual == "Integer":
 			memoria = contEntGlo
 			contEntGlo += 1
-		if tipo_pro_actual == "Float":
+		elif tipo_pro_actual == "Float":
 			memoria = contFlotGlo
 			contFlotGlo += 1
-		if tipo_pro_actual == "Double":
+		elif tipo_pro_actual == "Double":
 			memoria = coutDoubleGlo
 			coutDoubleGlo += 1
-		if tipo_pro_actual == "String":
+		elif tipo_pro_actual == "String":
 			memoria = contStrGlo
 			contStrGlo += 1
+		elif tipo_pro_actual == "Boolean":
+			memoria = contBoolGlo 
+			contBoolGlo+=1
 	else:
 		if tipo_pro_actual == "Integer":
 			memoria = contEntLoc
 			contEntLoc += 1
-		if tipo_pro_actual == "Float":
+		elif tipo_pro_actual == "Float":
 			memoria = contFlotLoc
 			contFlotLoc += 1
-		if tipo_pro_actual == "Double":
+		elif tipo_pro_actual == "Double":
 			memoria = contDoubleLoc
 			contDoubleLoc += 1
-		if tipo_pro_actual == "String":
+		elif tipo_pro_actual == "String":
 			memoria = contStrLoc
 			contStrLoc += 1
+		elif tipo_pro_actual == "Boolean":
+			memoria = contBoolLoc 
+			contBoolLoc+=1
+
 	global nombre_var_actual
 	nombre_var_actual = t[2]
 	pass
@@ -302,14 +312,19 @@ def p_lectura(t):
 	pass
 
 def p_escritura(t):
-	'escritura : RES_PRINT LPAREN escritura1 RPAREN '
+	'escritura : RES_PRINT LPAREN cons RPAREN cuadruplo_est_prnt'
 	pass
 
-def p_escritura1(t):
-	'''escritura1 : expresion
-				  | CTE_STRING 
-				  '''
-	pass 
+def p_cuadruplo_est_prnt(t):
+	'cuadruplo_est_prnt : '
+	est_print()
+	pass
+
+#def p_escritura1(t):
+#	'''escritura1 : exp
+#				  | CTE_STRING 
+#				  '''
+#	pass 
 
 
 def p_asignacion(t):
@@ -388,19 +403,29 @@ def p_cuadruplo_est_while_3(t):
 	pass
 
 def p_for(t):
-	'for : RES_FOR LPAREN forexp RPAREN COL bloque cuadruplo_est_for_4 '
+	'for : RES_FOR LPAREN forexp RPAREN sale_update COL bloque cuadruplo_est_for_4 '
+	pass
+
+def p_sale_update(t):
+	'sale_update : '
+	exp_for(False)
 	pass
 
 def p_forexp(t):
-	'''forexp : seen_id_for cuadruplo_est_for_1 EQUALS exp COL expresion cuadruplo_est_for_2 COL ID EQUALS exp cuadruplo_est_for_3
+	'''forexp : asignacion cuadruplo_est_for_1 COL expresion cuadruplo_est_for_2 COL entra_update ID EQUALS exp cuadruplo_est_for_3
 			   '''
 	pass
 
-def p_seen_id_for(t):
-	'seen_id_for : ID'
-	global nombre_var_for
-	nombre_var_for = t[1]
+def p_entra_update(t):
+	'entra_update : '
+	exp_for(True)
 	pass
+
+# def p_seen_id_for(t):
+# 	'seen_id_for : ID'
+# 	global nombre_var_for
+# 	nombre_var_for = t[1]
+# 	pass
 
 def p_cuadruplo_est_for_1(t):
 	'cuadruplo_est_for_1 : '
@@ -433,14 +458,34 @@ def p_cuadruplo_est_for_4(t):
 
 
 def p_if(t):
-	'''if : RES_IF LPAREN expresion RPAREN COL  bloque ifelse
+	'''if : RES_IF LPAREN expresion RPAREN cuadruplo_est_if_1 COL  bloque ifelse
 		  '''
 	pass
 
+def p_cuadruplo_est_if_1(t):
+	'cuadruplo_est_if_1 : '
+	est_if_1()
+	pass
+
 def p_ifelse(t):
-	''' ifelse : RES_ELSE COL  bloque
-			   | empty
+	''' ifelse : cuadruplo_est_if_else_2 RES_ELSE COL  bloque cuadruplo_est_if_else_3
+			   | empty cuadruplo_est_if_2
 			   '''
+	pass
+
+def p_cuadruplo_est_if_2(t):
+	'cuadruplo_est_if_2 : '
+	est_if_2()
+	pass
+
+def p_cuadruplo_est_if_else_2(t):
+	'cuadruplo_est_if_else_2 : '
+	est_if_else_2()
+	pass
+
+def p_cuadruplo_est_if_else_3(t):
+	'cuadruplo_est_if_else_3 : '
+	est_if_else_3()
 	pass
 
 def p_switch(t):
