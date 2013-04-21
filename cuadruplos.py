@@ -196,9 +196,13 @@ def exp_9():
 			if p_oper.head() == "=":
 				res = pila_o.pop()
 				op = pila_o.pop()
-				cuadruplo = Cuadruplo(p_oper.pop(), op, None, res)
+				oper = p_oper.pop()
+				cuadruplo = Cuadruplo(oper, op, None, res)
 			else:
-				cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
+				op1 = pila_o.pop()
+				op2 = pila_o.pop()
+				oper = p_oper.pop()
+				cuadruplo = Cuadruplo(oper, op1, op2, memoria)
 				pila_o.push(cuadruplo.res)
 				p_tipos.push(tipo_res)
 
@@ -211,6 +215,7 @@ def exp_9():
 			#	pila_o.pop()
 
 		else:
+			print_cuadruplos(tabla_cuadruplos)
 			print "Sorry - incomaptible types"
 			sys.exit()
 
@@ -289,10 +294,13 @@ def est_for_1():
 	p_saltos.push(cont_saltos)
 
 def est_for_2():
-	res = tabla_cuadruplos[-1].res
-	cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
-	insert_cuadruplo(cuadruplo)
-	p_saltos.push(cont_saltos)
+	if p_tipos.pop() == "Boolean":
+		res = pila_o.pop()
+		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
+		insert_cuadruplo(cuadruplo)
+		p_saltos.push(cont_saltos)
+	else:
+		print "Sorry - for statement must return a Boolean"
 	pass
 
 def est_for_3():
@@ -303,12 +311,15 @@ def est_for_3():
 	falso = p_saltos.pop()
 	asign = p_saltos.pop()
 	tabla_cuadruplos[falso-1].res = cont_saltos
+	# res = tabla_cuadruplos[-1].o1
+	# cuadruplo = Cuadruplo("=", pila_o.pop(), "", res)
+	# insert_cuadruplo(cuadruplo)
 	cuadruplo = Cuadruplo("GOTO", "", "", asign)
 	insert_cuadruplo(cuadruplo)
 	pass
 
 # def est_for_4():
-# 	# id_ = pila_o.pop()
+# 	# id_ = pila_o.pop
 # 	# id_ = pila_o.head()
 # 	# retorno = p_saltos.pop()
 # 	# cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
