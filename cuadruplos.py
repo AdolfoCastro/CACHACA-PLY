@@ -26,8 +26,15 @@ class Cuadruplo:
 def insert_cuadruplo(cuad):
 	global tabla_cuadruplos
 	global cont_saltos
-	tabla_cuadruplos.append(cuad)
-	cont_saltos += 1
+	global exp_for
+	global tabla_aux
+	if exp_for:
+		print "Aux"
+		tabla_aux.append(cuad)
+	else:
+		print "Tabla"
+		tabla_cuadruplos.append(cuad)
+		cont_saltos += 1
 	#print cont_saltos
 
 # Pilas para las acciones de la validacion semantica
@@ -36,7 +43,8 @@ p_tipos = Stack()
 p_oper = Stack()
 p_saltos = Stack()
 tabla_cuadruplos = []
-
+tabla_aux = []
+exp_for = False
 
 p_oper.push(None)
 
@@ -208,34 +216,37 @@ def exp_9():
 def est_if_1():
 	aux = p_tipos.pop()
 	if aux != "Boolean":
-		print "Error Semantico"
+		print "Sorry - if statement must return a Boolean value"
 	else:
-		pila_o.pop()
-		cuadruplo = Cuadruplo("GOTOFALSO", res, "", "")
-		p_saltos.push(cont-1)
+		res = pila_o.pop()
+		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
+		insert_cuadruplo(cuadruplo)
+		p_saltos.push(cont_saltos-1)
 
-def est_if_2(cuadruplo):
-	p_saltos.pop()
-	cuadruplo.res = memoria.siguiente()
+def est_if_2():
+	fin = p_saltos.pop()
+	tabla_cuadruplos[fin].res = cont_saltos
 
 def est_if_else_1():
 	aux = p_tipos.pop()
 	if aux != "Boolean":
-		print "Error semantico"
+		print "Sorry - if statement must return a Boolean value"
 	else:
-		pila_o.pop()
-		cuadruplo = Cuadruplo("GOTOFALSO", res, "", "")
-		p_saltos.push(cont)
+		res = pila_o.pop()
+		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
+		insert_cuadruplo(cuadruplo)
+		p_saltos.push(cont_saltos)
 
 def est_if_else_2():
 	cuadruplo = Cuadruplo("GOTO", "", "", "")
-	p_saltos.pop()
-	cuadruplo.res = memoria.siguiente()
-	p_saltos.push(cont-1)
+	insert_cuadruplo(cuadruplo)
+	falso = p_saltos.pop()
+	tabla_cuadruplos[falso].res = cont_saltos
+	p_saltos.push(cont_saltos-1)
 
 def est_if_else_3():
-	p_saltos.pop()
-	cuadruplo.res = cont
+	falso = p_saltos.pop()
+	tabla_cuadruplos[falso].res = cont_saltos
 
 # Acciones de Generacion de codigo para estatutos condicionales while
 def est_while_1():
@@ -260,71 +271,57 @@ def est_while_3():
 	insert_cuadruplo(cuadruplo)
 	tabla_cuadruplos[falso].res = cont_saltos
 
+def est_print():
+	res = pila_o.pop()
+	cuadruplo = Cuadruplo("PRINT", res, "", "")
+	insert_cuadruplo(cuadruplo)
+
+
 # Acciones de Generacion de codigo para estatutos condicionales for
+def exp_for(boool):
+	global exp_for
+	exp_for=boool
+	print "Entra a exp_for = %r" %exp_for
+
 def est_for_1(dir):
 	pila_o.push(dir)
 
 def est_for_2():
-	exp1 = pila_o.pop()
-	id_ = pila_o.head()
-	cuadruplo = Cuadruplo("=", exp1, "", id_)
+	# exp1 = pila_o.pop()
+	# id_ = pila_o.head()
+	# cuadruplo = Cuadruplo("=", exp1, "", id_)
+	# insert_cuadruplo(cuadruplo)
+	pass
 
 def est_for_3():
-	global cont_saltos
-	global contEntTmp
-	id_ = pila_o.head()
-	tmpf = contEntTmp
-	contEntTmp += 1
-	exp2 = pila_o.pop()
-	tmpx = contEntTmp
-	contEntTmp += 1
-	cuadruplo1 = Cuadruplo("=", exp2, "", tmpf)
-	insert_cuadruplo(cuadruplo1)
-	cuadruplo2 = Cuadruplo("<=", id_, tmpf, tmpx)
-	insert_cuadruplo(cuadruplo2)
-	cuadruplo3 = Cuadruplo("GOTOFALSO", tmpx, "", "")
-	insert_cuadruplo(cuadruplo3)
-	p_saltos.push(cont_saltos-2)
+	# global cont_saltos
+	# global contEntTmp
+	# id_ = pila_o.head()
+	# tmpf = contEntTmp
+	# contEntTmp += 1
+	# exp2 = pila_o.pop()
+	# tmpx = contEntTmp
+	# contEntTmp += 1
+	# cuadruplo1 = Cuadruplo("=", exp2, "", tmpf)
+	# insert_cuadruplo(cuadruplo1)
+	# cuadruplo2 = Cuadruplo("<=", id_, tmpf, tmpx)
+	# insert_cuadruplo(cuadruplo2)
+	# cuadruplo3 = Cuadruplo("GOTOFALSO", tmpx, "", "")
+	# insert_cuadruplo(cuadruplo3)
+	# p_saltos.push(cont_saltos-2)
+	pass
 
 def est_for_4():
-	id_ = pila_o.pop()
-	cuadruplo1 = Cuadruplo("+", id_, 1, id_)
-	id_ = pila_o.head()
-	retorno = p_saltos.pop()
-	cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
-	cuadruplo3.res = retorno + 1
-	#tmpf.free()
+	# id_ = pila_o.pop()
+	# id_ = pila_o.head()
+	# retorno = p_saltos.pop()
+	# cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
+	# cuadruplo3.res = retorno + 1
+	pass
 
 
 # Acciones de Generacion de codigo para estatutos condicionales switch
-def est_case_1(exp):
-	if exp == "Integer" or exp == "Float" or exp == "Boolean" or exp == "Double":
-		p_saltos.push("(")
 
-def est_case_2():
-	#Verificar que la expresion ordinal
-	cte = pila_o.pop()
-	exp = pila_o.pop()
-	cuadruplo1 = Cuadruplo("=", exp, cte, tk)
-	cuadruplo2 = Cuadruplo("GOTOTRUE", tk, "", "")
-	pila_o.pop(tk)
-	pila_o.push(exp)
-	p_saltos(cont-1)
-
-def est_case_3():
-	#Verificar que la expresion ordinal...
-	cte = pila_o.pop()
-	exp = pila_o.pop()
-	cuadruplo = Cuadruplo("=", exp, cte, tk)
-
-def est_case_4():
-	pass
-def est_case_5():
-	pass
-def est_case_6():
-	pass
-def est_case_7():
-	pass
 
 def print_pilas():
 	print "Pilas"
