@@ -29,10 +29,8 @@ def insert_cuadruplo(cuad):
 	global exp_for
 	global tabla_aux
 	if exp_for:
-		print "Aux"
 		tabla_aux.append(cuad)
 	else:
-		print "Tabla"
 		tabla_cuadruplos.append(cuad)
 		cont_saltos += 1
 	#print cont_saltos
@@ -45,6 +43,8 @@ p_saltos = Stack()
 tabla_cuadruplos = []
 tabla_aux = []
 exp_for = False
+rescase  = None
+resswitch  = None
 
 p_oper.push(None)
 
@@ -148,7 +148,7 @@ def exp_5():
 			pila_o.push(cuadruplo.res)
 			p_tipos.push(tipo_res)
 		else:
-			print "Error semantico tipos incompatibles"
+			print "Sorry - incomaptible types"
 
 def exp_6():
 	global p_oper
@@ -194,7 +194,9 @@ def exp_9():
 			p_tipos.pop()
 
 			if p_oper.head() == "=":
-				cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), None, pila_o.pop())
+				res = pila_o.pop()
+				op = pila_o.pop()
+				cuadruplo = Cuadruplo(p_oper.pop(), op, None, res)
 			else:
 				cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
 				pila_o.push(cuadruplo.res)
@@ -278,50 +280,76 @@ def est_print():
 
 
 # Acciones de Generacion de codigo para estatutos condicionales for
-def exp_for(boool):
+def exp_for_(boool):
 	global exp_for
 	exp_for=boool
 	print "Entra a exp_for = %r" %exp_for
 
-def est_for_1(dir):
-	pila_o.push(dir)
+def est_for_1():
+	p_saltos.push(cont_saltos)
 
 def est_for_2():
-	# exp1 = pila_o.pop()
-	# id_ = pila_o.head()
-	# cuadruplo = Cuadruplo("=", exp1, "", id_)
-	# insert_cuadruplo(cuadruplo)
+	res = tabla_cuadruplos[-1].res
+	cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
+	insert_cuadruplo(cuadruplo)
+	p_saltos.push(cont_saltos)
 	pass
 
 def est_for_3():
-	# global cont_saltos
-	# global contEntTmp
-	# id_ = pila_o.head()
-	# tmpf = contEntTmp
-	# contEntTmp += 1
-	# exp2 = pila_o.pop()
-	# tmpx = contEntTmp
-	# contEntTmp += 1
-	# cuadruplo1 = Cuadruplo("=", exp2, "", tmpf)
-	# insert_cuadruplo(cuadruplo1)
-	# cuadruplo2 = Cuadruplo("<=", id_, tmpf, tmpx)
-	# insert_cuadruplo(cuadruplo2)
-	# cuadruplo3 = Cuadruplo("GOTOFALSO", tmpx, "", "")
-	# insert_cuadruplo(cuadruplo3)
-	# p_saltos.push(cont_saltos-2)
+	global tabla_aux
+	global tabla_cuadruplos
+	for cuad in tabla_aux:
+		insert_cuadruplo(cuad)
+	falso = p_saltos.pop()
+	asign = p_saltos.pop()
+	tabla_cuadruplos[falso-1].res = cont_saltos
+	cuadruplo = Cuadruplo("GOTO", "", "", asign)
+	insert_cuadruplo(cuadruplo)
 	pass
 
-def est_for_4():
-	# id_ = pila_o.pop()
-	# id_ = pila_o.head()
-	# retorno = p_saltos.pop()
-	# cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
-	# cuadruplo3.res = retorno + 1
-	pass
+# def est_for_4():
+# 	# id_ = pila_o.pop()
+# 	# id_ = pila_o.head()
+# 	# retorno = p_saltos.pop()
+# 	# cuadruplo2 = Cuadruplo("GOTO", "", "",retorno)
+# 	# cuadruplo3.res = retorno + 1
+# 	pass
 
 
 # Acciones de Generacion de codigo para estatutos condicionales switch
+def est_case_1(res):
+	global resswitch
+	resswitch = res
+	print resswitch
+	pass
 
+def est_case_2(res):
+	global rescase
+	global resswitch
+	global contBoolTmp
+	rescase  = res
+	cuadruplo = Cuadruplo('==',resswitch,rescase,contBoolTmp)
+	insert_cuadruplo(cuadruplo)
+	p_tipos.push('Boolean')
+	pila_o.push(contBoolTmp)
+	contBoolTmp+=1
+	print rescase
+	pass
+
+def est_case_3():
+	aux = p_tipos.pop()
+	if aux != "Boolean":
+		print "Sorry - if statement must return a Boolean value"
+	else:
+		res = pila_o.pop()
+		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
+		insert_cuadruplo(cuadruplo)
+		p_saltos.push(cont_saltos-1)
+
+def est_case_4():
+	falso = p_saltos.pop()
+	tabla_cuadruplos[falso].res = cont_saltos
+	pass
 
 def print_pilas():
 	print "Pilas"
