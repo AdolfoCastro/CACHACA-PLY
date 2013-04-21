@@ -412,7 +412,7 @@ def p_sale_update(t):
 	pass
 
 def p_forexp(t):
-	'''forexp : asignacion cuadruplo_est_for_1 COL expresion cuadruplo_est_for_2 COL entra_update ID EQUALS exp
+	'''forexp : asignacion cuadruplo_est_for_1 COL expresion cuadruplo_est_for_2 COL entra_update asignacion
 			   '''
 	pass
 
@@ -632,8 +632,8 @@ def p_cons(t):
 	'''cons : seen_id_cons exp_1
 			| seen_int_cons exp_cons_int
 			| seen_float_cons exp_cons_float
-			| CTE_DOUBLE
-			| CTE_STRING
+			| seen_double_cons exp_cons_double
+			| seen_string_cons exp_cons_string
 			| seen_bool
 			| consarray
 			| conslist
@@ -664,6 +664,22 @@ def p_seen_float_cons(t):
 	global nombre_var_actual 
 	global tipo_var
 	tipo_var = "Float"
+	nombre_var_actual = t[1]
+	pass
+
+def p_seen_double_cons(t):
+	'''seen_double_cons : CTE_DOUBLE'''
+	global nombre_var_actual 
+	global tipo_var
+	tipo_var = "Double"
+	nombre_var_actual = t[1]
+	pass
+
+def p_seen_string_cons(t):
+	'''seen_string_cons : CTE_STRING'''
+	global nombre_var_actual 
+	global tipo_var
+	tipo_var = "Double"
 	nombre_var_actual = t[1]
 	pass
 
@@ -702,6 +718,26 @@ def p_exp_cons_float(t):
 	pila_o.push(contFlotCons)
 	p_tipos.push("Float")
 	contFlotCons+=1
+
+def p_exp_cons_double(t):
+	'exp_cons_double : '
+	global nombre_var_actual
+	global tipo_var
+	global contDoubleCons
+	insert_constante(nombre_var_actual, tipo_var, contDoubleCons)
+	pila_o.push(contDoubleCons)
+	p_tipos.push("Double")
+	contDoubleCons+=1
+
+def p_exp_cons_string(t):
+	'exp_cons_string : '
+	global nombre_var_actual
+	global tipo_var
+	global contStrCons
+	insert_constante(nombre_var_actual, tipo_var, contStrCons)
+	pila_o.push(contStrCons)
+	p_tipos.push("String")
+	contStrCons+=1
 
 def p_main(t):
 	'''main : RES_START comienza_main COL bloque RES_END '''
