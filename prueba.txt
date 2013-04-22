@@ -25,6 +25,29 @@ func Integer Algo1(Integer a):
 	Define: Boolean dbool
 	Define: String estr
 
+func Integer fibonacci_recursivo(Integer n):
+	if(n==0):
+		return 0
+	else:
+		if(n==1):
+			return 1
+		else:
+			return fibonacci(n-1) + fibonacci(n-2)
+		end
+	end
+
+func Integer fibonacci_iterativo(Integer n):
+	Define: Integer a
+	Define: Integer b
+	Define: Integer i
+	a = 0
+	b = 1
+	for(i=1: i==n: i=i+1):
+		a = b
+		b = a + b
+	end
+	return a
+
 $Este es el metodo main$
 Start:
 	Define: Array Integer arreglo[10]

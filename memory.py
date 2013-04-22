@@ -1,9 +1,9 @@
 #globales
-contEntGlo  =	0
-contFlotGlo	=	1000
-coutDoubleGlo= 4000
-contStrGlo	=	2000
-contBoolGlo	=	3000
+contEntGlo = 0
+contFlotGlo = 1000
+coutDoubleGlo = 4000
+contStrGlo = 2000
+contBoolGlo = 3000
 #contSaltosGlo=4000
 
 #locales
@@ -25,7 +25,7 @@ contBoolTmp=15000
 #Constates
 contEntCons=16000
 contFlotCons=17000
-contDoubleCons=13000 
-contStrCons=18000
-contBoolCons=19000
+contDoubleCons=18000 
+contStrCons=19000
+contBoolCons=20000
 #contSaltosCons=19000
