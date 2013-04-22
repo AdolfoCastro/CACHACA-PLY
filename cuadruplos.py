@@ -48,6 +48,15 @@ resswitch  = None
 
 p_oper.push(None)
 
+def goto_main():
+	cuadruplo = Cuadruplo("GOTO", "", "", "")
+	insert_cuadruplo(cuadruplo)
+
+def dir_main():
+	global cont_saltos
+	global tabla_cuadruplos
+	tabla_cuadruplos[0].res = cont_saltos
+
 # Acciones de Generacion de codigo para Expresiones usando 
 # cuadruplos incluyendo algunas acciones para verificacion semantica
 def exp_1(var, tipo):
@@ -149,6 +158,7 @@ def exp_5():
 			p_tipos.push(tipo_res)
 		else:
 			print "Sorry - incomaptible types"
+			sys.exit()
 
 def exp_6():
 	global p_oper
@@ -224,6 +234,7 @@ def est_if_1():
 	aux = p_tipos.pop()
 	if aux != "Boolean":
 		print "Sorry - if statement must return a Boolean value"
+		sys.exit()
 	else:
 		res = pila_o.pop()
 		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
@@ -238,6 +249,7 @@ def est_if_else_1():
 	aux = p_tipos.pop()
 	if aux != "Boolean":
 		print "Sorry - if statement must return a Boolean value"
+		sys.exit()
 	else:
 		res = pila_o.pop()
 		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
@@ -280,6 +292,7 @@ def est_while_3():
 
 def est_print():
 	res = pila_o.pop()
+	p_tipos.pop()
 	cuadruplo = Cuadruplo("PRINT", res, "", "")
 	insert_cuadruplo(cuadruplo)
 
@@ -288,7 +301,6 @@ def est_print():
 def exp_for_(boool):
 	global exp_for
 	exp_for=boool
-	print "Entra a exp_for = %r" %exp_for
 
 def est_for_1():
 	p_saltos.push(cont_saltos)
@@ -301,6 +313,7 @@ def est_for_2():
 		p_saltos.push(cont_saltos)
 	else:
 		print "Sorry - for statement must return a Boolean"
+		sys.exit()
 	pass
 
 def est_for_3():
@@ -351,6 +364,7 @@ def est_case_3():
 	aux = p_tipos.pop()
 	if aux != "Boolean":
 		print "Sorry - if statement must return a Boolean value"
+		sys.exit()
 	else:
 		res = pila_o.pop()
 		cuadruplo = Cuadruplo("GOTOFALSE", res, "", "")
@@ -362,6 +376,27 @@ def est_case_4():
 	tabla_cuadruplos[falso].res = cont_saltos
 	pass
 
+def call_proc_1():
+	pass
+
+def call_proc_2():
+	pass
+
+def call_proc_3():
+	pass
+
+def call_proc_4():
+	pass
+
+def call_proc_5():
+	pass
+
+def call_proc_6():
+	pass
+
+def get_cont_saltos():
+	return cont_saltos
+
 def print_pilas():
 	print "Pilas"
 	global pila_o
@@ -370,7 +405,7 @@ def print_pilas():
 	global p_saltos
 
 	print "\n"
-	print "--Opernando--"
+	print "--Operando--"
 	pila_o.show()
 	#print 'cabeza pila o', pila_o.head()
 	print "\n"
@@ -382,6 +417,7 @@ def print_pilas():
 	print "\n"
 	print "--Saltos--"
 	p_saltos.show()
+	print "\n"
 
 def print_cuadruplos(currentCuadList):
 	print "Tabla Cuadruplos"
