@@ -32,23 +32,27 @@ esta_global = False
 nombre_var_asignacion = None
 oper = None
 nombre_var_for = None
-
+param = None
 
 def p_programa(t):
-	'''programa : programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 main programa3
+	'''programa : ins_gt_main programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 dir_gt_main main programa3
 	            | empty'''
 	pass
 
-def p_prueba(t):
-	'prueba : '
-	global nombre_pro_act
-	print nombre_pro_act
+def p_ins_gt_main(t):
+	'ins_gt_main : '
+	goto_main()
+	pass
+
+def p_dir_gt_main(t):
+	'dir_gt_main : '
+	dir_main()
 	pass
 
 def p_generaglo(t):
 	'generaglo : '
 	global nombre_pro_act
-	insert_procedimiento('Global',' ',0)
+	def_proc_1('Global',' ',0)
 	tabla_pro[-1].se_uso = True
 	nombre_pro_act = "Global"
 	pass
@@ -62,7 +66,7 @@ def p_seen_prototipo(t):
 	'seen_prototipo : '
 	global nombre_pro_act
 	global tipo_pro_actual
-	insert_procedimiento(nombre_pro_act,tipo_pro_actual,1)
+	def_proc_1(nombre_pro_act,tipo_pro_actual,1)
 	pass
 
 def p_programa2(t):
@@ -75,12 +79,13 @@ def p_valida_entra_global(t):
 	'valida_entra_global : '
 	global esta_global
 	esta_global = True
+	pass
 
 def p_valida_salir_gobal(t):
 	'valida_salir_gobal : '
 	global esta_global
 	esta_global = False
-
+	pass
 
 def p_programa3(t):
 	'''programa3 : programa3 modulos
@@ -89,18 +94,56 @@ def p_programa3(t):
 	pass
 
 def p_prototipos(t):
-	'''prototipos : RES_FUNC dato seen_dato ID LPAREN prototipos_1 RPAREN'''
-	global nombre_pro_act 
-	nombre_pro_act = t[4]
+	'''prototipos : RES_FUNC dato seen_dato seen_nom_func  LPAREN prototipos_1 RPAREN'''
 	pass
+
+def p_seen_nom_func(t):
+	'seen_nom_func : ID '
+	global nombre_pro_act
+	nombre_pro_act = t[1]
+	pass
+
 
 def p_seen_dato(t):
 	'seen_dato :'
 	global tipo_pro_actual
 	tipo_pro_actual  = tipo_pro
 
+# def p_prototipos_0(t):
+# 	'prototipos_0 : prototipos_1'
+# 	global param
+# 	global tipo_var
+	
+# 	pass
+
 def p_prototipos_1(t):
 	''' prototipos_1 : tipo ID prototipos_2'''
+	global param
+	global tipo_pro
+	global nombre_pro_act
+	global memoria
+	global contEntLoc
+	global contFlotLoc
+	global contDoubleLoc
+	global contStrLoc
+	global contBoolLoc
+	param = t[2]
+	if tipo_pro == "Integer":
+		memoria = contEntLoc
+		contEntLoc += 1
+	elif tipo_pro == "Float":
+		memoria = contFlotLoc
+		contFlotLoc += 1
+	elif tipo_pro == "Double":
+		memoria = contDoubleLoc
+		contDoubleLoc += 1
+	elif tipo_pro == "String":
+		memoria = contStrLoc
+		contStrLoc += 1
+	elif tipo_pro == "Boolean":
+		memoria = contBoolLoc 
+		contBoolLoc+=1
+	def_proc_2(param, tipo_pro, memoria, nombre_pro_act)
 	pass
 
 def p_prototipos_2(t):
@@ -249,16 +292,23 @@ def p_array2(t):
 	pass
 
 def p_modulos(t):
-	'''modulos : prototipos se_uso COL  bloque '''
+	'''modulos : prototipos se_uso COL bloque cuad_def_proc_4 '''
+	pass
+
+def p_cuad_def_proc_4(t):
+	'cuad_def_proc_4 : '
+	def_proc_4()
 	pass
 
 def p_se_uso(t):
 	'se_uso : '
 	global nombre_pro_act
 	global tabla_pro
+	global cont_saltos
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == nombre_pro_act and not pro.se_uso:
 			tabla_pro[n].se_uso = True
+			def_proc_3(n, get_cont_saltos())
 			break
 		elif pro.nombre_funcion == nombre_pro_act and pro.se_uso:
 			print "Sorry - function %s already exists" %nombre_pro_act
@@ -646,7 +696,8 @@ def p_seen_bool(t):
 	global nombre_var_actual
 	global tipo_var
 	global contBoolCons
-	insert_constante(nombre_var_actual, tipo_var, contBoolCons)
+	tipo_var = "Boolean"
+	insert_constante(t[1], tipo_var, contBoolCons)
 	pila_o.push(contBoolCons)
 	p_tipos.push("Boolean")
 	contBoolCons+=1
@@ -679,7 +730,7 @@ def p_seen_string_cons(t):
 	'''seen_string_cons : CTE_STRING'''
 	global nombre_var_actual 
 	global tipo_var
-	tipo_var = "Double"
+	tipo_var = "String"
 	nombre_var_actual = t[1]
 	pass
 
@@ -745,7 +796,7 @@ def p_main(t):
 
 def p_comienza_main(t):
 	'comienza_main : '
-	insert_procedimiento("Main"," ",1)
+	def_proc_1("Main"," ",1)
 	tabla_pro[-1].se_uso = True
 	global nombre_pro_act
 	nombre_pro_act = 'Main'
