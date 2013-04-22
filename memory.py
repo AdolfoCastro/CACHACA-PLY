@@ -29,3 +29,4 @@ contDoubleCons=18000
 contStrCons=19000
 contBoolCons=20000
 #contSaltosCons=19000
+
