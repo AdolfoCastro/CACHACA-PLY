@@ -23,9 +23,9 @@ def lee_cuadruplos(currentCuadList):
 				elif currentCuad.o1 >= 16000 and currentCuad.o1 <=20999:
 					val=get_value_cons(currentCuad.o1)	
 				elif currentCuad.o1 >= 0 and currentCuad.o1 <=9999:
-					val=get_value_var(currentCuad.o1,"Main")
+					val=get_value_var(currentCuad.o1)
 
-				cambia_valor(currentCuad.res,"Main",val)
+				cambia_valor(currentCuad.res,val)
 
 			elif currentCuad.op == "+":
 				if currentCuad.o1 >=11000 and currentCuad.o1 <=15999:
@@ -33,14 +33,14 @@ def lee_cuadruplos(currentCuadList):
 				elif currentCuad.o1 >= 16000 and currentCuad.o1 <=20999:
 					op1 = get_value_cons(currentCuad.o1)
 				elif currentCuad.o1 >= 0 and currentCuad.o1 <=9999:
-					op1 = get_value_var(currentCuad.o1,"Main")
+					op1 = get_value_var(currentCuad.o1)
 
 				if currentCuad.o2 >=11000 and currentCuad.o2 <=15999:
 					op2 = get_value_temp(currentCuad.o2)
 				elif currentCuad.o2 >= 16000 and currentCuad.o2 <=20999:
 					op2 = get_value_cons(currentCuad.o2)
 				elif currentCuad.o2 >= 0 and currentCuad.o2 <=9999:
-					op2 = get_value_var(currentCuad.o2,"Main")
+					op2 = get_value_var(currentCuad.o2)
 
 				result = op1 + op2
 				newtempo = Tempo(currentCuad.res,result)
@@ -52,14 +52,14 @@ def lee_cuadruplos(currentCuadList):
 				elif currentCuad.o1 >= 16000 and currentCuad.o1 <=20999:
 					op1 = get_value_cons(currentCuad.o1)
 				elif currentCuad.o1 >= 0 and currentCuad.o1 <=9999:
-					op1 = get_value_var(currentCuad.o1,"Main")
+					op1 = get_value_var(currentCuad.o1)
 
 				if currentCuad.o2 >=11000 and currentCuad.o2 <=15999:
 					op2 = get_value_temp(currentCuad.o2)
 				elif currentCuad.o2 >= 16000 and currentCuad.o2 <=20999:
 					op2 = get_value_cons(currentCuad.o2)
 				elif currentCuad.o2 >= 0 and currentCuad.o2 <=9999:
-					op2 = get_value_var(currentCuad.o2,"Main")
+					op2 = get_value_var(currentCuad.o2)
 
 				result = op1 - op2
 				newtempo = Tempo(currentCuad.res,result)
@@ -71,14 +71,14 @@ def lee_cuadruplos(currentCuadList):
 				elif currentCuad.o1 >= 16000 and currentCuad.o1 <=20999:
 					op1 = get_value_cons(currentCuad.o1)
 				elif currentCuad.o1 >= 0 and currentCuad.o1 <=9999:
-					op1 = get_value_var(currentCuad.o1,"Main")
+					op1 = get_value_var(currentCuad.o1)
 
 				if currentCuad.o2 >=11000 and currentCuad.o2 <=15999:
 					op2 = get_value_temp(currentCuad.o2)
 				elif currentCuad.o2 >= 16000 and currentCuad.o2 <=20999:
 					op2 = get_value_cons(currentCuad.o2)
 				elif currentCuad.o2 >= 0 and currentCuad.o2 <=9999:
-					op2 = get_value_var(currentCuad.o2,"Main")
+					op2 = get_value_var(currentCuad.o2)
 
 				result = op1 * op2
 				newtempo = Tempo(currentCuad.res,result)
@@ -90,14 +90,14 @@ def lee_cuadruplos(currentCuadList):
 				elif currentCuad.o1 >= 16000 and currentCuad.o1 <=20999:
 					op1 = get_value_cons(currentCuad.o1)
 				elif currentCuad.o1 >= 0 and currentCuad.o1 <=9999:
-					op1 = get_value_var(currentCuad.o1,"Main")
+					op1 = get_value_var(currentCuad.o1)
 
 				if currentCuad.o2 >=11000 and currentCuad.o2 <=15999:
 					op2 = get_value_temp(currentCuad.o2)
 				elif currentCuad.o2 >= 16000 and currentCuad.o2 <=20999:
 					op2 = get_value_cons(currentCuad.o2)
 				elif currentCuad.o2 >= 0 and currentCuad.o2 <=9999:
-					op2 = get_value_var(currentCuad.o2,"Main")
+					op2 = get_value_var(currentCuad.o2)
 
 				result = op1 / op2
 				newtempo = Tempo(currentCuad.res,result)

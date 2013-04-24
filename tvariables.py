@@ -155,18 +155,16 @@ def get_address(nombre,proc):
 	pass
 
 #cambia el valor de la variable
-def cambia_valor(dire,proc,val):
+def cambia_valor(dire,val):
 	global tabla_pro
 	esta = False
 	for n,pro in enumerate(tabla_pro):
-		if pro.nombre_funcion == proc:
 			for variable in pro.var:
 				if variable.direccion == dire:
 					variable.valor  = val
 					esta = True
 
 	for n,pro in enumerate(tabla_pro):
-		if pro.nombre_funcion == "Global":
 			for variable in pro.var:
 				if variable.direccion == dire:
 					variable.valor  = val
@@ -184,18 +182,16 @@ def existe_var_asignar(tabla_var, nombre):
 		sys.exit()
 
 
-def get_value_var(dirb,proc):
+def get_value_var(dirb):
 	global tabla_pro
 	esta = False
 	for n,pro in enumerate(tabla_pro):
-		if pro.nombre_funcion == proc:
 			for variable in pro.var:
 				if variable.direccion == dirb:
 					esta = True
 					return variable.valor
 
 	for n,pro in enumerate(tabla_pro):
-		if pro.nombre_funcion == "Global":
 			for variable in pro.var:
 				if variable.direccion == dirb:
 					esta = True

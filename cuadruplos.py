@@ -103,8 +103,10 @@ def exp_4():
 
 			p_tipos.pop()
 			p_tipos.pop()
+			o2 = pila_o.pop()
+			o1 = pila_o.pop()
 
-			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
+			cuadruplo = Cuadruplo(p_oper.pop(), o1, o2, memoria)
 			insert_cuadruplo(cuadruplo)
 
 			#Libera la memoria
@@ -146,7 +148,10 @@ def exp_5():
 			p_tipos.pop()
 			p_tipos.pop()
 
-			cuadruplo = Cuadruplo(p_oper.pop(), pila_o.pop(), pila_o.pop(), memoria)
+			o2 = pila_o.pop()
+			o1 = pila_o.pop()
+
+			cuadruplo = Cuadruplo(p_oper.pop(),o1, o2, memoria)
 			insert_cuadruplo(cuadruplo)
 
 			#Libera la memoria
