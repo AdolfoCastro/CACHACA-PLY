@@ -18,4 +18,11 @@ def print_constantes(currentProList):
 			print currentPro.cons, currentPro.tipo, currentPro.dirb
 		else:
 			print "List is empty"
+
+def get_value_cons(dirb):
+	global tabla_cons
+	for cons in tabla_cons:
+		if cons.dirb == dirb:
+			return cons.cons
+
 			

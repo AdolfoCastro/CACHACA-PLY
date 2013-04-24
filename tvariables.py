@@ -16,6 +16,7 @@ class TablaVariableNodo:
 		self.nombre_variable = nombre
 		self.tipo_dato = tipo
 		self.direccion = dire
+		self.valor = None
 		
 class TablaProcedimientoNodo:
 	def __init__(self, nombre, tipo, dirb):
@@ -152,7 +153,68 @@ def get_address(nombre,proc):
 
 	pass
 
+#cambia el valor de la variable
+def cambia_valor(dire,proc,val):
+	global tabla_pro
+	esta = False
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for variable in pro.var:
+				if variable.direccion == dire:
+					variable.valor  = val
+					esta = True
+
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == "Global":
+			for variable in pro.var:
+				if variable.direccion == dire:
+					variable.valor  = val
+					esta = True
+	if not esta:
+		print "Sorry - the variable  %s was not declared"%nombre
+ 		sys.exit()
+
+	pass
+
+
 def existe_var_asignar(tabla_var, nombre):
 	if not existe_var(tabla_var, nombre):
 		print "La variable " + nombre + " a la que quieres asignar un valor no existe"
 		sys.exit()
+
+
+def get_value_var(dirb,proc):
+	global tabla_pro
+	esta = False
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for variable in pro.var:
+				if variable.direccion == dirb:
+					esta = True
+					return variable.valor
+
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == "Global":
+			for variable in pro.var:
+				if variable.direccion == dirb:
+					esta = True
+					return variable.valor
+
+	pass
+
+
+#tabla para ver que los valores si esten cambiando con forme se leen los cuadruplos
+def print_tables_alfinal(currentProList):
+	print "Tabla de procedimientos y variables"
+	for currentPro in currentProList:
+		if currentPro:
+			print currentPro.nombre_funcion, " - ", currentPro.tipo_retorno, " - ", currentPro.dir_base
+			print "Vars"
+			for variable in currentPro.var:
+				print variable.nombre_variable, " - ", variable.tipo_dato, " - ", variable.direccion, "-", variable.valor
+			print "Params"
+			for param in currentPro.param:
+				print param.nombre_variable, " - ", param.tipo_dato, " - ", param.direccion
+			print "\n"
+		else:
+			print "List is empty"

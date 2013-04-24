@@ -1,0 +1,10 @@
+Start:
+	
+	Define: Integer Uno
+	Define: Integer Dos
+	Define: Integer Tres
+	Uno=3-1
+	Dos  = 10 * 5
+	Tres = 1/10
+	
+End

@@ -17,6 +17,7 @@ from tvariables import *
 from memory import *
 from cuadruplos import *
 from tconstantes import *
+from mprueba import *
 
 # Consigue el mapa de tokens
 tokens = scanner.tokens
@@ -844,4 +845,8 @@ print_tables(tabla_pro)
 print_pilas()
 print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
+lee_cuadruplos(tabla_cuadruplos)
+print_tables_alfinal(tabla_pro)
+print_temporales(tabla_tempo)
+
 #print "Num Saltos: %d" %cont_saltos
