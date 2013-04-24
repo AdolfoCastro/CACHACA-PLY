@@ -66,7 +66,7 @@ def p_seen_prototipo(t):
 	'seen_prototipo : '
 	global nombre_pro_act
 	global tipo_pro_actual
-	def_proc_1(nombre_pro_act,tipo_pro_actual,1)
+	def_proc_1(nombre_pro_act,tipo_pro_actual,cont_saltos)
 	pass
 
 def p_programa2(t):
@@ -108,6 +108,7 @@ def p_seen_dato(t):
 	'seen_dato :'
 	global tipo_pro_actual
 	tipo_pro_actual  = tipo_pro
+	pass
 
 # def p_prototipos_0(t):
 # 	'prototipos_0 : prototipos_1'
@@ -117,7 +118,13 @@ def p_seen_dato(t):
 # 	pass
 
 def p_prototipos_1(t):
-	''' prototipos_1 : tipo ID prototipos_2'''
+	''' prototipos_1 : tipo seen_id_proto prototipos_2
+					| empty
+					'''
+	pass
+
+def p_seen_id_proto(t):
+	'seen_id_proto : ID'
 	global param
 	global tipo_pro
 	global nombre_pro_act
@@ -127,7 +134,8 @@ def p_prototipos_1(t):
 	global contDoubleLoc
 	global contStrLoc
 	global contBoolLoc
-	param = t[2]
+	param = t[1]
+	print tipo_pro
 	if tipo_pro == "Integer":
 		memoria = contEntLoc
 		contEntLoc += 1
@@ -348,13 +356,54 @@ def p_condicion(t):
 	pass
 
 def p_llamada(t):
-	'llamada : ID LPAREN llamada1 RPAREN '
+	'llamada : seen_id_call LPAREN call_proc_2 llamada1 RPAREN call_proc_4 '
+	pass
+
+def p_call_proc_4(t):
+	'call_proc_4 : '
+	global func_actual
+	global dirb_actual
+	call_proc_4(func_actual, dirb_actual)
+	pass
+
+def p_seen_id_call(t):
+	'seen_id_call : ID'
+	global tabla_pro
+	global func_actual
+	global param_actual
+	global dirb_actual
+	func_actual = t[1]
+	existe = existe_pro(func_actual)
+	call_proc_1(existe, func_actual)
+	for proc in tabla_pro:
+		if proc.nombre_funcion == func_actual:
+			param_actual = [param for param in proc.param]
+			dirb_actual = proc.dir_base
+	pass
+
+def p_call_proc_2(t):
+	'call_proc_2 : '
+	global func_actual
+	call_proc_2(func_actual)
 	pass
 
 def p_llamada1(t):
-	'''llamada1 : expresion
+	'''llamada1 : exp call_proc_3 param
 				| empty
 				'''
+	pass
+
+def p_call_proc_3(t):
+	'call_proc_3 : '
+	global param_actual
+	if param_actual:
+		param = param_actual.pop()
+		call_proc_3(param)
+	pass
+
+def p_param(t):
+	'''param : COMMA exp call_proc_3 param
+			| empty'''
 	pass
 
 def p_lectura(t):
