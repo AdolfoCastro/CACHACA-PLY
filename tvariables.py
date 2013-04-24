@@ -30,7 +30,9 @@ tabla_pro = [ ]
 
 def def_proc_1(nombre, tipo, dirb):
 	global tabla_pro
-	existe_pro (nombre)
+	if existe_pro(nombre):
+		print "Sorry - the prototype %s already exist" %nombre
+		sys.exit()
 	pro = TablaProcedimientoNodo(nombre, tipo, dirb)
 	tabla_pro.append(pro)
 
@@ -82,9 +84,8 @@ def existe_pro(nombre):
 	global tabla_pro
 	for pro in tabla_pro:
 		if pro.nombre_funcion == nombre:
-			print "Sorry - the prototype %s already exist"%nombre
-			sys.exit()
-	pass
+			return True
+	return False
 
 def existe_var(nombre,proc):
 	global tabla_pro
