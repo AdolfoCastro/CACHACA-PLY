@@ -45,6 +45,7 @@ tabla_aux = []
 exp_for = False
 rescase  = None
 resswitch  = None
+param_actual = []
 
 p_oper.push(None)
 
@@ -376,25 +377,36 @@ def est_case_4():
 	tabla_cuadruplos[falso].res = cont_saltos
 	pass
 
-def call_proc_1():
+def call_proc_1(existe, nombre):
+	if not existe:
+		print "Sorry - the prototype %s does not exist" %nombre
+		sys.exit()
 	pass
 
-def call_proc_2():
+def call_proc_2(nombre):
+	cuadruplo = Cuadruplo("ERA", nombre, "", "")
+	insert_cuadruplo(cuadruplo)
 	pass
 
-def call_proc_3():
+def call_proc_3(param):
+	global tabla_pro
+	arg = pila_o.pop()
+	tipo_arg = p_tipos.pop()
+	if param.tipo_dato == tipo_arg:
+		cuadruplo = Cuadruplo("PARAM", arg, "", param.nombre_variable)
+		insert_cuadruplo(cuadruplo)
+	else:
+		print "Sorry - incompatible types in argument %s" %param.nombre_variable
+		sys.exit()
 	pass
 
-def call_proc_4():
-	pass
-
-def call_proc_5():
-	pass
-
-def call_proc_6():
+def call_proc_4(nom, dirb):
+	cuadruplo = Cuadruplo("GOSUB", nom, dirb, "")
+	insert_cuadruplo(cuadruplo)
 	pass
 
 def get_cont_saltos():
+	global cont_saltos
 	return cont_saltos
 
 def print_pilas():
