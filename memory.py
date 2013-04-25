@@ -30,3 +30,41 @@ contStrCons=19000
 contBoolCons=20000
 #contSaltosCons=19000
 
+class Memoria(object):
+  def __init__(self):
+		self.globales = Memoria_sub()
+		self.locales = Memoria_sub()
+		self.temporales = Memoria_sub()
+		self.constantes = Memoria_sub()
+		
+class Memoria_sub(object):
+	def __init__(self):
+		self.int = [ ]
+		self.dbl = [ ]
+		self.flt = [ ]
+		self.str = [ ]
+		self.boo = [ ]
+
+	def new_int(self, celda):
+		self.int.append(celda)
+
+	def new_dbl(self, celda):
+		self.dbl.append(celda)
+
+	def new_flt(self, celda):
+		self.flt.append(celda)
+
+	def new_str(self, celda):
+		self.str.append(celda)
+
+	def new_boo(self, celda):
+		self.boo.append(celda)
+
+class Memoria_celda(object):
+	def __init__(self, _dir, value):
+		if _dir>=0:
+			self.direccion = _dir
+			self.valor = value
+		else:
+			print "Error - direccion de memoria inexistente"
+			sys.exit()
