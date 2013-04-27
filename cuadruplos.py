@@ -53,6 +53,10 @@ def goto_main():
 	cuadruplo = Cuadruplo("GOTO", "", "", "")
 	insert_cuadruplo(cuadruplo)
 
+def crea_end():
+	cuadruplo = Cuadruplo("END", "", "", "")
+	insert_cuadruplo(cuadruplo)
+
 def dir_main():
 	global cont_saltos
 	global tabla_cuadruplos
@@ -215,8 +219,8 @@ def exp_9():
 				oper = p_oper.pop()
 				cuadruplo = Cuadruplo(oper, op, None, res)
 			else:
-				op1 = pila_o.pop()
 				op2 = pila_o.pop()
+				op1 = pila_o.pop()
 				oper = p_oper.pop()
 				cuadruplo = Cuadruplo(oper, op1, op2, memoria)
 				pila_o.push(cuadruplo.res)
@@ -408,6 +412,31 @@ def call_proc_3(param):
 def call_proc_4(nom, dirb):
 	cuadruplo = Cuadruplo("GOSUB", nom, dirb, "")
 	insert_cuadruplo(cuadruplo)
+	pass
+
+def def_arr_1(_id):
+	pila_o.push(_id)
+	pass
+
+def def_arr_2():
+	pass
+
+def def_arr_3():
+	pass
+
+def def_arr_4():
+	pass
+
+def def_arr_5():
+	pass
+
+def def_arr_6():
+	pass
+
+def def_arr_7():
+	pass
+
+def def_arr_8():
 	pass
 
 def get_cont_saltos():
