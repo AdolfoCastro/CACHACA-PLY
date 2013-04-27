@@ -1,10 +1,8 @@
 Start:
-	
-	Define: Integer Uno
-	Define: Integer Dos
-	Define: Integer Tres
-	Uno=3-1
-	Dos  = 10 * 5
-	Tres = 100/10
-	
+	Define: Integer x
+	x = 1
+	while (x < 10):
+		x = x+1
+	end
+
 End

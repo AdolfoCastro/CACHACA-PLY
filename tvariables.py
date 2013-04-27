@@ -154,28 +154,6 @@ def get_address(nombre,proc):
 
 	pass
 
-#cambia el valor de la variable
-def cambia_valor(dire,val):
-	global tabla_pro
-	esta = False
-	for n,pro in enumerate(tabla_pro):
-			for variable in pro.var:
-				if variable.direccion == dire:
-					variable.valor  = val
-					esta = True
-
-	for n,pro in enumerate(tabla_pro):
-			for variable in pro.var:
-				if variable.direccion == dire:
-					variable.valor  = val
-					esta = True
-	if not esta:
-		print "Sorry - the variable  %s was not declared"%nombre
- 		sys.exit()
-
-	pass
-
-
 def existe_var_asignar(tabla_var, nombre):
 	if not existe_var(tabla_var, nombre):
 		print "La variable " + nombre + " a la que quieres asignar un valor no existe"

@@ -896,7 +896,6 @@ print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
 maquina_virtual()
 print_tables_alfinal(tabla_pro)
-print_temporales(tabla_tempo)
 print_memoria()
 
 #print "Num Saltos: %d" %cont_saltos
