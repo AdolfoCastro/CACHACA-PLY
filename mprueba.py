@@ -41,7 +41,14 @@ def get_value_temp(dirb):
 	for temp in tabla_tempo:
 		if temp.direccion == dirb:
 			return temp.valor
+	return False
 	pass
+def set_value_tmp(dirb,newvalue):
+	global tabla_tempo
+	for temp in tabla_tempo:
+		if temp.direccion == dirb:
+			temp.valor = newvalue
+			break
 
 def get_value_const(dirb):
 	global tabla_const
@@ -56,12 +63,6 @@ def get_value_var(dirb):
 		if variable.direccion == dirb:
 			return variable.valor
 	pass
-
-def lee_cuadruplos():
-	global contcuad
-	currentCuadList = tabla_cuadruplos
-	for currentCuad in currentCuadList:
-		contcuad += 1
 
 def cambia_valor(dire,val):
 	global tabla_varia
@@ -83,6 +84,13 @@ def cambia_valor(dire,val):
 
 	pass
 
+
+def lee_cuadruplos():
+	global contcuad
+	currentCuadList = tabla_cuadruplos
+	for currentCuad in currentCuadList:
+		contcuad += 1
+
 def dame_o1_o2(i):
 	global op1
 	global op2
@@ -99,6 +107,21 @@ def dame_o1_o2(i):
 		op2 =  get_value_const(tabla_cuadruplos[i].o2)
 	elif tabla_cuadruplos[i].o2 >= 0 and tabla_cuadruplos[i].o2 <=9999:
 		op2 =  get_value_var(tabla_cuadruplos[i].o2)
+
+def genera_memoria_proc(proc):
+	global tabla_pro
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			auxlist  = []
+			for variable in pro.var:
+				mem = Memoria(variable.direccion,variable.valor)
+				auxlist.append(mem)
+	tabla_varia.append(auxlist)
+	pass
+
+def carga_params(param):
+	tabla_varia[-1].append(param)
+	print tabla_varia
 	
 def maquina_virtual():
 	carga_globales()
@@ -125,31 +148,43 @@ def maquina_virtual():
 		elif tabla_cuadruplos[i].op == "+":
 			dame_o1_o2(i)
 			result = op1 + op2
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
 			i+=1
 
 		elif tabla_cuadruplos[i].op == "-":
 			dame_o1_o2(i)
 			result = op1 - op2
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
 			i+=1
 
 
 		elif tabla_cuadruplos[i].op == "*":
 			dame_o1_o2(i)
 			result = op1 * op2
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
 			i+=1
 
 
 		elif tabla_cuadruplos[i].op == "/":
 			dame_o1_o2(i)
 			result = op1 / op2
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
 			i+=1
 
 		elif tabla_cuadruplos[i].op == "==":
@@ -158,48 +193,11 @@ def maquina_virtual():
 				result = "true"
 			else:
 				result = "false"
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
-			i+=1
-
-		elif tabla_cuadruplos[i].op == "<=":
-			dame_o1_o2(i)
-			if op1 <= op2:
-				result = "true"
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
 			else:
-				result = "false"
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
-			i+=1
-
-		elif tabla_cuadruplos[i].op == ">=":
-			dame_o1_o2(i)
-			if op1 >= op2:
-				result = "true"
-			else:
-				result = "false"
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
-			i+=1
-
-		elif tabla_cuadruplos[i].op == ">":
-			dame_o1_o2(i)
-			if op1 > op2:
-				result = "true"
-			else:
-				result = "false"
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
-			i+=1
-
-		elif tabla_cuadruplos[i].op == "<":
-			dame_o1_o2(i)
-			if op1 < op2:
-				result = "true"
-			else:
-				result = "false"
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
 			i+=1
 
 		elif tabla_cuadruplos[i].op == "!=":
@@ -208,12 +206,68 @@ def maquina_virtual():
 				result = "true"
 			else:
 				result = "false"
-			newtempo = Memoria(tabla_cuadruplos[i].res,result)
-			tabla_tempo.append(newtempo)
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+
+		elif tabla_cuadruplos[i].op == "<=":
+			dame_o1_o2(i)
+			if op1 <= op2:
+				result = "true"
+			else:
+				result = "false"
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+
+		elif tabla_cuadruplos[i].op == ">=":
+			dame_o1_o2(i)
+			if op1 >= op2:
+				result = "true"
+			else:
+				result = "false"
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+
+		elif tabla_cuadruplos[i].op == ">":
+			dame_o1_o2(i)
+			if op1 > op2:
+				result = "true"
+			else:
+				result = "false"
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+
+		elif tabla_cuadruplos[i].op == "<":
+			dame_o1_o2(i)
+			if op1 < op2:
+				result = "true"
+			else:
+				result = "false"
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
 			i+=1
 
 		elif tabla_cuadruplos[i].op == "GOTO":
 			i = tabla_cuadruplos[i].res
+			
 
 		elif tabla_cuadruplos[i].op == "GOTOFALSE":
 			if get_value_temp(tabla_cuadruplos[i].o1) == "false":
@@ -232,6 +286,22 @@ def maquina_virtual():
 			print op1
 			i+=1 
 
+		elif tabla_cuadruplos[i].op ==  "ERA":
+			genera_memoria_proc(tabla_cuadruplos[i].o1)
+			i+=1
+
+		elif tabla_cuadruplos[i].op ==  "PARAM":
+			valor = get_value_var(tabla_cuadruplos[i].o1)
+			parametro = Memoria(tabla_cuadruplos[i].o1,valor)
+			carga_params(parametro)
+			i+=1
+
+		elif tabla_cuadruplos[i].op ==  "GOSUB":
+			i+=1
+			
+		elif tabla_cuadruplos[i].op ==  "ENDPROC":
+			i+=1
+
 def print_memoria():
 	global tabla_tempo
 	global tabla_const
@@ -242,9 +312,16 @@ def print_memoria():
 	print "memoria temporal"
 	for campo in tabla_tempo:
 		print campo.direccion, campo.valor
-	print "memoria local"
-	for campo in tabla_varia:
-		print campo.direccion, campo.valor
+	
 	print "memoria global"
 	for campo in tabla_varia_globales:
 		print campo.direccion, campo.valor
+
+	print "memoria local"
+	for campo in tabla_varia:
+		if campo == list :
+			print "proc"
+		else:
+			print campo.direccion, campo.valor
+
+	

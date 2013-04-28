@@ -1,8 +1,17 @@
+Prototype func Integer funcion(Integer Algo, Integer Algo2)
+func Integer funcion(Integer Algo, Integer Algo2):
+
 Start:
 	Define: Integer x
-	x = 1
-	while (x < 10):
-		x = x+1
+	x = 0
+	for (x = 0:x<11:x = x+1):
+		print (x)
 	end
+	if (x==10):
+		print ("entra en 10")
+	else:
+		print ("no entra en 10")
+	end
+	funcion(x,x)
 
 End

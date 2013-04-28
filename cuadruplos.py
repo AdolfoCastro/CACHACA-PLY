@@ -333,7 +333,7 @@ def est_for_3():
 		insert_cuadruplo(cuad)
 	falso = p_saltos.pop()
 	asign = p_saltos.pop()
-	tabla_cuadruplos[falso-1].res = cont_saltos
+	tabla_cuadruplos[falso-1].res = cont_saltos+1
 	# res = tabla_cuadruplos[-1].o1
 	# cuadruplo = Cuadruplo("=", pila_o.pop(), "", res)
 	# insert_cuadruplo(cuadruplo)
