@@ -136,7 +136,6 @@ def p_seen_id_proto(t):
 	global contStrLoc
 	global contBoolLoc
 	param = t[1]
-	print tipo_pro
 	if tipo_pro == "Integer":
 		memoria = contEntLoc
 		contEntLoc += 1
@@ -893,9 +892,9 @@ yacc.parse(' '.join(program))
 # print_tables(tabla_pro)
 # print_pilas()
 # print_constantes(tabla_cons)
-print_cuadruplos(tabla_cuadruplos)
+#print_cuadruplos(tabla_cuadruplos)
 maquina_virtual()
 # print_tables_alfinal(tabla_pro)
-# print_memoria()
+#print_memoria()
 
 #print "Num Saltos: %d" %cont_saltos
