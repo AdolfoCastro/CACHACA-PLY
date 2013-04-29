@@ -82,29 +82,28 @@ def get_value_const(dirb):
 		if constante.direccion == dirb:
 			return constante.valor
 	pass
-
+#revizar
 def get_value_var(dirb):
 	global tabla_varia
 	global tabla_varia_aux
 	esta = False
 	tabla_varia_aux = tabla_varia
 	n = tabla_varia_aux[-1]
-	if not isinstance(n,list):
-		for variable in tabla_varia:
-			if variable.direccion == dirb:
-				return variable.valor
-				esta=True
-		if not esta :
-			for variable in tabla_varia_globales:
-				if variable.direccion== dirb:
+	if tabla_varia_aux:
+		if not isinstance(n,list):
+			for variable in tabla_varia:
+				if variable.direccion == dirb:
 					return variable.valor
-	else:
-		tabla_varia_aux = tabla_varia_aux[-1]
-		variable = get_value_var_aux(dirb)
-		return variable
-
-	pass
-
+					esta=True
+			if not esta :
+				for variable in tabla_varia_globales:
+					if variable.direccion== dirb:
+						return variable.valor
+		else:
+			tabla_varia_aux = tabla_varia_aux[-1]
+			variable = get_value_var_aux(dirb)
+			return variable
+#revizar
 def get_value_var_aux(dirb):
 	global tabla_varia_aux
 	esta = False
@@ -121,12 +120,24 @@ def get_value_var_aux(dirb):
 		else:
 			tabla_varia_aux = tabla_varia_aux[-1]
 			get_value_var_aux(dirb)
-
+#revizar
 def cambia_valor(dire,val):
 	global tabla_varia
 	global tabla_varia_globales
 	esta = False
-	if not isinstance(tabla_varia[-1],list):
+	if tabla_varia:
+		if not isinstance(tabla_varia[-1],list):
+			for variable in tabla_varia:
+				if variable.direccion == dire:
+					variable.valor  = val
+					esta = True
+			if not esta:
+				for variable in tabla_varia_globales:
+					if variable.direccion == dire:
+						variable.valor  = val
+		else:
+			cambia_valor_aux(dire,val,tabla_varia[-1])
+	else:
 		for variable in tabla_varia:
 			if variable.direccion == dire:
 				variable.valor  = val
@@ -135,9 +146,7 @@ def cambia_valor(dire,val):
 			for variable in tabla_varia_globales:
 				if variable.direccion == dire:
 					variable.valor  = val
-	else:
-		cambia_valor_aux(dire,val,tabla_varia[-1])
-
+#revizar
 def cambia_valor_aux(dire,val,lista):
 	esta = False
 	global tabla_varia_globales
@@ -156,7 +165,7 @@ def cambia_valor_aux(dire,val,lista):
 
 	pass
 
-def genera_memoria_proc(proc):
+def crea_espacio(proc):
 	global tabla_pro
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == proc:
@@ -164,18 +173,19 @@ def genera_memoria_proc(proc):
 			for variable in pro.var:
 				mem = Memoria(variable.direccion,variable.valor)
 				auxlist.append(mem)
-	if not isinstance(tabla_varia[-1],list):
-		tabla_varia.append(auxlist)
-	else:
-		genera_memoria_proc_aux(proc,tabla_varia[-1],auxlist)
-	pass
+	return auxlist
 
-def genera_memoria_proc_aux(proc,lista,auxlist):
+def genera_memoria_proc(proc,lista):
 	if lista:
-		if not isinstance(lista[-1],list):
-			tabla_varia.append(auxlist)
-		else:
-			genera_memoria_proc_aux(proc,tabla_varia[-1],auxlist)
+		if isinstance(lista[-1],list):
+			if lista[-1]:
+				genera_memoria_proc(proc,lista[-1])
+			else:
+				mem = crea_espacio(proc)
+				lista.append(mem)
+	else:
+		aux = crea_espacio(proc)
+		lista.append(aux)
 	pass
 
 def borra_memoria(proc):
@@ -188,7 +198,7 @@ def borra_memoria(proc):
 def carga_params(param):
 	global tabla_varia
 	if not isinstance(tabla_varia[-1],list):
-		tabla_varia[-1].append(param)
+		tabla_varia.append(param)
 	else:
 		carga_params_aux(param,tabla_varia[-1])
 
@@ -204,6 +214,7 @@ def maquina_virtual():
 	carga_const()
 	carga_scope_local("Main")
 	lee_cuadruplos()
+	global pila_brincos
 	global op1
 	global op2
 	global contcuad
@@ -392,23 +403,29 @@ def maquina_virtual():
 			i+=1 
 
 		elif tabla_cuadruplos[i].op ==  "ERA":
-			genera_memoria_proc(tabla_cuadruplos[i].o1)
+			genera_memoria_proc(tabla_cuadruplos[i].o1,tabla_varia)
 			i+=1
 
 		elif tabla_cuadruplos[i].op ==  "PARAM":
-			valor = get_value_var(tabla_cuadruplos[i].o1)
-			parametro = Memoria(tabla_cuadruplos[i].o1,valor)
-			carga_params(parametro)
+			#valor = get_value_var(tabla_cuadruplos[i].o1)
+			#parametro = Memoria(tabla_cuadruplos[i].o1,valor)
+			#carga_params(parametro)
 			i+=1
+			pass
 
 		elif tabla_cuadruplos[i].op ==  "GOSUB":
 			pila_brincos.append(i+1)
-			i = tabla_cuadruplos[i].o2
+			global tabla_pro
+			for pro in tabla_pro:
+				if pro.nombre_funcion == tabla_cuadruplos[i].o1:
+					i = pro.dir_base
+			pass
 
 		elif tabla_cuadruplos[i].op ==  "ENDPROC":
-			i=pila_brincos[-1]
+			i = pila_brincos[-1]
 			del pila_brincos[-1]
 			borra_memoria(tabla_varia)
+			pass
 
 def print_memoria():
 	global tabla_tempo

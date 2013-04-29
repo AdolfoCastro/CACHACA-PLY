@@ -1,15 +1,19 @@
-Prototype func Integer funcion(Integer Algo, Integer Algo2)
+Prototype func Integer funcion1(Integer Algo, Integer Algo2)
+Prototype func Integer func2(Integer Algo)
 Define: Integer x
 
 
-func Integer funcion(Integer Algo):
-print (x)
-	
+func Integer func2(Integer Algo):
+print("hola")
+
+func Integer funcion1(Integer Algo):
+
+
 
 Start:
-Define: Integer y
-	y=1
-	funcion(y)
-	x = 1
-	print(x)
+	x=0
+	funcion1(x)
+	func2(x)
+	func2(x)
 End
+

@@ -889,12 +889,12 @@ for line in fileinput.input():
 	program.append(line)
 yacc.parse(' '.join(program))
 
-# print_tables(tabla_pro)
+print_tables(tabla_pro)
 # print_pilas()
 # print_constantes(tabla_cons)
-#print_cuadruplos(tabla_cuadruplos)
+print_cuadruplos(tabla_cuadruplos)
 maquina_virtual()
 # print_tables_alfinal(tabla_pro)
-#print_memoria()
+# print_memoria()
 
 #print "Num Saltos: %d" %cont_saltos
