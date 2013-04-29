@@ -28,12 +28,14 @@ tipo_pro = None
 tipo_pro_actual  = None
 nombre_var_actual = None
 tipo_var = None
-memoria = None
+memoria = 0
 esta_global = False
 nombre_var_asignacion = None
 oper = None
 nombre_var_for = None
 param = None
+dim_int = 0
+cont_dim = 0
 
 def p_programa(t):
 	'''programa : ins_gt_main programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 dir_gt_main main programa3
@@ -183,15 +185,11 @@ def p_estructura(t):
 	pass
 
 def p_vars(t):
-	'vars : RES_DEF COL vars1 '
-	global memoria
-	insert_variable(nombre_var_actual,tipo_pro_actual,memoria, nombre_pro_act)
+	'vars : RES_DEF COL vars1'
 	pass
 
-def p_vars1(t):
-	'''vars1 : estructura vars1
-			| dato ID vars2 vars1_1
-			'''
+def p_vars_1(t):
+	'vars_1 : dato ID vars2 vars1_1 '
 	global tipo_pro_actual
 
 	global contEntLoc
@@ -244,6 +242,14 @@ def p_vars1(t):
 
 	global nombre_var_actual
 	nombre_var_actual = t[2]
+	global memoria
+	insert_variable(nombre_var_actual,tipo_pro_actual,memoria, nombre_pro_act)
+	pass
+
+def p_vars1(t):
+	'''vars1 : estructura empty
+			| vars_1
+			'''
 	pass
 
 def p_vars1_1(t):
@@ -281,23 +287,115 @@ def p_cons_loop(t):
 
 def p_cons_loop_1(t):
 	'''cons_loop_1 : COMMA cons_loop
-				   | empty'''	
+				   | empty'''
+	pass
 
 def p_array(t):
-	'array : RES_ARRAY dato ID LBRACKET CTE_INT RBRACKET array1 '
+	'array : RES_ARRAY dato crea_arr LBRACKET dim RBRACKET genera_ms array1 '
+	pass
+
+def p_genera_ms(t):
+	'genera_ms : '
+	global nombre_var_actual
+	global nombre_pro_act
+	genera_m_arr(nombre_var_actual, nombre_pro_act)
+	pass
+
+def p_crea_arr(t):
+	'crea_arr : ID '
+	global tipo_pro
+	global nombre_pro_act
+	global nombre_var_actual
+	global contEntLoc
+	global contFlotLoc
+	global contStrLoc
+	global contDoubleLoc
+	global contBoolLoc
+
+	global contEntGlo
+	global contFlotGlo
+	global coutDoubleGlo
+	global contStrGlo
+	global contBoolGlo
+
+	global memoria
+	global esta_global
+	tipo_pro_actual = tipo_pro
+	if esta_global:
+		if tipo_pro_actual == "Integer":
+			memoria = contEntGlo
+			contEntGlo += 1
+		elif tipo_pro_actual == "Float":
+			memoria = contFlotGlo
+			contFlotGlo += 1
+		elif tipo_pro_actual == "Double":
+			memoria = coutDoubleGlo
+			coutDoubleGlo += 1
+		elif tipo_pro_actual == "String":
+			memoria = contStrGlo
+			contStrGlo += 1
+		elif tipo_pro_actual == "Boolean":
+			memoria = contBoolGlo 
+			contBoolGlo+=1
+	else:
+		if tipo_pro_actual == "Integer":
+			memoria = contEntLoc
+			contEntLoc += 1
+		elif tipo_pro_actual == "Float":
+			memoria = contFlotLoc
+			contFlotLoc += 1
+		elif tipo_pro_actual == "Double":
+			memoria = contDoubleLoc
+			contDoubleLoc += 1
+		elif tipo_pro_actual == "String":
+			memoria = contStrLoc
+			contStrLoc += 1
+		elif tipo_pro_actual == "Boolean":
+			memoria = contBoolLoc 
+			contBoolLoc+=1
+	nombre_var_actual = t[1]
+	tipo_pro = "arr"+tipo_pro
+	insert_variable(nombre_var_actual, tipo_pro, memoria, nombre_pro_act)
+	pass
+
+def p_dim(t):
+	'''dim : dim_cte dim_struct dim2'''
+	pass
+
+def p_dim_cte(t):
+	'dim_cte : CTE_INT'
+	global dim_int
+	dim_int = t[1]
+	pass
+
+def p_dim_struct(t):
+	'dim_struct : '
+	global nombre_var_actual
+	global nombre_pro_act
+	global dim_int
+	insert_dim_arr(nombre_var_actual, nombre_pro_act, dim_int)
+	pass
+
+def p_dim2(t):
+	'''dim2 : COMMA dim
+			| empty
+			'''
 	pass
 
 def p_array1(t):
-	'''array1 : COL LBRACKET array2 RBRACKET
+	'''array1 : COL LBRACKET array2 RBRACKET array1
 				| empty 
 				'''
 	pass
 
 def p_array2(t):
-	'''array2 : cons
-				| cons COMMA array2
-				'''
+	'''array2 : cons array3'''
 	pass
+
+def p_array3(t):
+	'''array3 : COMMA array2
+				| empty
+				'''
 
 def p_modulos(t):
 	'''modulos : prototipos se_uso COL bloque cuad_def_proc_4 '''
@@ -328,8 +426,16 @@ def p_se_uso(t):
 
 def p_bloque(t):
 	'''bloque : estatutos bloque 
+			  | return bloque
 			  | empty
 			  '''
+	pass
+
+def p_return(t):
+	'return : RES_RETURN exp'
+	global nombre_pro_act
+	global tabla_pro
+	genera_return(nombre_pro_act, tabla_pro)
 	pass
 
 def p_estatutos(t):
@@ -342,6 +448,8 @@ def p_estatutos(t):
 				 | vars
 				 '''
 	pass
+
+
 
 def p_ciclo(t):
 	'''ciclo : while
@@ -427,7 +535,7 @@ def p_cuadruplo_est_prnt(t):
 
 
 def p_asignacion(t):
-	'asignacion : seen_id_asignacion EQUALS cuadruplo_exp_8_asignacion asignacion1 insert_asignacion cuadruplo_exp_9_asignacion'
+	'asignacion : seen_id_asignacion consarray EQUALS cuadruplo_exp_8_asignacion asignacion1 insert_asignacion cuadruplo_exp_9_asignacion'
 	pass
 
 def p_cuadruplo_exp_8_asignacion(t):
@@ -541,10 +649,10 @@ def p_cuadruplo_est_for_3(t):
 	est_for_3()
 	pass
 
-def p_cuadruplo_est_for_4(t):
-	'cuadruplo_est_for_4 : '
-	est_for_4()
-	pass
+# def p_cuadruplo_est_for_4(t):
+# 	'cuadruplo_est_for_4 : '
+# 	est_for_4()
+# 	pass
 
 #def p_comparacion(t):
 #	'''comparacion : MAY
@@ -728,13 +836,12 @@ def p_cuadruplo_exp_7(t):
 	pass
 
 def p_cons(t):
-	'''cons : seen_id_cons exp_1
+	'''cons : seen_id_cons consarray exp_1
 			| seen_int_cons exp_cons_int
 			| seen_float_cons exp_cons_float
 			| seen_double_cons exp_cons_double
 			| seen_string_cons exp_cons_string
 			| seen_bool
-			| consarray
 			| conslist
 			'''
 	pass
@@ -841,6 +948,7 @@ def p_exp_cons_string(t):
 
 def p_main(t):
 	'''main : RES_START comienza_main COL bloque RES_END '''
+	crea_end()
 	pass 
 
 def p_comienza_main(t):
@@ -852,8 +960,29 @@ def p_comienza_main(t):
 	pass
 
 def p_consarray(t):
-	'consarray : ID LBRACKET CTE_INT RBRACKET EQUALS cons '
+	'''consarray : LBRACKET dim_pos RBRACKET
+				| empty'''
+	global cont_dim
+	cont_dim = 0
 	pass
+
+def p_dim_pos(t):
+	'dim_pos : seen_int_pos dim_pos_2'
+	pass
+
+def p_seen_int_pos(t):
+	'seen_int_pos : CTE_INT'
+	global nombre_pro_act
+	global nombre_var_actual
+	global cont_dim
+	pos = t[1]
+	verifica_tope(nombre_pro_act, nombre_var_actual, pos, cont_dim)
+	cont_dim+=1
+	pass
+
+def p_dim_pos_2(t):
+	'''dim_pos_2 : COMMA dim_pos
+				| empty'''
 
 def p_conslist(t):
 	'conslist : ID EQUALS LCURLY conslist1 RCURLY '
@@ -870,8 +999,9 @@ def p_empty(t):
 	pass
 
 def p_error(t):
-	print "Sorry, what did you mean by %s?" %t.value
+	print "Sorry, what did you mean by %s, at line %d?"%(t.value,t.lexer.lineno)
 	print "Sorry - Syntax error at token", t.value ,">>", t.type
+	sys.exit()
 	# Just discard the token and tell the parser it's okay.
 	yacc.restart()
 
@@ -890,11 +1020,11 @@ for line in fileinput.input():
 yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
-# print_pilas()
-# print_constantes(tabla_cons)
+print_pilas()
+print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
-maquina_virtual()
-# print_tables_alfinal(tabla_pro)
-# print_memoria()
+lee_cuadruplos(tabla_cuadruplos)
+print_tables_alfinal(tabla_pro)
+print_temporales(tabla_tempo)
 
 #print "Num Saltos: %d" %cont_saltos
