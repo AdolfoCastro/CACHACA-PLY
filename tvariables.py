@@ -16,7 +16,18 @@ class TablaVariableNodo:
 		self.nombre_variable = nombre
 		self.tipo_dato = tipo
 		self.direccion = dire
-		self.valor = None
+		self.dim = []
+
+	# def __init__(self, nombre, tipo, dire):
+	# 	self.nombre_variable = nombre
+	# 	self.tipo_dato = tipo
+	# 	self.direccion = dire
+	# 	self.dim = []
+
+class Dimension:
+	def __init__(self, ls, m):
+		self.ls = ls
+		self.m = m
 		
 class TablaProcedimientoNodo:
 	def __init__(self, nombre, tipo, dirb):
@@ -75,11 +86,56 @@ def print_tables(currentProList):
 
 def insert_variable(nombre, tipo, dire, proc):
 	global tabla_pro
-	existe_var(nombre,proc)
-	variable = TablaVariableNodo(nombre, tipo, dire)
+
+	if existe_var(nombre,proc):
+		print "Sorry - the variable %s already exist"%nombre
+		sys.exit()
+	else:
+		for n,pro in enumerate(tabla_pro):
+			if pro.nombre_funcion == proc:
+				variable = TablaVariableNodo(nombre, tipo, dire)
+				tabla_pro[n].var.append(variable)
+				break
+
+def insert_dim_arr(nom, proc, ls):
+	global tabla_pro
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == proc:
-			tabla_pro[n].var.append(variable)
+			for m,var in enumerate(tabla_pro[n].var):
+				if var.nombre_variable == nom:
+					dim = Dimension(ls, "m")
+					tabla_pro[n].var[m].dim.append(dim)
+					break
+
+def genera_m_arr(nom, proc):
+	global tabla_pro
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for m,var in enumerate(tabla_pro[n].var):
+				if var.nombre_variable == nom:
+					lss = [d.ls for d in tabla_pro[n].var[m].dim]
+					mx = reduce(lambda x, y: (x+1)*(y+1), lss)
+					m_aux = 1
+					for dim in tabla_pro[n].var[m].dim:
+						if not dim == tabla_pro[n].var[m].dim[-1]:
+							d_n=dim.ls+1
+							dim.m = ((mx/m_aux)/d_n)
+							m_aux *= d_n
+						else:
+							dim.m = 0
+					break
+
+def verifica_tope(proc, nom, pos, dimn):
+	global tabla_pro
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for m,var in enumerate(tabla_pro[n].var):
+				if var.nombre_variable == nom:
+					if var.dim:
+						if not (0 <= pos <= var.dim[dimn].ls):
+							print "Sorry, array %s out of bounds" %nom
+							sys.exit()
+
 
 def existe_pro(nombre):
 	global tabla_pro
@@ -94,9 +150,8 @@ def existe_var(nombre,proc):
 		if pro.nombre_funcion == proc:
 			for variable in pro.var:
 				if variable.nombre_variable == nombre:
-					print "Sorry - the variable %s already exist"%nombre
-					sys.exit()
-	pass
+					return True
+	return False
 
 def existe_param(nombre,proc):
 	global tabla_pro
@@ -151,12 +206,33 @@ def get_address(nombre,proc):
 	if not esta:
 		print "Sorry - the variable  %s was not declared"%nombre
  		sys.exit()
+	pass
+
+#cambia el valor de la variable
+def cambia_valor(dire,val):
+	global tabla_pro
+	esta = False
+	for n,pro in enumerate(tabla_pro):
+			for variable in pro.var:
+				if variable.direccion == dire:
+					variable.valor  = val
+					esta = True
+
+	for n,pro in enumerate(tabla_pro):
+			for variable in pro.var:
+				if variable.direccion == dire:
+					variable.valor  = val
+					esta = True
+	if not esta:
+		print "Sorry - the variable  %s was not declared"%nombre
+ 		sys.exit()
 
 	pass
 
+
 def existe_var_asignar(tabla_var, nombre):
 	if not existe_var(tabla_var, nombre):
-		print "La variable " + nombre + " a la que quieres asignar un valor no existe"
+		print "Sorry - Var " + nombre + " does not exist."
 		sys.exit()
 
 
@@ -168,13 +244,6 @@ def get_value_var(dirb):
 				if variable.direccion == dirb:
 					esta = True
 					return variable.valor
-
-	for n,pro in enumerate(tabla_pro):
-			for variable in pro.var:
-				if variable.direccion == dirb:
-					esta = True
-					return variable.valor
-
 	pass
 
 
@@ -186,7 +255,9 @@ def print_tables_alfinal(currentProList):
 			print currentPro.nombre_funcion, " - ", currentPro.tipo_retorno, " - ", currentPro.dir_base
 			print "Vars"
 			for variable in currentPro.var:
-				print variable.nombre_variable, " - ", variable.tipo_dato, " - ", variable.direccion, "-", variable.valor
+				print variable.nombre_variable, " - ", variable.tipo_dato, " - ", variable.direccion
+				for dim in variable.dim:
+					print dim.ls, "-", dim.m
 			print "Params"
 			for param in currentPro.param:
 				print param.nombre_variable, " - ", param.tipo_dato, " - ", param.direccion
