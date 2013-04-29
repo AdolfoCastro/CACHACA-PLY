@@ -192,7 +192,7 @@ def exp_9():
 	global p_tipos
 	global pila_o
 	if p_oper.head() == ">" or p_oper.head() == ">=" or	p_oper.head() == "<" or p_oper.head() == "<=" or p_oper.head() == "==" or p_oper.head() == "!=" or p_oper.head() == "=":
-		tipo_res = cubo_semantico[p_tipos.head()][p_tipos.neck()][p_oper.head()]
+		tipo_res = cubo_semantico[p_tipos.head().replace("arr", "")][p_tipos.neck().replace("arr", "")][p_oper.head()]
 		if tipo_res != "Error":
 			if tipo_res == "Integer":
 				memoria  = contEntTmp
@@ -333,7 +333,7 @@ def est_for_3():
 		insert_cuadruplo(cuad)
 	falso = p_saltos.pop()
 	asign = p_saltos.pop()
-	tabla_cuadruplos[falso-1].res = cont_saltos+1
+	tabla_cuadruplos[falso-1].res = cont_saltos + 1
 	# res = tabla_cuadruplos[-1].o1
 	# cuadruplo = Cuadruplo("=", pila_o.pop(), "", res)
 	# insert_cuadruplo(cuadruplo)
@@ -386,6 +386,22 @@ def est_case_4():
 	tabla_cuadruplos[falso].res = cont_saltos
 	pass
 
+def genera_return(proc, tabla_pro):
+	global pila_o
+	for pro in tabla_pro:
+		if pro.nombre_funcion == proc:
+			tipo = pro.tipo_retorno
+			ptipo = p_tipos.pop()
+			if tipo == ptipo:
+				res = pila_o.pop()
+				cuadruplo = Cuadruplo("RET", res, "", "")
+				insert_cuadruplo(cuadruplo)
+				break
+			else:
+				print "Sorry, but function %s must return type %s not %s" %(proc, tipo, ptipo)
+				sys.exit()
+
+
 def call_proc_1(existe, nombre):
 	if not existe:
 		print "Sorry - the prototype %s does not exist" %nombre
@@ -414,30 +430,30 @@ def call_proc_4(nom, dirb):
 	insert_cuadruplo(cuadruplo)
 	pass
 
-def def_arr_1(_id):
-	pila_o.push(_id)
-	pass
+# def def_arr_1(_id):
+# 	pila_o.push(_id)
+# 	pass
 
-def def_arr_2():
-	pass
+# def def_arr_2():
+# 	pass
 
-def def_arr_3():
-	pass
+# def def_arr_3():
+# 	pass
 
-def def_arr_4():
-	pass
+# def def_arr_4():
+# 	pass
 
-def def_arr_5():
-	pass
+# def def_arr_5():
+# 	pass
 
-def def_arr_6():
-	pass
+# def def_arr_6():
+# 	pass
 
-def def_arr_7():
-	pass
+# def def_arr_7():
+# 	pass
 
-def def_arr_8():
-	pass
+# def def_arr_8():
+# 	pass
 
 def get_cont_saltos():
 	global cont_saltos
