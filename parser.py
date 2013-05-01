@@ -242,7 +242,6 @@ def p_vars_1(t):
 
 	global nombre_var_actual
 	nombre_var_actual = t[2]
-	global memoria
 	insert_variable(nombre_var_actual,tipo_pro_actual,memoria, nombre_pro_act)
 	pass
 
@@ -1020,11 +1019,11 @@ for line in fileinput.input():
 yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
-print_pilas()
-print_constantes(tabla_cons)
+# print_pilas()
+# print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
-lee_cuadruplos(tabla_cuadruplos)
-print_tables_alfinal(tabla_pro)
-print_temporales(tabla_tempo)
+maquina_virtual()
+# print_tables_alfinal(tabla_pro)
+# print_temporales(tabla_tempo)
 
 #print "Num Saltos: %d" %cont_saltos

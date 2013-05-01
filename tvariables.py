@@ -16,6 +16,7 @@ class TablaVariableNodo:
 		self.nombre_variable = nombre
 		self.tipo_dato = tipo
 		self.direccion = dire
+		self.valor = None
 		self.dim = []
 
 	# def __init__(self, nombre, tipo, dire):
