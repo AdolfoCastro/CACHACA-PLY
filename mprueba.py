@@ -427,6 +427,10 @@ def maquina_virtual():
 			borra_memoria(tabla_varia)
 			pass
 
+		elif tabla_cuadruplos[i].op ==  "END":
+			sys.exit()
+			pass
+
 def print_memoria():
 	global tabla_tempo
 	global tabla_const
