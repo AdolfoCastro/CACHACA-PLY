@@ -28,10 +28,8 @@ reserved = {
 	'Start'		:'RES_START',
 	'true'		:'RES_TRUE',
 	'false'		:'RES_FALSE',
-	'set'		:'RES_SET',
 	'if'		:'RES_IF',
 	'else'		:'RES_ELSE',
-	'elif'		:'RES_ELIF',
 	'switch'	:'RES_SWITCH',
 	'case'		:'RES_CASE',
 	'for'		:'RES_FOR',
@@ -40,14 +38,14 @@ reserved = {
 	'read'		:'RES_READ',
 	'End'		:'RES_END',
 	'end'		:'E_END',
-	'endi'		:'ENDI'
+	'return'	:'RES_RETURN'
 	}
 
 # Tokens
-tokens = [ 	'ID','CTE_INT', 'CTE_FLOAT', 'CTE_DOUBLE', 'CTE_STRING', 'VAR',
+tokens = [ 	'ID','CTE_INT', 'CTE_FLOAT', 'CTE_DOUBLE', 'CTE_STRING',
 		   	'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'EQUALS', 'LPAREN', 
 		   	'RPAREN', 'TAB', 'MAY', 'MAY_EQ', 'MIN','MIN_EQ',
-			'DIF', 'EQ_EQ', 'NEW_LINE', 'COMMA', 'LBRACKET', 
+			'DIF', 'EQ_EQ', 'COMMA', 'LBRACKET', 
 			'RBRACKET', 'LCURLY', 'RCURLY', 'COL',
 			'AND', 'OR'] + list(reserved.values())
 
@@ -85,16 +83,11 @@ t_RCURLY 	= r'\}'
 #new line, tab
 t_TAB = r'\t'
 
-
-# Palabras Reservadas---------
-
-#----------------------------
-
 reserved_map = { }
 for r in reserved:
     reserved_map[r.lower()] = r
 
-t_ignore = ' \t \n'
+t_ignore = ' \t'
 
 # Identificador de funciones
 def t_ID(t):
