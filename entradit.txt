@@ -1,19 +1,30 @@
-Prototype func Integer funcion1(Integer Algo, Integer Algo2)
-Prototype func Integer func2(Integer Algo)
-Define: Integer x
-
-
-func Integer func2(Integer Algo):
-print("hola")
-
-func Integer funcion1(Integer Algo):
-
-
+Prototype func Integer func1(Integer Algo)
+Prototype func Integer fibonacci_iterativo(Integer n)
+	
+func Integer fibonacci_iterativo(Integer a):
+	Define: Integer actual
+	Define: Integer anterior
+	Define: Integer auxiliar
+	Define: Integer i
+	Define: Integer n
+	n = 10
+	actual = 1
+	anterior = 0
+	
+	print(anterior)
+	print(actual)
+	for(i=1: i<=n: i=i+1):
+		auxiliar = actual
+		actual = actual + anterior
+		print (actual)
+		anterior = auxiliar
+	end	
 
 Start:
-	x=0
-	funcion1(x)
-	func2(x)
-	func2(x)
+	Define: Integer y
+	y=0
+	fibonacci_iterativo(y)
 End
 
+
+	
