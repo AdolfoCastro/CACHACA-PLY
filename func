@@ -1,0 +1,22 @@
+Prototype func Integer llamada (Integer x)
+Prototype func Integer llamada2(Integer x)
+func Integer llamada2(Integer x):
+x = 1
+print (x)
+
+func Integer llamada(Integer x):
+Define: Integer a
+a=1000
+x = 100
+return (a)
+
+
+
+Start:
+Define: Integer x
+Define: Integer a
+x = 1
+print (x)
+a = llamada(x)
+print (a)
+End

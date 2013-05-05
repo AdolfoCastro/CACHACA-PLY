@@ -137,7 +137,6 @@ def verifica_tope(proc, nom, pos, dimn):
 							print "Sorry, array %s out of bounds" %nom
 							sys.exit()
 
-
 def existe_pro(nombre):
 	global tabla_pro
 	for pro in tabla_pro:
@@ -150,6 +149,9 @@ def existe_var(nombre,proc):
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == proc:
 			for variable in pro.var:
+				if variable.nombre_variable == nombre:
+					return True
+			for variable in pro.param:
 				if variable.nombre_variable == nombre:
 					return True
 	return False
@@ -172,6 +174,11 @@ def busca_tipo(nombre,proc):
 			for variable in pro.var:
 				if variable.nombre_variable == nombre:
 					tipo_var  = variable.tipo_dato
+					esta = True
+					return tipo_var
+			for variable in pro.param:
+				if variable.nombre_variable == nombre:
+					tipo_var = variable.tipo_dato
 					esta = True
 					return tipo_var
  	for n,pro in enumerate(tabla_pro):
@@ -197,6 +204,11 @@ def get_address(nombre,proc):
 					address_var  = variable.direccion
 					esta = True
 					return address_var
+			for variable in pro.param:
+				if variable.nombre_variable == nombre:
+					address_var  = variable.direccion
+					esta = True
+					return address_var
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == "Global":
 			for variable in pro.var:
@@ -209,44 +221,10 @@ def get_address(nombre,proc):
  		sys.exit()
 	pass
 
-#cambia el valor de la variable
-def cambia_valor(dire,val):
-	global tabla_pro
-	esta = False
-	for n,pro in enumerate(tabla_pro):
-			for variable in pro.var:
-				if variable.direccion == dire:
-					variable.valor  = val
-					esta = True
-
-	for n,pro in enumerate(tabla_pro):
-			for variable in pro.var:
-				if variable.direccion == dire:
-					variable.valor  = val
-					esta = True
-	if not esta:
-		print "Sorry - the variable  %s was not declared"%nombre
- 		sys.exit()
-
-	pass
-
-
 def existe_var_asignar(tabla_var, nombre):
 	if not existe_var(tabla_var, nombre):
 		print "Sorry - Var " + nombre + " does not exist."
 		sys.exit()
-
-
-def get_value_var(dirb):
-	global tabla_pro
-	esta = False
-	for n,pro in enumerate(tabla_pro):
-			for variable in pro.var:
-				if variable.direccion == dirb:
-					esta = True
-					return variable.valor
-	pass
-
 
 #tabla para ver que los valores si esten cambiando con forme se leen los cuadruplos
 def print_tables_alfinal(currentProList):
