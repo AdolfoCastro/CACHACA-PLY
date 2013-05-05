@@ -18,7 +18,6 @@ func Integer fibonacci_iterativo(Integer a):
 		actual = actual + anterior
 		print (actual)
 		anterior = auxiliar
-	return actual
 	end	
 
 Start:

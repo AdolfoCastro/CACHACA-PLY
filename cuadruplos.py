@@ -11,6 +11,7 @@ from clases import Stack
 from cubo_semantico import cubo_semantico
 import os, sys
 from memory import *
+from tvariables import *
 
 cont_saltos = 0
 
@@ -457,6 +458,35 @@ def asign_arr():
 	cuadruplo = Cuadruplo("=", "op2", "", "("+str(op1)+")")
 	insert_cuadruplo(cuadruplo)
 	pass
+
+def asigna_llamada(proc_actual, tabla_pro):
+	global contEntTmp
+	global contFlotTmp
+	global contStrTmp
+	global pila_o
+	if tabla_pro:
+		for proc in tabla_pro:
+			if proc.nombre_funcion == proc_actual:
+				if proc.tipo_retorno == 'Integer':
+					cont = contEntTmp
+					contEntTmp+=1
+					pila_o.push(cont)
+					p_tipos.push('Integer')
+				if proc.tipo_retorno == 'Float':
+					cont = contFlotTmp
+					contFlotTmp+=1
+					pila_o.push(cont)
+					p_tipos.push('Float')
+				if proc.tipo_retorno == 'String':
+					cont = contStrTmp
+					contStrTmp+=1
+					pila_o.push(cont)
+					p_tipos.push('String')
+	else:
+		print "No"
+					
+				
+
 
 def get_cont_saltos():
 	global cont_saltos

@@ -16,6 +16,7 @@ class TablaVariableNodo:
 		self.nombre_variable = nombre
 		self.tipo_dato = tipo
 		self.direccion = dire
+		self.valor = None
 		self.dim = []
 
 	# def __init__(self, nombre, tipo, dire):
@@ -174,16 +175,16 @@ def genera_m_arr(nom, proc):
 							dim.m = 0
 					break
 
-# def verifica_tope(proc, nom, pos, dimn):
-# 	global tabla_pro
-# 	for n,pro in enumerate(tabla_pro):
-# 		if pro.nombre_funcion == proc:
-# 			for m,var in enumerate(tabla_pro[n].var):
-# 				if var.nombre_variable == nom:
-# 					if var.dim:
-# 						if not (0 <= pos <= var.dim[dimn].ls):
-# 							print "Sorry, array %s out of bounds" %nom
-# 							sys.exit()
+def verifica_tope(proc, nom, pos, dimn):
+	global tabla_pro
+	for n,pro in enumerate(tabla_pro):
+		if pro.nombre_funcion == proc:
+			for m,var in enumerate(tabla_pro[n].var):
+				if var.nombre_variable == nom:
+					if var.dim:
+						if not (0 <= pos <= var.dim[dimn].ls):
+							print "Sorry, array %s out of bounds" %nom
+							sys.exit()
 
 def existe_pro(nombre):
 	global tabla_pro
@@ -257,20 +258,9 @@ def get_address(nombre,proc):
 					address_var  = variable.direccion
 					esta = True
 					return address_var
-<<<<<<< HEAD
-			for variable in pro.param:
-=======
 			for param in pro.param:
 				if param.nombre_variable == nombre:
 					address_var  = param.direccion
-					esta = True
-					return address_var
-	for n,pro in enumerate(tabla_pro):
-		if pro.nombre_funcion == "Global":
-			for variable in pro.var:
->>>>>>> c468c87a19aa98fb86ab8ae8101def14d86f6985
-				if variable.nombre_variable == nombre:
-					address_var  = variable.direccion
 					esta = True
 					return address_var
 	for n,pro in enumerate(tabla_pro):

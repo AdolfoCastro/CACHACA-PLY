@@ -502,9 +502,9 @@ def maquina_virtual():
 			pass
 
 		elif tabla_cuadruplos[i].op ==  "END":
-			print
-			for para in tabla_parametros:
-				print para.direccion,para.pointer,para.valor
+			# print
+			# for para in tabla_parametros:
+			# 	print para.direccion,para.pointer,para.valor
 			sys.exit()
 
 			pass
@@ -558,7 +558,8 @@ def maquina_virtual():
 			i+=1
 			pass
 
-		elif tabla_cuadruplos[i].op ==  "RET":
+		elif tabla_cuadruplos[i].op ==  "RETURN":
+			print 
 			if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
 				valor = get_value_temp(tabla_cuadruplos[i].o1)
 			elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
@@ -568,6 +569,8 @@ def maquina_virtual():
 
 			regreso = Returnes(tabla_cuadruplos[i].o1,valor)
 			tabla_retrun.append(regreso)
+			for dato in tabla_retrun:
+				print dato.direccion,dato.valor
 			i+=1
 
 def print_memoria():

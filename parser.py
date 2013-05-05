@@ -545,6 +545,7 @@ def p_seen_id_call(t):
 	global func_actual
 	global param_actual
 	global dirb_actual
+	global procllamado
 	func_actual = t[1]
 	existe = existe_pro(func_actual)
 	call_proc_1(existe, func_actual)
@@ -644,9 +645,16 @@ def p_asignacion1(t):
 	'''asignacion1 : exp
 				   | asignlist
 				   | asignarray
-				   | llamada
+				   | see_llamada
 				   '''
 	pass
+
+def p_see_llamada(t):
+	''' see_llamada : llamada'''
+	global tabla_pro
+	asigna_llamada(func_actual, tabla_pro)
+	pass
+
 
 def p_asignlist(t):
 	'asignlist : LCURLY asignlist1 RCURLY'
@@ -1116,9 +1124,11 @@ for line in fileinput.input():
 yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
-print_pilas()
-print_constantes(tabla_cons)
+# print_pilas()
+# print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
+print 
+maquina_virtual()
 # lee_cuadruplos(tabla_cuadruplos)
 # print_tables_alfinal(tabla_pro)
 # print_temporales(tabla_tempo)
