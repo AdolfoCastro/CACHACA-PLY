@@ -537,6 +537,8 @@ def p_call_proc_4(t):
 		call_proc_3(param, arg[n], tipo[n])
 
 	call_proc_4(func_actual, dirb_actual)
+	
+	params=[]
 	pass
 
 def p_seen_id_call(t):
@@ -1124,7 +1126,7 @@ for line in fileinput.input():
 yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
-# print_pilas()
+print_pilas()
 # print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
 print 

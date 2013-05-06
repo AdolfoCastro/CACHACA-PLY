@@ -1,12 +1,11 @@
 Prototype func Integer llamada (Integer x, Integer a)
 Prototype func Integer llamada2(Integer x)
+Define: Integer w
 func Integer llamada2(Integer x):
 print (x)
 
 func Integer llamada(Integer x, Integer a):
-print (a)
-a = 100
-llamada(x,a)
+a = a*10
 return (a)
 
 
@@ -17,5 +16,7 @@ Define: Integer a
 x = 1
 a = 10
 a = llamada(x,a)
-print (a)
+print(a)
+a = llamada(x,a)
+print(a)
 End

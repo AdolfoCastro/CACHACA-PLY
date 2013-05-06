@@ -512,6 +512,8 @@ def maquina_virtual():
 			# print
 			# for para in tabla_parametros:
 			# 	print para.direccion,para.pointer,para.valor
+			for dato in tabla_retrun:
+			 	print dato.direccion,dato.valor
 			sys.exit()
 
 			pass
