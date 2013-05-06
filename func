@@ -1,12 +1,12 @@
 Prototype func Integer llamada (Integer x, Integer a)
 Prototype func Integer llamada2(Integer x)
 func Integer llamada2(Integer x):
-x = 1
 print (x)
 
 func Integer llamada(Integer x, Integer a):
-print (x)
 print (a)
+a = 100
+llamada(x,a)
 return (a)
 
 
@@ -16,7 +16,6 @@ Define: Integer x
 Define: Integer a
 x = 1
 a = 10
-print (x)
 a = llamada(x,a)
 print (a)
 End

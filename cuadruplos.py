@@ -470,17 +470,17 @@ def asigna_llamada(proc_actual, tabla_pro):
 				if proc.tipo_retorno == 'Integer':
 					cont = contEntTmp
 					contEntTmp+=1
-					pila_o.push(cont)
+					pila_o.push('RETURN')
 					p_tipos.push('Integer')
 				if proc.tipo_retorno == 'Float':
 					cont = contFlotTmp
 					contFlotTmp+=1
-					pila_o.push(cont)
+					pila_o.push('RETURN')
 					p_tipos.push('Float')
 				if proc.tipo_retorno == 'String':
 					cont = contStrTmp
 					contStrTmp+=1
-					pila_o.push(cont)
+					pila_o.push('RETURN')
 					p_tipos.push('String')
 	else:
 		print "No"
