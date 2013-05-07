@@ -5,18 +5,18 @@ func Integer llamada2(Integer x):
 print (x)
 
 func Integer llamada(Integer x, Integer a):
-a = a*10
+if (a<=10):
+a = a+1
+print (a)
+a = llamada(a)
+end
 return (a)
-
-
-
 Start:
 Define: Integer x
 Define: Integer a
 x = 1
-a = 10
+a = 1
 a = llamada(x,a)
 print(a)
-a = llamada(x,a)
-print(a)
+Define: String l
 End

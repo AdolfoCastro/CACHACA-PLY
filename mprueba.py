@@ -26,8 +26,7 @@ tabla_retrun = []
 contcuad = 0
 pila_brincos = []
 tabla_varia_aux = []
-
-
+#Carga en memoria la tabla de globales del programa.
 def carga_globales():
 	global tabla_pro
 	for n,pro in enumerate(tabla_pro):
@@ -36,12 +35,14 @@ def carga_globales():
 				mem = Memoria(variable.direccion,variable.valor)
 				tabla_varia_globales.append(mem)
 	pass
-
+#Carga en memoria las constantes que se vana utilizar durante la ejecucion del programa.
 def carga_const():
 	for cons in tabla_cons:
 			mem = Memoria(cons.dirb,cons.cons)
 			tabla_const.append(mem)
-
+#Primeramente carga el scope de main para la ejecucion del programa, posteriormetne
+#por cada llamada que se realice a una funcion carga las variables de esta hasta el 
+#momento en que se termina la ejecucion de la funcion y esta memoria es eliminada.
 def carga_scope_local(proc):
 	for n,pro in enumerate(tabla_pro):
 		if pro.nombre_funcion == proc:
@@ -49,13 +50,16 @@ def carga_scope_local(proc):
 				mem = Memoria(variable.direccion,variable.valor)
 				tabla_varia.append(mem)
 	pass
-
+#Funcion que va leyendo linea por linea lo que en va apareciendo en los cuadruplos
+# para posteriormente son utilizados en la maquina_virtual() para generar la ejecucion
+# del programa
 def lee_cuadruplos():
 	global contcuad
 	currentCuadList = tabla_cuadruplos
 	for currentCuad in currentCuadList:
 		contcuad += 1
-
+# Funcion utilizada para extraer los valores de las direcciones que aparecen en los cuadruplos
+# las cuales seran utilizadas para funciones aritmeticas y comparaciones
 def dame_o1_o2(i):
 	global op1
 	global op2
@@ -72,7 +76,7 @@ def dame_o1_o2(i):
 		op2 =  get_value_const(tabla_cuadruplos[i].o2)
 	elif tabla_cuadruplos[i].o2 >= 0 and tabla_cuadruplos[i].o2 <=9999:
 		op2 =  get_value_var(tabla_cuadruplos[i].o2)
-
+# Funcion que toma una direccion temporal y regresa su valor que esta alojado en la memoria.
 def get_value_temp(dirb):
 	global tabla_tempo
 	for temp in tabla_tempo:
@@ -80,21 +84,26 @@ def get_value_temp(dirb):
 			return temp.valor
 	return False
 	pass
-
+# Funcion que toma una direccion temporal y cambia su valor que esta alojado en la memoria.
 def set_value_tmp(dirb,newvalue):
 	global tabla_tempo
 	for temp in tabla_tempo:
 		if temp.direccion == dirb:
 			temp.valor = newvalue
 			break
-
+# Funcion que toma una direccion constante y regresa su valor que esta alojado en la memoria.
 def get_value_const(dirb):
 	global tabla_const
 	for constante in tabla_const:
 		if constante.direccion == dirb:
 			return constante.valor
 	pass
-
+# Las siguente dos funciones son utilizadas para buscar los valores de las variables de cada 
+# funcion, dado que la memoria se maneja como una anidacion de listas para realizar las llamadas
+# de funciones, todas las funciones que necesiten obtener o modificar un valor de la memoria de 
+# variables de las funciones, necesitaran tener una funcion auxiliar que les ayuda a entrar hasta
+# la seccion de memoria donde se esta realizando la funcion (la lista mas profunda).
+# Esta funcion regresa el valor que se tiene actualmente en la variable buscada.
 def get_value_var(dirb):
 	global tabla_varia
 	global tabla_varia_globales
@@ -123,7 +132,8 @@ def get_value_var_aux(dirb,lista):
 		for variable in tabla_varia_globales:
 			if variable.direccion == dirb:
 				return variable.valor
-
+# Funcion que vusca el valor de los parametros con los que se hizo la llamada, para poder realizar
+# la funcion que se corre.(utiliza aux)
 def get_value_param(dirb):
 	global tabla_varia
 	global tabla_varia_globales
@@ -151,7 +161,8 @@ def get_value_param_aux(dirb,lista):
 		for variable in tabla_varia_globales:
 			if variable.direccion == dirb:
 				return variable.valor
-
+# Funcion que cambia los valores de las variabes en la memoria del procedimiento en que se
+# esta corriendo.
 def cambia_valor(dirb,val):
 	global tabla_varia
 	global tabla_varia_globales
@@ -183,7 +194,9 @@ def cambia_valor_aux(dirb,val,lista):
 			if variable.direccion == dirb:
 				variable.valor = val
 	pass
-
+# Funcion que busca en las tablas procedentes de la compilacion, y genera el espacio en la memoria
+# suficientes para realizar el procedimiento llamado, el cual sera alojado en la memoria de variables
+# de la funcion actual
 def crea_espacio(proc):
 	global tabla_pro
 	for n,pro in enumerate(tabla_pro):
@@ -196,7 +209,8 @@ def crea_espacio(proc):
 				mem = Memoria(variable.direccion,variable.valor)
 				auxlist.append(mem)
 	return auxlist
-
+# Ya generado el espacio de la memoria esta es introducida dentro de la memoria de variables para la
+# funcion.
 def genera_memoria_proc(proc,lista):
 	if lista:
 		if isinstance(lista[-1],list):
@@ -209,7 +223,7 @@ def genera_memoria_proc(proc,lista):
 			aux = crea_espacio(proc)
 			lista.append(aux)
 	pass
-
+#Borrado de la memoria del procedimiento al terminar la ejecucion de este
 def borra_memoria(proc):
 	if isinstance(proc[-1],list):
 		if proc[-1]:
@@ -217,7 +231,8 @@ def borra_memoria(proc):
 				borra_memoria(proc[-1])
 			else:
 				del proc[-1]	
-
+#Procedimientos utilizados para cargar los valores de los parametros de las funciones llamadas a la 
+# memoria de las funciones antes de que comience su ejecucion
 def carga_params(param):
 	global tabla_varia
 	if not isinstance(tabla_varia[-1],list):
@@ -231,7 +246,9 @@ def carga_params_aux(param,lista):
 			lista.append(param)
 		else:
 			carga_params_aux(lista[-1])
-
+#Las proximas tres funciones son utilizadas para mandar parametros por referencia al procedimiento
+# las cuales solo fueron creadas para pruebas pero no estan funcionando, dado que solo se tienen la sitnaxis
+# y las semantica para las llamadas con parametros pro referencia, sin embargo fueron probadas y funciona.
 def asigna_valores_parametros(lista):
 	global tabla_parametros
 	if lista:
@@ -262,7 +279,9 @@ def intercambio_de_parametros():
 			if param.direccion == pointer.pointer:
 				param.valor = pointer.valor
 				del pointer
-
+#Funcion que guarda el return en una memoria externa para ser enviado a la funcion que fue llamada
+#donde se le realizara la asignacion del valor del return a una variable local de la funcion o una 
+#variable global del programa
 def carga_return(lista):
 	if lista:
 		if isinstance(lista[-1],list):
@@ -271,7 +290,9 @@ def carga_return(lista):
 			for resultado in tabla_retrun:
 				lista.append(resultado)
 				del resultado
-
+#Funcion principal que realiza las llamadas a todos las funciones necesarias pra realizar las operaciones
+#que el lenguaje permite, ademas de hacer validaciones para revizar que los valores esten alojados donde
+#deberian o que no tengan valores nulos que el compilador no puede operar
 def maquina_virtual():
 	carga_globales()
 	carga_const()
@@ -314,6 +335,11 @@ def maquina_virtual():
 			else:
 				newtempo = Memoria(tabla_cuadruplos[i].res,result)
 				tabla_tempo.append(newtempo)
+			#limpia tabla de retorno
+			if tabla_retrun:
+					val = tabla_retrun[-1].valor
+					del tabla_retrun[-1]
+			#-----------------------------------------------------
 			i+=1
 
 		elif tabla_cuadruplos[i].op == "-":
@@ -512,8 +538,6 @@ def maquina_virtual():
 			# print
 			# for para in tabla_parametros:
 			# 	print para.direccion,para.pointer,para.valor
-			for dato in tabla_retrun:
-			 	print dato.direccion,dato.valor
 			sys.exit()
 
 			pass
@@ -567,6 +591,23 @@ def maquina_virtual():
 			i+=1
 			pass
 
+		elif tabla_cuadruplos[i].op ==  "SUMB":
+			if tabla_cuadruplos[i].o2 >=11000 and tabla_cuadruplos[i].o2 <=15999:
+				val_direc = get_value_temp(tabla_cuadruplos[i].o2)
+			elif tabla_cuadruplos[i].o2 >= 16000 and tabla_cuadruplos[i].o2 <=20999:
+				val_direc = get_value_const(tabla_cuadruplos[i].o2)
+			elif tabla_cuadruplos[i].o2 >= 0 and tabla_cuadruplos[i].o2 <=9999:
+				val_direc = get_value_var(tabla_cuadruplos[i].o2)
+
+			result = tabla_cuadruplos[i].o1 + val_direc
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+			pass
+
 		elif tabla_cuadruplos[i].op ==  "RETURN":
 			if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
 				valor = get_value_temp(tabla_cuadruplos[i].o1)
@@ -580,7 +621,7 @@ def maquina_virtual():
 			# for dato in tabla_retrun:
 			# 	print dato.direccion,dato.valor
 			i+=1
-
+# impresion de la memoira (solo para testing)
 def print_memoria():
 	global tabla_tempo
 	global tabla_const

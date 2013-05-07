@@ -485,7 +485,11 @@ def asigna_llamada(proc_actual, tabla_pro):
 					p_tipos.push('String')
 	else:
 		print "No"
-					
+
+def convertion(tipo_conver):
+	
+	pass
+
 				
 
 

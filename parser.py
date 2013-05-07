@@ -648,7 +648,14 @@ def p_asignacion1(t):
 				   | asignlist
 				   | asignarray
 				   | see_llamada
+				   | convert
 				   '''
+	pass
+
+def p_convert(t):
+	'''convert : TOSTR LPAREN exp RPAREN
+			   | TOINT LPAREN exp RPAREN
+			   '''
 	pass
 
 def p_see_llamada(t):

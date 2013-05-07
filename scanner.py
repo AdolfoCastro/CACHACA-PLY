@@ -38,7 +38,10 @@ reserved = {
 	'read'		:'RES_READ',
 	'End'		:'RES_END',
 	'end'		:'E_END',
-	'return'	:'RES_RETURN'
+	'return'	:'RES_RETURN',
+	'tostr'		:'TOSTR',
+	'toint'		:'TOINT',
+	'lenght'	:'LEN',
 	}
 
 # Tokens
