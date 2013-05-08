@@ -307,46 +307,11 @@ def maquina_virtual():
 	i  = 0
 	while i < contcuad:
 		if tabla_cuadruplos[i].op == "=":
-			# if str(tabla_cuadruplos[i].res)[0:1]=="(":
-			# 	aux = str(tabla_cuadruplos[i].res).replace("(","").replace(")","")
-			# 	print aux,'-----'
-			# 	aux2 = get_value_temp(int(aux))
-			# 	if not aux2:
-			# 		aux2 = None
-			# 	print aux2,'----------**********'
-			# 	if aux2 >=11000 and aux2 <=15999:
-			# 		print "if 1"
-			# 		val= get_value_temp(aux2)
-			# 	elif aux2 >= 16000 and aux2 <=20999:
-			# 		print "if 2"
-			# 		val= get_value_const(aux2)	
-			# 	elif aux2 >= 0 and aux2 <=9999:
-			# 		print "if 3"
-			# 		val= get_value_var(aux2)
-			# 	elif aux2 == 'RETURN':
-			# 		if tabla_retrun:
-			# 			val = tabla_retrun[-1].valor
-			# 			del tabla_retrun[-1]
-			# 		else:
-			# 			i+=1
-			# 			break
-			# else:
-
-			# if str(tabla_cuadruplos[i].res)[0:1]=="(":
-			# 	auxy = str(tabla_cuadruplos[i].res).replace("(","").replace(")","")
-			# 	print auxy,'----- auxy'
-			# 	auxy2 = get_value_temp(int(auxy))
-			# 	print auxy2,'12345678765432'
-			# 	cambia_valor(auxy2,val)
-			# else:
 			if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
-				print "else 1"
 				val= get_value_temp(tabla_cuadruplos[i].o1)
 			elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
-				print "else 2"
 				val= get_value_const(tabla_cuadruplos[i].o1)	
 			elif tabla_cuadruplos[i].o1 >= 0 and tabla_cuadruplos[i].o1 <=9999:
-				print "else 3"
 				val= get_value_var(tabla_cuadruplos[i].o1)
 			elif tabla_cuadruplos[i].o1 == 'RETURN':
 				if tabla_retrun:
@@ -355,6 +320,7 @@ def maquina_virtual():
 				else:
 					i+=1
 					break
+
 			cambia_valor(tabla_cuadruplos[i].res,val)
 			i+=1
 
@@ -363,7 +329,6 @@ def maquina_virtual():
 			if (op1  is None or op2  is None):
 				print "Sorry - None value"
 				sys.exit()
-
 			result = op1 + op2
 			if get_value_temp(tabla_cuadruplos[i].res):
 				set_value_tmp(tabla_cuadruplos[i].res,result)
@@ -577,73 +542,71 @@ def maquina_virtual():
 
 			pass
 
-		# elif tabla_cuadruplos[i].op ==  "VER":
-		# 	if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
-		# 		dim = get_value_temp(tabla_cuadruplos[i].o1)
-		# 	elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
-		# 		dim = get_value_const(tabla_cuadruplos[i].o1)
-		# 	elif tabla_cuadruplos[i].o1 >= 0 and tabla_cuadruplos[i].o1 <=9999:
-		# 		dim = get_value_var(tabla_cuadruplos[i].o1)
+		elif tabla_cuadruplos[i].op ==  "VER":
+			if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
+				dim = get_value_temp(tabla_cuadruplos[i].o1)
+			elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
+				dim = get_value_const(tabla_cuadruplos[i].o1)
+			elif tabla_cuadruplos[i].o1 >= 0 and tabla_cuadruplos[i].o1 <=9999:
+				dim = get_value_var(tabla_cuadruplos[i].o1)
 
-		# 	if dim >= tabla_cuadruplos[i].o2 and dim <= tabla_cuadruplos[i].res:
-		# 		i+=1
-		# 	else:
-		# 		print "Sorry - array out of bounds"
-		# 		sys.exit()
-		# 	pass
+			if dim >= tabla_cuadruplos[i].o2 and dim <= tabla_cuadruplos[i].res:
+				i+=1
+			else:
+				print "Sorry - array out of bounds"
+				sys.exit()
+			pass
 
-		# elif tabla_cuadruplos[i].op ==  "MULTM":
-		# 	if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
-		# 		val_direc = get_value_temp(tabla_cuadruplos[i].o1)
-		# 	elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
-		# 		val_direc = get_value_const(tabla_cuadruplos[i].o1)
-		# 	elif tabla_cuadruplos[i].o1 >= 0 and tabla_cuadruplos[i].o1 <=9999:
-		# 		val_direc = get_value_var(tabla_cuadruplos[i].o1)
+		elif tabla_cuadruplos[i].op ==  "MULTM":
+			if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
+				val_direc = get_value_temp(tabla_cuadruplos[i].o1)
+			elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
+				val_direc = get_value_const(tabla_cuadruplos[i].o1)
+			elif tabla_cuadruplos[i].o1 >= 0 and tabla_cuadruplos[i].o1 <=9999:
+				val_direc = get_value_var(tabla_cuadruplos[i].o1)
 
-		# 	result = val_direc * tabla_cuadruplos[i].o2
-		# 	if get_value_temp(tabla_cuadruplos[i].res):
-		# 		set_value_tmp(tabla_cuadruplos[i].res,result)
-		# 	else:
-		# 		newtempo = Memoria(tabla_cuadruplos[i].res,result)
-		# 		tabla_tempo.append(newtempo)
-		# 	i+=1
-		# 	pass
+			result = val_direc * tabla_cuadruplos[i].o2
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+			pass
 
-		# elif tabla_cuadruplos[i].op ==  "SUMM":
-		# 	if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
-		# 		val_direc = get_value_temp(tabla_cuadruplos[i].o1)
-		# 	elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
-		# 		val_direc = get_value_const(tabla_cuadruplos[i].o1)
-		# 	elif tabla_cuadruplos[i].o1 >= 0 and tabla_cuadruplos[i].o1 <=9999:
-		# 		val_direc = get_value_var(tabla_cuadruplos[i].o1)
+		elif tabla_cuadruplos[i].op ==  "SUMM":
+			if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:
+				val_direc = get_value_temp(tabla_cuadruplos[i].o1)
+			elif tabla_cuadruplos[i].o1 >= 16000 and tabla_cuadruplos[i].o1 <=20999:
+				val_direc = get_value_const(tabla_cuadruplos[i].o1)
+			elif tabla_cuadruplos[i].o1 >= 0 and tabla_cuadruplos[i].o1 <=9999:
+				val_direc = get_value_var(tabla_cuadruplos[i].o1)
 
-		# 	result = val_direc + tabla_cuadruplos[i].o2
-		# 	if get_value_temp(tabla_cuadruplos[i].res):
-		# 		set_value_tmp(tabla_cuadruplos[i].res,result)
-		# 	else:
-		# 		newtempo = Memoria(tabla_cuadruplos[i].res,result)
-		# 		tabla_tempo.append(newtempo)
-		# 	i+=1
-		# 	pass
+			result = val_direc + tabla_cuadruplos[i].o2
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+			pass
 
-		# elif tabla_cuadruplos[i].op ==  "SUMB":
-		# 	for valor in tabla_tempo:
-		# 		if valor.direccion == tabla_cuadruplos[i].o1:
-		# 			val_direc = valor.valor
-		# 	result = val_direc + tabla_cuadruplos[i].o2
-		# 	if str(tabla_cuadruplos[i].res)[0:1]=="(":
-		# 	direccion = int(str(tabla_cuadruplos[i].res).replace("(","").replace(")",""))
-		# 	direccion2 = get_value_temp(direccion)
-		# 	print "dir", direccion
-		# 	set_value_tmp(direccion,result)
-		# 	for valor in tabla_tempo:
-		# 		if valor.direccion == direccion:
-		# 			print valor.direccion,valor.valor,'-------*'
-		# 		# else:
-		# 		# 	print 'no ta'
+		elif tabla_cuadruplos[i].op ==  "SUMB":
+			if tabla_cuadruplos[i].o2 >=11000 and tabla_cuadruplos[i].o2 <=15999:
+				val_direc = get_value_temp(tabla_cuadruplos[i].o2)
+			elif tabla_cuadruplos[i].o2 >= 16000 and tabla_cuadruplos[i].o2 <=20999:
+				val_direc = get_value_const(tabla_cuadruplos[i].o2)
+			elif tabla_cuadruplos[i].o2 >= 0 and tabla_cuadruplos[i].o2 <=9999:
+				val_direc = get_value_var(tabla_cuadruplos[i].o2)
 
-		# 	i+=1
-		# 	pass
+			result = tabla_cuadruplos[i].o1 + val_direc
+			if get_value_temp(tabla_cuadruplos[i].res):
+				set_value_tmp(tabla_cuadruplos[i].res,result)
+			else:
+				newtempo = Memoria(tabla_cuadruplos[i].res,result)
+				tabla_tempo.append(newtempo)
+			i+=1
+			pass
 
 		elif tabla_cuadruplos[i].op ==  "RETURN":
 			if tabla_cuadruplos[i].o1 >=11000 and tabla_cuadruplos[i].o1 <=15999:

@@ -219,10 +219,7 @@ def exp_9():
 				res = pila_o.pop()
 				op = pila_o.pop()
 				oper = p_oper.pop()
-				if str(res)[0:0]=="(":
-					cuadruplo = Cuadruplo(oper, res, None, op)
-				else:
-					cuadruplo = Cuadruplo(oper, op, None, res)
+				cuadruplo = Cuadruplo(oper, op, None, res)
 			else:
 				op2 = pila_o.pop()
 				op1 = pila_o.pop()
@@ -441,13 +438,12 @@ def verifica_tope_arr(ls, m, n, ln):
 	cuadruplo = Cuadruplo("VER", pila_o.head(), 0, ls)
 	insert_cuadruplo(cuadruplo)
 	if n != ln:
-		op = pila_o.pop()
 		p_tipos.pop()
-		cuadruplo = Cuadruplo("MULTM", op, m, contEntTmp)
+		cuadruplo = Cuadruplo("MULTM", pila_o.pop(), m, contEntTmp)
 		insert_cuadruplo(cuadruplo)
 		pila_o.push(contEntTmp)
 		contEntTmp+=1
-	if n>0:
+	if n>1:
 		op2 = pila_o.pop()
 		op1 = pila_o.pop()
 		cuadruplo = Cuadruplo("+", op1, op2, contEntTmp)
@@ -456,34 +452,13 @@ def verifica_tope_arr(ls, m, n, ln):
 		contEntTmp+=1
 	pass
 
-def suma_base(arr):
+def asign_arr():
 	global pila_o
-	global p_oper
-	global contEntTmp
 	op1 = pila_o.pop()
-	dirb = arr
-	#dirb = pila_o.pop()
-	cuadruplo = Cuadruplo("SUMB", op1, dirb, contEntTmp)
+	#op2 = pila_o.pop()
+	cuadruplo = Cuadruplo("=", "op2", "", "("+str(op1)+")")
 	insert_cuadruplo(cuadruplo)
-	pila_o.push("(" + str(contEntTmp) + ")")
-	contEntTmp+=1
 	pass
-
-def asign_arr(arr):
-	global pila_o
-	global p_oper
-	global contEntTmp
-	oper = p_oper.pop()
-	op1 = pila_o.pop()
-	op2 = pila_o.pop()
-	#dirb = pila_o.pop()
-	cuadruplo = Cuadruplo("SUMB", contEntTmp-1, arr, contEntTmp)
-	insert_cuadruplo(cuadruplo)
-	contEntTmp+=1
-	cuadruplo = Cuadruplo(oper, op2, "", "("+str(contEntTmp-1)+")")
-	insert_cuadruplo(cuadruplo)
-	#pila_o.pop()
-
 
 def asigna_llamada(proc_actual, tabla_pro):
 	global contEntTmp
@@ -514,6 +489,9 @@ def asigna_llamada(proc_actual, tabla_pro):
 def convertion(tipo_conver):
 	
 	pass
+
+				
+
 
 def get_cont_saltos():
 	global cont_saltos

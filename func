@@ -1,23 +1,22 @@
 Prototype func Integer llamada (Integer x, Integer a)
 Prototype func Integer llamada2(Integer x)
 Define: Integer w
-
 func Integer llamada2(Integer x):
 print (x)
 
 func Integer llamada(Integer x, Integer a):
-	if (a<=10):
-		a = a+1
-		print (a)
-		a = llamada(a)
-	end
-	return (a)
-
+if (a<=10):
+a = a+1
+print (a)
+a = llamada(a)
+end
+return (a)
 Start:
-	Define: Integer x
-	Define: Integer a
-	x = 1
-	a = 1
-	a = llamada(x,a)
-	print(a)
+Define: Integer x
+Define: Integer a
+x = 1
+a = 1
+a = llamada(x,a)
+print(a)
+Define: String l
 End
