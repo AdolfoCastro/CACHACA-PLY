@@ -39,7 +39,7 @@ cont_dim = 0
 pila_dim = Stack()
 arr = None
 params = []
-
+arreglo = False
 
 def p_programa(t):
 	'''programa : ins_gt_main programa1 valida_entra_global generaglo programa2 valida_salir_gobal programa3 dir_gt_main main programa3
@@ -310,38 +310,80 @@ def p_array(t):
 	global contBoolGlo
 	global memoria
 	global esta_global
+	#aqui
 	mem = arr_mem(nombre_pro_act, nombre_var_actual)
+	tipo = tipo_pro.replace("arr", "")
 	if esta_global:
 		if tipo_pro.replace("arr", "") == "Integer":
 			memoria = contEntGlo
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contEntGlo+x, nombre_pro_act)
+				x+=1
 			contEntGlo += mem
 		elif tipo_pro.replace("arr", "") == "Float":
 			memoria = contFlotGlo
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contFlotGlo+x, nombre_pro_act)
+				x+=1
 			contFlotGlo += mem
 		elif tipo_pro.replace("arr", "") == "Double":
 			memoria = coutDoubleGlo
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contDoubleGlo+x, nombre_pro_act)
+				x+=1
 			coutDoubleGlo += mem
 		elif tipo_pro.replace("arr", "") == "String":
 			memoria = contStrGlo
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contStrGlo+x, nombre_pro_act)
+				x+=1
 			contStrGlo += mem
 		elif tipo_pro.replace("arr", "") == "Boolean":
 			memoria = contBoolGlo 
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contBoolGlo+x, nombre_pro_act)
+				x+=1
 			contBoolGlo+= mem
 	else:
 		if tipo_pro.replace("arr", "") == "Integer":
 			memoria = contEntLoc
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contEntLoc+x, nombre_pro_act)
+				x+=1
 			contEntLoc += mem
 		elif tipo_pro.replace("arr", "") == "Float":
 			memoria = contFlotLoc
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contFlotLoc+x, nombre_pro_act)
+				x+=1
 			contFlotLoc += mem
 		elif tipo_pro.replace("arr", "") == "Double":
 			memoria = contDoubleLoc
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contDoubleLoc+x, nombre_pro_act)
+				x+=1
 			contDoubleLoc += mem
 		elif tipo_pro.replace("arr", "") == "String":
 			memoria = contStrLoc
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contStrLoc+x, nombre_pro_act)
+				x+=1
 			contStrLoc += mem
 		elif tipo_pro.replace("arr", "") == "Boolean":
 			memoria = contBoolLoc 
+			x=0
+			while x<mem:
+				insert_variable(nombre_var_actual+str(x), tipo, contBoolLoc+x, nombre_pro_act)
+				x+=1
 			contBoolLoc+=mem
 	pass
 
@@ -405,7 +447,7 @@ def p_crea_arr(t):
 			memoria = contBoolLoc 
 			contBoolLoc+=1
 	nombre_var_actual = t[1]
-	tipo_pro = "arr"+tipo_pro
+	p_tipos.push(tipo_pro)
 	insert_variable(nombre_var_actual, tipo_pro, memoria, nombre_pro_act)
 	pass
 
@@ -603,21 +645,37 @@ def p_cuadruplo_est_prnt(t):
 
 
 def p_asignacion(t):
-	'''asignacion : seen_id_asignacion consarray EQUALS cuadruplo_exp_8_asignacion asignacion1 insert_asignacion cuadruplo_exp_9_asignacion'''
+	'''asignacion : seen_id_asignacion seen_arr EQUALS cuadruplo_exp_8_asignacion asignacion1 insert_asignacion cuadruplo_exp_9_asignacion'''
+	global arr
+	global as_arr
+	as_arr = False
+	arr = None
+	pass
+
+def p_seen_arr(t):
+	'seen_arr : consarray'
+	global as_arr
+	as_arr = True
 	pass
 
 def p_cuadruplo_exp_8_asignacion(t):
 	'cuadruplo_exp_8_asignacion : '
-	global arr
-	if arr:
-		asign_arr()
-	else:
-		exp_8("=")
+	exp_8("=")
 	pass
 
 def p_cuadruplo_exp_9_asignacion(t):
 	'cuadruplo_exp_9_asignacion : '
-	exp_9()
+	global arr
+	global nombre_pro_act
+	global nombre_var_actual
+	global as_arr
+	global arreglo
+	if es_dim(nombre_pro_act, nombre_var_asignacion):
+		asign_arr(get_address(nombre_var_asignacion, nombre_pro_act))
+		arr = None
+		as_arr = False
+	else:
+		exp_9()
 	pass 
 
 # def p_asigna_arr(t):
@@ -647,7 +705,7 @@ def p_asignacion1(t):
 	'''asignacion1 : exp
 				   | asignlist
 				   | asignarray
-				   | see_llamada
+				   | llamada
 				   | convert
 				   '''
 	pass
@@ -957,7 +1015,17 @@ def p_seen_bool(t):
 def p_seen_id_cons(t):
 	'''seen_id_cons : ID'''
 	global nombre_var_actual 
+	global _arr
+	global nombre_pro_act
+	global arreglo
+	_arr = None
 	nombre_var_actual = t[1]
+	if es_dim(nombre_pro_act, nombre_var_actual):
+		_arr = nombre_var_actual
+		arreglo = nombre_var_actual
+	else:
+		_arr=None
+		arreglo=None
 	pass
 
 
@@ -996,9 +1064,18 @@ def p_seen_int_cons(t):
 def p_exp_1(t):
 	'exp_1 : '
 	global nombre_var_actual
+	global nombre_pro_act
 	global tipo_var
-	direccion_var_actual = get_address(nombre_var_actual,nombre_pro_act)
-	tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
+	global _arr
+	if _arr:
+		tipo_var = busca_tipo(arr,nombre_pro_act)
+		suma_base(get_address(arr, nombre_pro_act))
+		direccion_var_actual = pila_o.pop()
+		_arr = None
+		exp_7()
+	else:
+		tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
+		direccion_var_actual = get_address(nombre_var_actual,nombre_pro_act)
 	exp_1(direccion_var_actual,tipo_var)
 
 def p_exp_cons_int(t):
@@ -1055,7 +1132,7 @@ def p_comienza_main(t):
 	pass
 
 def p_consarray(t):
-	'''consarray : is_dim LBRACKET dim_pos RBRACKET
+	'''consarray : is_dim LBRACKET dim_pos RBRACKET 
 				| empty'''
 	pass
 
@@ -1065,13 +1142,15 @@ def p_is_dim(t):
 	global nombre_pro_act
 	global arr
 	global cont_dim
+	arr = None
 	if not es_dim(nombre_pro_act, nombre_var_actual):
 		print "Sorry, variable %s is neither a list nor an array" % nombre_var_actual
 		sys.exit()
 	else:
-		cont_dim = 1
+		cont_dim = 0
 		pila_dim.push(nombre_var_actual)
 		pila_dim.push(cont_dim)
+		exp_6()
 		arr = nombre_var_actual
 	pass
 
@@ -1134,7 +1213,7 @@ yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
 print_pilas()
-# print_constantes(tabla_cons)
+print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
 print 
 maquina_virtual()
