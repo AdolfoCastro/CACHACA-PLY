@@ -405,7 +405,7 @@ def p_crea_arr(t):
 			memoria = contBoolLoc 
 			contBoolLoc+=1
 	nombre_var_actual = t[1]
-	tipo_pro = "arr"+tipo_pro
+	p_tipos.push(tipo_pro)
 	insert_variable(nombre_var_actual, tipo_pro, memoria, nombre_pro_act)
 	pass
 
@@ -537,8 +537,6 @@ def p_call_proc_4(t):
 		call_proc_3(param, arg[n], tipo[n])
 
 	call_proc_4(func_actual, dirb_actual)
-	
-	params=[]
 	pass
 
 def p_seen_id_call(t):
@@ -547,7 +545,6 @@ def p_seen_id_call(t):
 	global func_actual
 	global param_actual
 	global dirb_actual
-	global procllamado
 	func_actual = t[1]
 	existe = existe_pro(func_actual)
 	call_proc_1(existe, func_actual)
@@ -604,20 +601,25 @@ def p_cuadruplo_est_prnt(t):
 
 def p_asignacion(t):
 	'''asignacion : seen_id_asignacion consarray EQUALS cuadruplo_exp_8_asignacion asignacion1 insert_asignacion cuadruplo_exp_9_asignacion'''
+	global arr
+	arr = None
 	pass
 
 def p_cuadruplo_exp_8_asignacion(t):
 	'cuadruplo_exp_8_asignacion : '
-	global arr
-	if arr:
-		asign_arr()
-	else:
-		exp_8("=")
+	exp_8("=")
 	pass
 
 def p_cuadruplo_exp_9_asignacion(t):
 	'cuadruplo_exp_9_asignacion : '
-	exp_9()
+	global arr
+	global nombre_pro_act
+	global nombre_var_actual
+	if es_dim(nombre_pro_act,nombre_var_actual):
+		asign_arr(get_address(arr, nombre_pro_act))
+		arr = None
+	else:
+		exp_9()
 	pass 
 
 # def p_asigna_arr(t):
@@ -647,23 +649,9 @@ def p_asignacion1(t):
 	'''asignacion1 : exp
 				   | asignlist
 				   | asignarray
-				   | see_llamada
-				   | convert
+				   | llamada
 				   '''
 	pass
-
-def p_convert(t):
-	'''convert : TOSTR LPAREN exp RPAREN
-			   | TOINT LPAREN exp RPAREN
-			   '''
-	pass
-
-def p_see_llamada(t):
-	''' see_llamada : llamada'''
-	global tabla_pro
-	asigna_llamada(func_actual, tabla_pro)
-	pass
-
 
 def p_asignlist(t):
 	'asignlist : LCURLY asignlist1 RCURLY'
@@ -957,7 +945,12 @@ def p_seen_bool(t):
 def p_seen_id_cons(t):
 	'''seen_id_cons : ID'''
 	global nombre_var_actual 
+	global _arr
+	global nombre_pro_act
+	_arr = None
 	nombre_var_actual = t[1]
+	if es_dim(nombre_pro_act, nombre_var_actual):
+		_arr = nombre_var_actual
 	pass
 
 
@@ -991,14 +984,23 @@ def p_seen_int_cons(t):
 	global tipo_var
 	tipo_var = "Integer"
 	nombre_var_actual = t[1]
+	print nombre_var_actual
 	pass
 
 def p_exp_1(t):
 	'exp_1 : '
 	global nombre_var_actual
+	global nombre_pro_act
 	global tipo_var
-	direccion_var_actual = get_address(nombre_var_actual,nombre_pro_act)
-	tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
+	global _arr
+	if _arr:
+		tipo_var = busca_tipo(arr,nombre_pro_act)
+		suma_base()
+		direccion_var_actual = pila_o.pop()
+		_arr = None
+	else:
+		tipo_var = busca_tipo(nombre_var_actual,nombre_pro_act)
+		direccion_var_actual = get_address(nombre_var_actual,nombre_pro_act)
 	exp_1(direccion_var_actual,tipo_var)
 
 def p_exp_cons_int(t):
@@ -1065,11 +1067,12 @@ def p_is_dim(t):
 	global nombre_pro_act
 	global arr
 	global cont_dim
+	arr = None
 	if not es_dim(nombre_pro_act, nombre_var_actual):
 		print "Sorry, variable %s is neither a list nor an array" % nombre_var_actual
 		sys.exit()
 	else:
-		cont_dim = 1
+		cont_dim = 0
 		pila_dim.push(nombre_var_actual)
 		pila_dim.push(cont_dim)
 		arr = nombre_var_actual
@@ -1134,10 +1137,8 @@ yacc.parse(' '.join(program))
 
 print_tables(tabla_pro)
 print_pilas()
-# print_constantes(tabla_cons)
+print_constantes(tabla_cons)
 print_cuadruplos(tabla_cuadruplos)
-print 
-maquina_virtual()
 # lee_cuadruplos(tabla_cuadruplos)
 # print_tables_alfinal(tabla_pro)
 # print_temporales(tabla_tempo)
