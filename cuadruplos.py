@@ -11,7 +11,6 @@ from clases import Stack
 from cubo_semantico import cubo_semantico
 import os, sys
 from memory import *
-from tvariables import *
 
 cont_saltos = 0
 
@@ -183,7 +182,6 @@ def exp_7():
 def exp_8(oper):
 	p_oper.push(oper)
 
-
 def exp_9():
 	global contEntTmp
 	global contFlotTmp
@@ -219,7 +217,10 @@ def exp_9():
 				res = pila_o.pop()
 				op = pila_o.pop()
 				oper = p_oper.pop()
-				cuadruplo = Cuadruplo(oper, op, None, res)
+				if str(res)[0:0]=="(":
+					cuadruplo = Cuadruplo(oper, res, None, op)
+				else:
+					cuadruplo = Cuadruplo(oper, op, None, res)
 			else:
 				op2 = pila_o.pop()
 				op1 = pila_o.pop()
@@ -438,12 +439,13 @@ def verifica_tope_arr(ls, m, n, ln):
 	cuadruplo = Cuadruplo("VER", pila_o.head(), 0, ls)
 	insert_cuadruplo(cuadruplo)
 	if n != ln:
+		op = pila_o.pop()
 		p_tipos.pop()
-		cuadruplo = Cuadruplo("MULTM", pila_o.pop(), m, contEntTmp)
+		cuadruplo = Cuadruplo("MULTM", op, m, contEntTmp)
 		insert_cuadruplo(cuadruplo)
 		pila_o.push(contEntTmp)
 		contEntTmp+=1
-	if n>1:
+	if n>0:
 		op2 = pila_o.pop()
 		op1 = pila_o.pop()
 		cuadruplo = Cuadruplo("+", op1, op2, contEntTmp)
@@ -452,46 +454,32 @@ def verifica_tope_arr(ls, m, n, ln):
 		contEntTmp+=1
 	pass
 
-def asign_arr():
+def suma_base():
 	global pila_o
+	global p_oper
+	global contEntTmp
 	op1 = pila_o.pop()
-	#op2 = pila_o.pop()
-	cuadruplo = Cuadruplo("=", "op2", "", "("+str(op1)+")")
+	dirb = pila_o.pop()
+	cuadruplo = Cuadruplo("SUMB", op1, dirb, contEntTmp)
+	insert_cuadruplo(cuadruplo)
+	pila_o.push("(" + str(contEntTmp) + ")")
+	contEntTmp+=1
+	pass
+
+def asign_arr(arr):
+	global pila_o
+	global p_oper
+	global contEntTmp
+	oper = p_oper.pop()
+	op1 = pila_o.pop()
+	op2 = pila_o.pop()
+	#dirb = pila_o.pop()
+	cuadruplo = Cuadruplo("SUMB", arr, contEntTmp-1, contEntTmp)
+	insert_cuadruplo(cuadruplo)
+	contEntTmp+=1
+	cuadruplo = Cuadruplo(oper, op2, "", "("+str(contEntTmp-1)+")")
 	insert_cuadruplo(cuadruplo)
 	pass
-
-def asigna_llamada(proc_actual, tabla_pro):
-	global contEntTmp
-	global contFlotTmp
-	global contStrTmp
-	global pila_o
-	if tabla_pro:
-		for proc in tabla_pro:
-			if proc.nombre_funcion == proc_actual:
-				if proc.tipo_retorno == 'Integer':
-					cont = contEntTmp
-					contEntTmp+=1
-					pila_o.push('RETURN')
-					p_tipos.push('Integer')
-				if proc.tipo_retorno == 'Float':
-					cont = contFlotTmp
-					contFlotTmp+=1
-					pila_o.push('RETURN')
-					p_tipos.push('Float')
-				if proc.tipo_retorno == 'String':
-					cont = contStrTmp
-					contStrTmp+=1
-					pila_o.push('RETURN')
-					p_tipos.push('String')
-	else:
-		print "No"
-
-def convertion(tipo_conver):
-	
-	pass
-
-				
-
 
 def get_cont_saltos():
 	global cont_saltos
