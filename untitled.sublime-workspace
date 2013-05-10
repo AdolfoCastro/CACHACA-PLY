@@ -1,0 +1,1465 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"set",
+				"set_value_tmp"
+			],
+			[
+				"get",
+				"get_value_temp"
+			],
+			[
+				"get_value_var",
+				"get_value_var"
+			],
+			[
+				"get_value_",
+				"get_value_const"
+			],
+			[
+				"cont",
+				"contEntTmp"
+			],
+			[
+				"auxy",
+				"auxy2"
+			],
+			[
+				"aux",
+				"aux2"
+			],
+			[
+				"tabla",
+				"tabla_cuadruplos"
+			],
+			[
+				"getvalue",
+				"get_value_temp"
+			],
+			[
+				"ptipo",
+				"p_tipos"
+			],
+			[
+				"tipo",
+				"tipo_conver"
+			],
+			[
+				"cambia",
+				"cambia_valor"
+			],
+			[
+				"pti",
+				"p_tipos"
+			],
+			[
+				"pila",
+				"pila_o"
+			],
+			[
+				"proc",
+				"proc_actual"
+			],
+			[
+				"param",
+				"param"
+			],
+			[
+				"parame",
+				"intercambio_de_parametros"
+			],
+			[
+				"tabla_",
+				"tabla_parametros"
+			],
+			[
+				"poin",
+				"pointer"
+			],
+			[
+				"para",
+				"parametro"
+			],
+			[
+				"val",
+				"valor"
+			],
+			[
+				"tabl",
+				"tabla_parametros"
+			],
+			[
+				"get_value",
+				"get_value_var"
+			],
+			[
+				"dire",
+				"direccion"
+			],
+			[
+				"tabla_vari",
+				"tabla_varia"
+			],
+			[
+				"tabla_varia",
+				"tabla_varia_globales"
+			],
+			[
+				"true",
+				"True"
+			],
+			[
+				"tabla_var",
+				"tabla_varia"
+			],
+			[
+				"getvalu",
+				"get_value_var_aux"
+			],
+			[
+				"tablava",
+				"tabla_varia"
+			],
+			[
+				"is",
+				"isinstance"
+			],
+			[
+				"genera",
+				"genera_memoria_proc_aux"
+			],
+			[
+				"tabla_vara",
+				"tabla_varia"
+			],
+			[
+				"list",
+				"list_act"
+			],
+			[
+				"tab",
+				"tabla_varia"
+			],
+			[
+				"tabla_va",
+				"tabla_varia"
+			],
+			[
+				"memor",
+				"Memoria"
+			],
+			[
+				"print",
+				"print_memoria"
+			],
+			[
+				"ge",
+				"get_value_const"
+			],
+			[
+				"o",
+				"op"
+			],
+			[
+				"carga",
+				"carga_globales"
+			],
+			[
+				"mem",
+				"Memoria"
+			],
+			[
+				"op",
+				"op1"
+			],
+			[
+				"cuad",
+				"currentCuad"
+			],
+			[
+				"nombre",
+				"nombre"
+			],
+			[
+				"nom",
+				"nombre_pro_act"
+			],
+			[
+				"nombre_",
+				"nombre_pro_act"
+			],
+			[
+				"existe",
+				"existe_pro"
+			],
+			[
+				"ta",
+				"TablaVariableNodo"
+			],
+			[
+				"Ta",
+				"TablaVariableNodo"
+			],
+			[
+				"tipo_pro",
+				"tipo_pro_actual"
+			],
+			[
+				"programa",
+				"programa1_1"
+			],
+			[
+				"dir",
+				"dir_base"
+			],
+			[
+				"tip",
+				"tipo_pro_actual"
+			],
+			[
+				"escr",
+				"escritura2"
+			],
+			[
+				"esc",
+				"escritura2"
+			],
+			[
+				"escri",
+				"escritura1"
+			],
+			[
+				"cons",
+				"cons"
+			],
+			[
+				"expre",
+				"expresion_1"
+			],
+			[
+				"exp",
+				"expresion_1"
+			],
+			[
+				"empty",
+				"empty"
+			],
+			[
+				"empt",
+				"empty_lines_almost_one"
+			],
+			[
+				"proto",
+				"prototipos_2"
+			],
+			[
+				"pro",
+				"prototipos"
+			],
+			[
+				"if",
+				"ifelse"
+			],
+			[
+				"empy",
+				"empty"
+			],
+			[
+				"switch",
+				"switch2"
+			],
+			[
+				"cons_loop",
+				"cons_loop_1"
+			],
+			[
+				"vars",
+				"vars1_1"
+			],
+			[
+				"loop",
+				"cons_loop_1"
+			],
+			[
+				"program",
+				"programa2"
+			],
+			[
+				"progra",
+				"programa1"
+			],
+			[
+				"emp",
+				"empty_lines_almost_one"
+			],
+			[
+				"emt",
+				"empty_lines_almost_one"
+			],
+			[
+				"li",
+				"lineas_vacias"
+			],
+			[
+				"Res",
+				"RES_DEF"
+			],
+			[
+				"Pl",
+				"PLUS"
+			],
+			[
+				"em",
+				"empty"
+			],
+			[
+				"r",
+				"right"
+			],
+			[
+				"tk",
+				"Tkinter"
+			],
+			[
+				"frame",
+				"frame2"
+			],
+			[
+				"fr",
+				"Frame"
+			],
+			[
+				"mys",
+				"mysql_connect"
+			],
+			[
+				"inser",
+				"insertCuadruplos"
+			],
+			[
+				"cuadr",
+				"cuadruploDeEntrada"
+			],
+			[
+				"contboo",
+				"contBoolTmp-13000"
+			],
+			[
+				"contstrt",
+				"contStrTmp-12000"
+			],
+			[
+				"global",
+				"global"
+			],
+			[
+				"variab",
+				"variablesGlobales"
+			],
+			[
+				"start",
+				"startProList"
+			],
+			[
+				"tpor",
+				"TproNodoPtr"
+			],
+			[
+				"tresest",
+				"tresEstWhile"
+			],
+			[
+				"doses",
+				"dosEstWhile"
+			],
+			[
+				"unoest",
+				"unoEstWhile"
+			],
+			[
+				"contsalts",
+				"contSaltos"
+			],
+			[
+				"cuadru",
+				"CuadruplosPtr"
+			],
+			[
+				"star",
+				"startCuadruplos"
+			],
+			[
+				"escritura",
+				"EscrituraWrite"
+			],
+			[
+				"direcc",
+				"direccionDeVariable"
+			],
+			[
+				"nomv",
+				"nombreDeVariable"
+			],
+			[
+				"varib",
+				"variablebuscada"
+			],
+			[
+				"variable",
+				"variablebuscada"
+			],
+			[
+				"gobal",
+				"globalesBool"
+			],
+			[
+				"glo",
+				"globalesInt"
+			],
+			[
+				"main",
+				"mainInt"
+			],
+			[
+				"cuenta",
+				"cuentaBool"
+			],
+			[
+				"cuentag",
+				"cuentaGlobalesInt"
+			],
+			[
+				"sal",
+				"Saltos"
+			],
+			[
+				"valor",
+				"valorC"
+			],
+			[
+				"oper",
+				"operando2"
+			],
+			[
+				"w",
+				"WHILE"
+			],
+			[
+				"consta",
+				"constante"
+			],
+			[
+				"tabc",
+				"Tabcons"
+			],
+			[
+				"operando",
+				"operando1"
+			],
+			[
+				"f",
+				"f"
+			],
+			[
+				"opera",
+				"operacionValida"
+			],
+			[
+				"pri",
+				"printf"
+			],
+			[
+				"ti",
+				"tipo1"
+			],
+			[
+				"he",
+				"headTvarPtr"
+			],
+			[
+				"new",
+				"newPtr"
+			],
+			[
+				"stat",
+				"startCuadruplos"
+			],
+			[
+				"diroper",
+				"dirOperando2"
+			],
+			[
+				"di",
+				"dirOperando1"
+			],
+			[
+				"A",
+				"A40000"
+			],
+			[
+				"mo",
+				"Model"
+			],
+			[
+				"Blog",
+				"BlogAdmin"
+			],
+			[
+				"blog",
+				"Blog"
+			],
+			[
+				"ADMIN",
+				"ADMIN_MEDIA_PREFIX"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "mprueba.py",
+			"settings":
+			{
+				"buffer_size": 20841,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tvariables.py",
+			"settings":
+			{
+				"buffer_size": 7988,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cuadruplos.py",
+			"settings":
+			{
+				"buffer_size": 12092,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "parser.py",
+			"settings":
+			{
+				"buffer_size": 21645,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scanner.py",
+			"settings":
+			{
+				"buffer_size": 2737,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "entradit.txt",
+			"settings":
+			{
+				"buffer_size": 509,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "fibo_recursivo.txt",
+			"settings":
+			{
+				"buffer_size": 472,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "func",
+			"settings":
+			{
+				"buffer_size": 366,
+				"line_ending": "Unix",
+				"name": "Prototype func llamada (Integer x)"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"commit",
+				"Git: Quick Commit"
+			],
+			[
+				"git commit",
+				"Git: Commit history"
+			],
+			[
+				"git comm",
+				"Git: Commit"
+			],
+			[
+				"packac",
+				"Package Control: Discover Packages"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"sspy",
+				"Set Syntax: Python"
+			],
+			[
+				"git mess",
+				"Set Syntax: Git Commit Message"
+			],
+			[
+				"commit ",
+				"Git: Commit history"
+			],
+			[
+				"git",
+				"Git: Amend Commit"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"paacka",
+				"Package Control: Remove Package"
+			],
+			[
+				"packet",
+				"Package Control: List Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				"project",
+				"Project: Close"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"sql",
+				"Set Syntax: SQL"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/sintaxis reglas",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/parser.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/mprueba.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/cubo_semantico.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/memory.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/scanner.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/untitled.sublime-project",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/entradit.txt",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/fibo_recursivo.txt",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/prueba.txt",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/tvariables.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/entrada.txt",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/cuadruplos.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/tconstantes.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Proyecto 9no/Catalogos/MVCP9.jpeg/tag.html",
+		"/Users/adolfocastro/Library/Application Support/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/procedimiento.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/untitled.sublime-workspace",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/parser.out",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/entrada_prueba_completa.txt",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/parsetab.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/clases.py",
+		"/Users/adolfocastro/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/adolfocastro/Dropbox/Desarrollo en la nube/desarrollo en la nube funcionando/django-testapp-develop/dbindexer/compiler.py",
+		"/Users/adolfocastro/Desktop/CACHACA-PLY/parser.py",
+		"/Users/adolfocastro/Desktop/CACHACA-PLY/entrada.txt",
+		"/Users/adolfocastro/Desktop/CACHACA-PLY/parser.out",
+		"/Users/adolfocastro/Desktop/CACHACA-PLY/scanner.py",
+		"/Users/adolfocastro/Desktop/compilador/BlockSchemer.py",
+		"/Users/adolfocastro/Desktop/compilador/scanner.py",
+		"/Users/adolfocastro/Desktop/compilador/parser.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/scanner.py",
+		"/Users/adolfocastro/Desktop/BlockSchemer.py",
+		"/Users/adolfocastro/Desktop/python/scanner.py",
+		"/Users/adolfocastro/Desktop/python/parser.py",
+		"/Users/adolfocastro/Desktop/scanner.py",
+		"/Users/adolfocastro/Desktop/parser.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/A00225591-fb-tabla de variables/tvariables.c",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/ply-3.4/example/yply/yparse.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/ply-3.4/example/GardenSnake/README",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/ply-3.4/TODO",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/ply-3.4/README",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/ply-3.4/example/ansic/clex.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/ply-3.4/example/ansic/README",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Proyecto/CACHACA-PLY/ply-3.4/example/classcalc/calc.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/entrada.txt",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/parser.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/parsetab.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/scanner.pyc",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/lextab.pyc",
+		"/Users/adolfocastro/Desktop/pascal-in-python-master/docs/relatorio.textile",
+		"/Users/adolfocastro/Desktop/pascal-in-python-master/readme.textile",
+		"/Users/adolfocastro/Desktop/A00225591-ply/parser.py",
+		"/Users/adolfocastro/Desktop/A00225591-ply/scanner.py",
+		"/Volumes/ADATA/A00225591-ply/parser.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/parser.out",
+		"/Users/adolfocastro/Desktop/A00225591-fb/compilar.sh",
+		"/Users/adolfocastro/Desktop/tvariables.c",
+		"/Users/adolfocastro/Downloads/index.html",
+		"/Users/adolfocastro/Downloads/error.php",
+		"/Users/adolfocastro/Downloads/loader.php",
+		"/Users/adolfocastro/Downloads/index.php",
+		"/Users/adolfocastro/Desktop/python/out.py",
+		"/Users/adolfocastro/Desktop/out.py",
+		"/Users/adolfocastro/Desktop/graficos.py",
+		"/Users/adolfocastro/Downloads/mini_c/samples/foo.c",
+		"/Users/adolfocastro/Downloads/mini_c/samples/foo_lib.c",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/ply/lex.py",
+		"/Users/adolfocastro/Documents/Escuela/Ultimo Semestre/Compiladores/Tareas/Tarea 3.2 analizadores/A00225591-ply/ply/yacc.py",
+		"/Users/adolfocastro/Downloads/ply-3.4/example/ansic/clex.py",
+		"/Users/adolfocastro/Downloads/ply-3.4/example/ansic/cparse.py",
+		"/Users/adolfocastro/Downloads/ply-3.4/example/BASIC/basic.py",
+		"/Users/adolfocastro/Downloads/ply-3.4/example/BASIC/basparse.py",
+		"/Users/adolfocastro/Downloads/ply-3.4/example/BASIC/basiclex.py",
+		"/Users/adolfocastro/Downloads/ply-3.4/example/classcalc/calc.py",
+		"/Users/adolfocastro/Sites/mavera backup/public_html/index.htm",
+		"/Users/adolfocastro/Sites/mavera sale update/public_html/index.htm",
+		"/Users/adolfocastro/Sites/mavera sale update/public_html/wood.htm",
+		"/Users/adolfocastro/Desktop/queue.c",
+		"/Users/adolfocastro/Desktop/stack.c",
+		"/Applications/XAMPP/xamppfiles/htdocs/mavera/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/missunderstood/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/missunderstood/style.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/missunderstood/templete.php",
+		"/Users/adolfocastro/Desktop/missunderstood/index.php",
+		"/Users/adolfocastro/Desktop/missunderstood/index.html",
+		"/Users/adolfocastro/Downloads/missunderstood/style.css",
+		"/Users/adolfocastro/Downloads/missunderstood/index.html",
+		"/Users/adolfocastro/Downloads/missunderstood/codenums.png",
+		"/Users/adolfocastro/Downloads/BlackTech/BlackTech.xml",
+		"/Users/adolfocastro/Downloads/pyrmont/pyrmont.xml",
+		"/Users/adolfocastro/Desktop/algo.html",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/codigointermedio.txt",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/Programa.ac",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/stack.c",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/sintactico.y",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/tvariables.c",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/cuadruplos.c",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/ProgramaUno.ac",
+		"/Users/adolfocastrorojas/NetBeansProjects/PrograNoobs/tabcons.c",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/sintactico.y",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/entrada.txt",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/tvariables.c",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/cuadruplos.c",
+		"/Users/adolfocastrorojas/Desktop/storeathon/django-testapp-develop/templates/base.html",
+		"/Users/adolfocastrorojas/Desktop/storeathon/django-testapp-develop/templates/registration/login.html",
+		"/Users/adolfocastrorojas/Desktop/storeathon/django-testapp-develop/settings.py",
+		"/Users/adolfocastrorojas/Desktop/storeathon/django-testapp-develop/templates/home.html",
+		"/Users/adolfocastrorojas/Desktop/storeathon/django-testapp-develop/urls.py",
+		"/Users/adolfocastrorojas/Desktop/storeathon/django-testapp-develop/templates/registration/signup.html",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/stack.c",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/tabcons.c",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/codigointermedio.txt",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/cambios.c",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/lexico.l",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/nombre_del_archivo.txt",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/expresiones.c",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/sintactico.tab.h",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/sintactico.tab.c",
+		"/Users/adolfocastrorojas/Documents/Escuela/9no semestre/Compiladores/Proyecto/flex y bison/semantica.c",
+		"/Users/adolfocastrorojas/Desktop/tutorial/tumblog/tumblog/settings.py",
+		"/Users/adolfocastrorojas/Desktop/storeathon/django-testapp-develop/storeathon/views.py",
+		"/Users/adolfocastrorojas/Desktop/storeathon html/html/precios.html",
+		"/Users/adolfocastrorojas/Desktop/storeathon html/html/registro.html",
+		"/Users/adolfocastrorojas/Desktop/storeathon html/html/tiendas.html",
+		"/Users/adolfocastrorojas/Desktop/storeathon html/html/acercade.html",
+		"/Users/adolfocastrorojas/Desktop/storeathon html/html/index.html",
+		"/Users/adolfocastrorojas/Desktop/arc_a7e6e3fe16935154613e65130235f33a/html/acercade.html"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"$",
+			"sumb",
+			"\"(\"",
+			"res_def",
+			"insert",
+			"res_def",
+			"temp",
+			"False",
+			"*?*?*?*?*?*?",
+			"tabla_cuadruplos[i].o1",
+			"aux",
+			"tabla_cuadruplos[i].o1",
+			"print",
+			"o1",
+			"o2",
+			":",
+			"'",
+			"suma_base",
+			"dim",
+			"params",
+			"sumb",
+			"LEN",
+			"val = tabla_retrun[-1].valor",
+			"end",
+			"print ",
+			"print\\n",
+			"print ",
+			"contStrTmp",
+			"asignacion1",
+			"asignacion",
+			"tabla_cuadruplos",
+			"campo",
+			"tabla_pro",
+			"tabla_paro",
+			"print",
+			"op1",
+			"print_memoria()",
+			"global memoria",
+			"print",
+			"gosub",
+			"carga_params",
+			"carga_params(",
+			"carga_params(param)",
+			"genera_memoria_proc",
+			"tabla_varia",
+			"lista",
+			"tabla_varia_aux",
+			"get_value_var",
+			"carga",
+			" != None",
+			"newtempo = Memoria(tabla_cuadruplos[i].res,result)\n			tabla_tempo.append(newtempo)",
+			"7",
+			"i",
+			"print_tables_alfinal(tabla_pro)\nprint_memoria()",
+			"print",
+			"print tipo",
+			"print",
+			"dame_o1_o2()",
+			"gotofalse",
+			"tabla_varia",
+			"TConstantes",
+			"currentCuad",
+			"TConstantes[i]",
+			"cons",
+			"temp",
+			"Tempo",
+			")\n",
+			"for",
+			"nombre",
+			"operando2",
+			"Cuadruplo",
+			"def",
+			"DEF",
+			"def",
+			"DEF",
+			"def",
+			"',\n",
+			"def ",
+			"nombre",
+			"#----------------------------------------------",
+			"nombre_pro_act",
+			"vars",
+			"var",
+			"sorry",
+			"exp",
+			"exp_1",
+			"subindice",
+			"print",
+			"tipo_pro_actual",
+			"insert",
+			"prototipos",
+			"programa",
+			"asignacion",
+			"VAR",
+			"asignacion",
+			"empty",
+			"!",
+			"if",
+			"expresion",
+			"asignacion",
+			">",
+			"expresion",
+			"asignacion",
+			"llamada",
+			"vars",
+			"VAR",
+			"cons",
+			"!",
+			"cons",
+			"escritura",
+			"if",
+			"expresion",
+			"if",
+			"bloque",
+			"comparacion",
+			"switch",
+			"!",
+			"bloque",
+			"!",
+			"bloque",
+			"!",
+			"bloque",
+			"modulos",
+			"!",
+			"bloque",
+			"if",
+			"NEW_LINE",
+			"empty_lines"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"::=",
+			"dame_o1_o2(i)",
+			"tipo_pro",
+			"ID",
+			"",
+			"FUNC",
+			"empty_lines_almost_one",
+			"7CFC00",
+			"//printf",
+			"escribeTabCons",
+			"TabConsPtr",
+			"printTabCons",
+			"insertTabCons",
+			"isemptyTabCons",
+			"\"",
+			"currentPtr",
+			"insertCuadruplo",
+			"isEmtpyCuadruplo",
+			"CuadruplosPtr",
+			"../../django/contrib/admin/media/img",
+			"images",
+			"esSumResMulDiv",
+			"nombre",
+			"isVarEmpty",
+			"isEmptyVar",
+			"printTables",
+			"insertVar",
+			"TvarNodoPtr",
+			"tvarNodo",
+			"cons",
+			"const",
+			"gltc",
+			"unoExpStr",
+			"contStrGlo",
+			"contFlotGlo",
+			"contEntGlo",
+			"",
+			"contOperandos"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "mprueba.py",
+					"settings":
+					{
+						"buffer_size": 20841,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18050,
+								20694
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9084.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "tvariables.py",
+					"settings":
+					{
+						"buffer_size": 7988,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3426,
+								3450
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1848.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "cuadruplos.py",
+					"settings":
+					{
+						"buffer_size": 12092,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4274,
+								4274
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2575.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "parser.py",
+					"settings":
+					{
+						"buffer_size": 21645,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9387,
+								9397
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6726.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "scanner.py",
+					"settings":
+					{
+						"buffer_size": 2737,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2353,
+								2353
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1466.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "cuadruplos.py",
+					"settings":
+					{
+						"buffer_size": 12092,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								391,
+								391
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "entradit.txt",
+					"settings":
+					{
+						"buffer_size": 509,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								509,
+								509
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "fibo_recursivo.txt",
+					"settings":
+					{
+						"buffer_size": 472,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								470,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "func",
+					"settings":
+					{
+						"buffer_size": 366,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								344,
+								344
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Prototype func llamada (Integer x)",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.438381958008,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.git":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"scane",
+				"scanner.py"
+			],
+			[
+				"cuad",
+				"cuadruplos.py"
+			],
+			[
+				"cubo",
+				"cubo_semantico.py"
+			],
+			[
+				"scaner",
+				"scanner.py"
+			],
+			[
+				"memory",
+				"memory.py"
+			],
+			[
+				"memo",
+				"memory.py"
+			],
+			[
+				"sca",
+				"scanner.py"
+			],
+			[
+				"prueba",
+				"prueba.txt"
+			],
+			[
+				"tvar",
+				"tvariables.py"
+			],
+			[
+				"parser",
+				"parser.py"
+			],
+			[
+				"entra",
+				"entradit.txt"
+			],
+			[
+				"ent",
+				"entradit.txt"
+			],
+			[
+				"cuadr",
+				"cuadruplos.py"
+			],
+			[
+				"entrada",
+				"entrada.txt"
+			],
+			[
+				"entradi",
+				"entradit.txt"
+			],
+			[
+				"entr",
+				"entradit.txt"
+			],
+			[
+				"scanner",
+				"scanner.py"
+			],
+			[
+				"tconsta",
+				"tconstantes.py"
+			],
+			[
+				"tvariab",
+				"tvariables.py"
+			],
+			[
+				"mem",
+				"memory.py"
+			],
+			[
+				"consta",
+				"tconstantes.py"
+			],
+			[
+				"tabl",
+				"tvariables.py"
+			],
+			[
+				"etra",
+				"entrada.txt"
+			],
+			[
+				"paser",
+				"parser.out"
+			],
+			[
+				"entrad",
+				"entrada_prueba_completa.txt"
+			],
+			[
+				"par",
+				"parser.py"
+			],
+			[
+				"tv",
+				"tvariables.py"
+			],
+			[
+				"tvariabes",
+				"tvariables.py"
+			],
+			[
+				"cuadrup",
+				"cuadruplos.py"
+			],
+			[
+				"tvaria",
+				"tvariables.py"
+			],
+			[
+				"clases",
+				"clases.py"
+			],
+			[
+				"tva",
+				"tvariables.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 203.0,
+	"status_bar_visible": true
+}

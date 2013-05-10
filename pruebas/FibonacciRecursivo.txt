@@ -1,26 +1,21 @@
-Prototype func Integer algo (Integer n, Integer x)
 Prototype func Integer fibo (Integer n,Integer anterior,Integer actual)
 
-Define: Integer anterior
-Define: Integer actual
+func Integer fibo(Integer n,Integer anterior,Integer actual):
 Define: Integer auxiliar
-func Integer algo(Integer n,Integer x):
-print (n)
-print (x)
-
-
-func Integer fibo(Integer n):
-if (n<=10):
+if (n<=100  ):
 	auxiliar = actual
 	actual = anterior + actual
 	anterior = auxiliar
 	n = n+1
 	print (actual)
-	fibo(n)
+	fibo(n,anterior,actual)
 end
 
 
 Start:
+	Define: Integer anterior
+	Define: Integer actual
+	
 	Define: Integer x
 	x = 0
 	anterior = 0
@@ -29,5 +24,3 @@ Start:
 	print (actual)
 	fibo(x,anterior,actual)
 End
-
-

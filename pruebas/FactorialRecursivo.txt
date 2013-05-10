@@ -1,0 +1,23 @@
+Prototype func Integer FactorialRecursivo( Integer n)
+
+func Integer FactorialRecursivo(Integer n):
+	Define: Integer aux
+	aux = 0
+	if(n<2):
+	    return 1
+	else:
+		Define: Integer llamada
+		llamada = n+-1
+		aux = FactorialRecursivo(llamada)
+		Define: Integer ret
+		ret = n * aux
+		return ret
+	end
+
+Start:
+	Define: Integer fact
+	Define: Integer llamada
+	llamada = 3
+	fact = FactorialRecursivo(llamada)
+	print(fact)
+End

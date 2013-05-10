@@ -1,0 +1,18 @@
+Prototype func Integer FactorialCiclico( Integer n)
+
+func Integer FactorialCiclico(Integer n):
+	Define: Integer aux
+	aux = 1
+	Define: Integer i
+	for(i=0:i<n:i=i+1):
+		aux = aux * (i+1)
+	end
+	return aux
+
+Start:
+	Define: Integer fact
+	Define: Integer llamada
+	llamada = 3
+	fact = FactorialCiclico(llamada)
+	print(fact)
+End

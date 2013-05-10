@@ -1132,11 +1132,11 @@ for line in fileinput.input():
 	program.append(line)
 yacc.parse(' '.join(program))
 
-print_tables(tabla_pro)
-print_pilas()
-# print_constantes(tabla_cons)
-print_cuadruplos(tabla_cuadruplos)
-print 
+# print_tables(tabla_pro)
+# print_pilas()
+# # print_constantes(tabla_cons)
+# print_cuadruplos(tabla_cuadruplos)
+# print 
 maquina_virtual()
 # lee_cuadruplos(tabla_cuadruplos)
 # print_tables_alfinal(tabla_pro)

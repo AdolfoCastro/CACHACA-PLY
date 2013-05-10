@@ -1,0 +1,27 @@
+Prototype func Integer func1(Integer Algo)
+Prototype func Integer fibonacci_iterativo(Integer n)
+	
+func Integer fibonacci_iterativo(Integer a):
+	Define: Integer actual
+	Define: Integer anterior
+	Define: Integer auxiliar
+	Define: Integer i
+	Define: Integer n
+	n = 100
+	actual = 1
+	anterior = 0
+	
+	print(anterior)
+	print(actual)
+	for(i=1: i<=n: i=i+1):
+		auxiliar = actual
+		actual = actual + anterior
+		print (actual)
+		anterior = auxiliar
+	end	
+
+Start:
+	Define: Integer y
+	y=0
+	fibonacci_iterativo(y)
+End
